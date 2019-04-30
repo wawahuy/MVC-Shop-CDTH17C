@@ -1,2 +1,2 @@
 # MVC-Shop-CDTH17C
-HELLO
+Đồ án Web PHP
