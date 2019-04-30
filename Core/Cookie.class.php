@@ -2,7 +2,7 @@
     /**
      * Coder: Nguyễn Gia Huy
      * Bắt đầu: 01-04-2019
-     * Sửa dổi cuối: --
+     * Sửa đổi cuối: 01-05-2019
      * 
      * 
      */
@@ -55,6 +55,29 @@
          */
         public static function Del($name){
             Cookie::Set($name, "", time() - 3600);
+        }
+
+
+        /**
+         * Mã hóa cookie
+         * Việc mã hóa chỉ nhằm giúp tương thích với cookie
+         *
+         * @param string $str
+         * @return string
+         */
+        public static function encodeCookieCart(string $str) : string {
+            return base64_encode(utf8_encode($str));
+        }
+
+
+        /**
+         * Giãi hóa cookie
+         *
+         * @param string $str
+         * @return string
+         */
+        public static function decodeCookieCart(string $str) : string {
+            return utf8_decode(base64_decode($str));
         }
 
     }
