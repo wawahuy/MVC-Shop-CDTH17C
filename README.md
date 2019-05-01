@@ -1,5 +1,6 @@
 # MVC Shop CDTH17C
-<i>Chưa hoàn thành!</i><br>
+<i><b>Chưa hoàn thành!<b></i><br>
+<hr>
 <b>Đồ án Web PHP, Cao Thắng</b><br>
 <ul>
     <li>Nguyễn Gia Huy</li>
