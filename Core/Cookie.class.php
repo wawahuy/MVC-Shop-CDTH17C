@@ -65,7 +65,7 @@
          * @param string $str
          * @return string
          */
-        public static function encodeCookieCart(string $str) : string {
+        public static function encodeCookie(string $str) : string {
             return base64_encode(utf8_encode($str));
         }
 
@@ -76,7 +76,7 @@
          * @param string $str
          * @return string
          */
-        public static function decodeCookieCart(string $str) : string {
+        public static function decodeCookie(string $str) : string {
             return utf8_decode(base64_decode($str));
         }
 

@@ -15,14 +15,13 @@
  */
 
 
-
 define("YUH_URI_ROOT", preg_replace('/\/App\.php/', "", $_SERVER['PHP_SELF']));
 define("URI_ROOT", YUH_URI_ROOT);
-
 define("ROUTE_ERR_VALUES", "route error value");
 define("ROUTE_ERR_MATCH",  "route error match");
 
 $YUH_URI_ROOT = YUH_URI_ROOT;
+
 
 /**
  * Phân luồng hoạt động của các controller
@@ -271,6 +270,22 @@ class Route {
         }
         return $values;
     }
+
+
+    /**
+     * Sửa lỗi phân đương dẫn Window
+     * Phân biệc hoa thường
+     * 
+     */
+    public static function fixPathWindows(){
+        $request_uri = substr($_SERVER['REQUEST_URI'], 0, strlen(YUH_URI_ROOT));
+        if(!preg_match('/'.Route::quotePath($request_uri).'/', $_SERVER["SCRIPT_FILENAME"])){
+            echo 'Lỗi đường dẫn Window, chú ý phân biệc hoa thường!<br>';
+            exit();
+        }
+    }
 }
+
+
 
 ?>

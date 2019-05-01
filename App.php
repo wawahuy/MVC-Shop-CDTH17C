@@ -94,6 +94,13 @@
     include_once "Core/View.class.php";
     include_once "Controller/Base.controller.php";
 
+
+    /**
+     * Fix lỗi đương dẫn windows
+     */
+    Route::fixPathWindows();
+
+
     /**
      * Cấu hình route trong file Route.config.php
      */
