@@ -34,7 +34,7 @@
         if(!(new BagModel())->add($id_product, $num_product, $option_product)){
             Func::Redirect($uri_refer."?mess=error");
             return;
-            //test
+            //test  big-update
         }
 
         Func::Redirect($uri_refer."?mess=success");
