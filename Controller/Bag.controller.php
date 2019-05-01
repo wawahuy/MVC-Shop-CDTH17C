@@ -11,27 +11,30 @@
          );
      }
 
-     public function Add(){
-         
-     }
-
 
      /**
-      * Lấy danh sách các sản phẩm đã đặt hàng
+      * Thêm sản phẩm vào giỏ hàng (POST)
       *
       * @return void
       */
-     private function getDataCart() {
-         try {
-            //return json_encode($this->decodeCookieCart(Cookie::Get("cart")));
-         }
-         catch(\Exception $e){
-             return null;
-         }
-         catch(\Throwable $t){
-             return null;
-         }
+     public function Add(){
+        $uri_refer = preg_replace('/\?(.*)$/', '', Route::getReferer());
+
+        #Kiểm tra hợp lệ dữ liệu
+        try {
+            $num_product = $_POST['soluong'];
+            $option_product = json_encode($_POST['option']);
+        } catch (Exception $e){
+            Func::Redirect($uri_refer."?mess=error");
+        }
+
+        #Kiểm tra thêm dữ liệu
+        
+
+
+        Func::Redirect($uri_refer."?mess=success");
      }
+
 
  }
 

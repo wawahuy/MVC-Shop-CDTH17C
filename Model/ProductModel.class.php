@@ -33,6 +33,7 @@
             $entity->name = $data['name'];
             $entity->image = json_decode($data['image']);
             $entity->sale = $data['sale'];
+            $entity->maxstar = 5;
             $entity->curstar = $data['star'];
             $entity->price = $data['price'];
             $entity->note = $data['note'];

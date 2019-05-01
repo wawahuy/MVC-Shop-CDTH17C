@@ -5,12 +5,14 @@
  * Hoạt động: 12-04-2019
  * 
  * Sửa đổi ngày: 20-04-2019
- *          thêm function notraffic
- *          cập nhật function makeRouting : thêm hasRouting
+ *          - thêm function notraffic
+ *          - cập nhật function makeRouting : thêm hasRouting
  * 
  * Sửa đổi ngày: 01-05-2019
- *          thêm chấp nhận tấc cả luồng với path = "*"
- *          với luồng "tấc cả" (*) cờ hasRouting không được bật
+ *          - thêm chấp nhận tấc cả luồng với path = "*"
+ *            với luồng "tấc cả" (*) cờ hasRouting không được bật
+ *          - thêm back_referer trở về page trước đó
+ *          
  * 
  */
 
@@ -284,6 +286,22 @@ class Route {
             exit();
         }
     }
+
+
+    /**
+     * Trở về page trước đó
+     *
+     * @return void
+     */
+    public static function back_referer(){
+        Func::Redirect($_SERVER["HTTP_REFERER"]);
+    }
+
+
+    public static function getReferer(){
+        return $_SERVER["HTTP_REFERER"];
+    }
+
 }
 
 

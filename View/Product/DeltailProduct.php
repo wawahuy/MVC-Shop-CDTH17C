@@ -61,6 +61,8 @@
     }
 </style>
 
+<form action="{{URI_ROOT}}/bag/add" method="POST" name="fproduct">
+
 <div class="sp-deltail">
     <div class="sp-c-deltail">
         <!--san phẩm-->
@@ -95,9 +97,12 @@
                     # <span `+(_js.star>0?'class="yes-st"':'')+`></span>
                     # $ ->maxstar số sao tối đa
                     # $ ->curstar số sao hiện tại
-                    for($i=0; $i<View::$DATA['product']->maxstar; $i++)
+                    for($i=0; $i<View::$DATA['product']->maxstar; $i++){
                 ?>
                     <span {{(@Data:product->curstar > $i ? "class='yes-st'" : '')}}></span>
+                <?php
+                    }
+                ?>
         </div>
 
         <div class="sp-c-bl">Lượt xem: {{@Data:product->numView}}</div>
@@ -117,7 +122,7 @@
         </div>
 
         <div class="sp-c-add">
-            <input type="submit" class="bt-add-card" value="Thêm vào vỏ hàng" />
+            <input type="submit" class="bt-add-card" value="Thêm vào vỏ hàng" onclick="Add(this)" />
         </div>
 
         <div class="sp-c-vc">
@@ -134,3 +139,27 @@
         <div style="padding: 10px;"></div>
     </div>
 </div> 
+
+</form>
+
+
+<script>
+    document.forms["fproduct"].onsubmit = function (e){
+        e.preventDefault();
+    }
+
+    function Add(e){
+        opt = document.getElementsByName("option")[0];
+        opt = JSON.parse(opt.value);
+        for( key in opt){
+            if(opt[key] == ""){
+                swal("Lỗi", "Bạn cần chọn đầy đủ thông tin!", "error");
+                e.preventDefault();
+                return;
+            }
+        }
+
+        document.forms["fproduct"].submit();
+    }
+
+</script>

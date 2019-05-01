@@ -17,6 +17,8 @@
 
 
         public function View($params){
+            $this->message();
+
             if($params['id'] == ""){
                 $this->Index();
                 return;
@@ -37,6 +39,19 @@
                     dirname(__FILE__)."/../View/Shared/Layout.php",
                     dirname(__FILE__)."/../View/Product/Product.php"
                 );
+            }
+        }
+
+
+        private function message(){
+            switch($_GET['mess'] ?? ''){
+                case "success":
+                    Javascript::InvokeSwal("Thêm sản phẩm thành công!", "", "success");
+                    break;
+
+                case "error":
+                    Javascript::InvokeSwal("Thêm sản phẩm thất bại!", "", "error");
+                    break;
             }
         }
 
