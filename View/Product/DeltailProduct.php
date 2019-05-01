@@ -62,6 +62,7 @@
 </style>
 
 <form action="{{URI_ROOT}}/bag/add" method="POST" name="fproduct">
+    <input type="hidden" name="id_product" value="{{@Data:product->id}}" />
 
 <div class="sp-deltail">
     <div class="sp-c-deltail">

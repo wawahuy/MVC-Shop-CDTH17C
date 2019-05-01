@@ -3,7 +3,16 @@
 
      class BagModel {
 
-          
+          public function add($id, $num, $option){
+               return true;
+          }
+
+          public function remove(){
+          }
+
+          public function update(){
+          }
+
 
      }
 ?>

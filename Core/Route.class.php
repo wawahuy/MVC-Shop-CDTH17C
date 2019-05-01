@@ -95,7 +95,7 @@ class Route {
      */
     public static function notraffic($path = null, $process, $constraint = null){
         if(!Route::$hasRouting)
-            Route::makeRouting(preg_replace("/^\\".YUH_URI_ROOT."/", "", $_SERVER["REQUEST_URI"]), $process, null);
+            Route::makeRouting(preg_replace("/^".Route::quotePath(YUH_URI_ROOT)."/", "", $_SERVER["REQUEST_URI"]), $process, null);
     }
 
 
