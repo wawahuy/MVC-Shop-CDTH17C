@@ -280,11 +280,11 @@ class Route {
      * 
      */
     public static function fixPathWindows(){
-        $request_uri = substr($_SERVER['REQUEST_URI'], 0, strlen(YUH_URI_ROOT));
-        if(!preg_match('/'.Route::quotePath($request_uri).'/', $_SERVER["SCRIPT_FILENAME"])){
-            echo 'Lỗi đường dẫn Window, chú ý phân biệc hoa thường!<br>';
-            exit();
-        }
+        // $request_uri = substr($_SERVER['REQUEST_URI'], 0, strlen(YUH_URI_ROOT));
+        // if(!preg_match('/'.Route::quotePath($request_uri).'/', $_SERVER["SCRIPT_FILENAME"])){
+        //     echo 'Lỗi đường dẫn Window, chú ý phân biệc hoa thường!<br>';
+        //     exit();
+        // }
     }
 
 
