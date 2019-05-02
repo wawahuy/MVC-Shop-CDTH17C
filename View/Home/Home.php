@@ -77,7 +77,7 @@
             <div class="hidden-scroll hidden-scrollefScroll3" style="font-size: 20px;">PHONG CÁCH THỜI TRANG</div>
             <div class="hidden-scroll hidden-scrollefScroll2">SỰ ĐƠN GIẢN KHÁC BIỆT</div>
         </div>
-        <video loop autoplay
+        <video loop autoplay muted
             style="height: auto; min-width: 100%; min-height: 100%; object-fit:contain; margin-top: -200px;">
             <source type="video/mp4" src="{{URI_ROOT}}/Resource/video/home_session.mp4">
             <source type="video/webm" src="{{URI_ROOT}}/Resource/video/home_session.webm">

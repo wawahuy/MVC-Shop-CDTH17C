@@ -1,6 +1,6 @@
 <?php
     include_once dirname(__FILE__)."/../Model/ProductModel.class.php";
-    
+    if (!IN_SITE)
 
     /* Trang chí tiết thông tin của sản phẩm
      * 

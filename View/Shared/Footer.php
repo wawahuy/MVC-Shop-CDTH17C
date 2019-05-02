@@ -33,7 +33,7 @@
             <h4>KẾT NỐI VỚI CHÚNG TÔI</h4>
 
             <div class="social-network">
-                <a href="http://www.facebook.com" class="link facebook tooltip">
+                <a href="http://www.facebook.com" target="_blank" class="link facebook tooltip">
 
                     <svg class="icon">
                         <use xlink:href="#icon--facebook"></use>
@@ -42,7 +42,7 @@
                 </a>
 
 
-                <a href="https://plus.google.com/" class="link google tooltip">
+                <a href="https://plus.google.com/" target="_blank" class="link google tooltip">
 
                     <svg class="icon">
                         <use xlink:href="#icon--google"></use>
@@ -51,14 +51,14 @@
                 </a>
 
 
-                <a href="https://www.instagram.com" class="link instagram tooltip">
+                <a href="https://www.instagram.com" target="_blank" target="_blank" class="link instagram tooltip">
 
                     <svg class="icon">
                         <use xlink:href="#icon--instagram"></use>
                         <title>Instagram</title>
                     </svg>
                 </a>
-                <a href="http://www.twitter.com" class="link twitter tooltip">
+                <a href="http://www.twitter.com" target="_blank" class="link twitter tooltip">
                     <svg class="icon">
                         <use xlink:href="#icon--twitter"></use>
                         <title>Twitter</title>
