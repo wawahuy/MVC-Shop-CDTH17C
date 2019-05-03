@@ -3,7 +3,6 @@
     /**
      * Coder: Nguyễn Gia Huy
      * Bắt đầu: 01-04-2019
-     * Sửa đổi cuối: --
      * 
      * 
      * 
