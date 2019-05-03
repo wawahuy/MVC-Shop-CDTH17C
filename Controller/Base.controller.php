@@ -1,6 +1,6 @@
 <?php
-    Func::ImportModel("User");
-    Func::ImportModel("Config");
+    Func::Import("Model/UserModel.class");
+    Func::Import("Model/ConfigModel.class");
 
     /**
      * Lớp trừu tượng controller

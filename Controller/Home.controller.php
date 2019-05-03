@@ -1,6 +1,6 @@
 <?php
-    Func::ImportModel("Product");
-    Func::ImportModel("Config");
+    Func::Import("Model/ProductModel.class");
+    Func::Import("Model/ConfigModel.class");
 
     class HomeController extends BaseController {
 

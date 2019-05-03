@@ -1,5 +1,5 @@
 <?php
-    Func::ImportModel("User");
+    Func::Import("Model/UserModel.class");
 
     class RegisterController extends BaseController {
 

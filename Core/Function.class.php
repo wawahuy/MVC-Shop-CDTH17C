@@ -10,6 +10,24 @@
 
     class Func {
 
+
+        /**
+         * Require Once qua đườg dẫn tương đối tình từ thư mục chứa App.php
+         * Ví dụ import file này:
+         *      Func::Import("Core/Function.class")
+         *      hoặc
+         *      Func::Import("Core/Function.class.php")
+         *      
+         *
+         * @param string $path
+         * @return void
+         */
+        public static function Import(string $path){
+            $path = preg_replace("/\.php$/", "", $path);
+            require_once $path.".php";
+        }
+
+
         /**
          * Include Once nếu file tồn tại
          *
@@ -35,69 +53,6 @@
         }
 
 
-        /**
-         * Include Once controller
-         *
-         * @param string $controller
-         * @return bool
-         */
-        public static function ImportController($controller){
-            $controller = ucwords($controller);
-            return Func::include_once_exists('Controller/'.$controller.'.controller.php');
-        }
-
-
-        /**
-         * Include Once model
-         *
-         * @param string $model
-         * @return bool
-         */
-        public static function ImportModel($model){
-            $model = ucwords($model);
-            require_once 'Model/'.$model.'Model.class.php';
-        }
-
-
-        /**
-         * Inlcude Once Entity
-         *
-         * @param string $entity
-         * @return bool
-         */
-        public static function ImportEntity($entity){
-            $entity = ucwords($entity);
-            require_once 'Model/Entity/'.$entity.'Entity.class.php';
-        }
-
-
-        /**
-         * Tạo model qua tên
-         * Không cần Import file
-         *
-         * @param string $model
-         * @return bool
-         */
-        public static function CreateModel($model){
-            Func::ImportModel($model);
-            $model = ucwords($model)."Model";
-            return new $model;
-        }
-
-
-        /**
-         * Tạo entity qua tên
-         * Không cần Import file
-         *
-         * @param string $entity
-         * @return bool
-         */
-        public static function CreateEntity($entity){
-            Func::ImportEntity($entity);
-            $model = ucwords($entity)."Entity";
-            return new $entity;
-        }
-
         
         /**
          * Import & thực hiện Action controller qua tên tương ứng
@@ -114,7 +69,7 @@
                     $action = ucwords($action);
 
                     #include [ControllerName].controller.php
-                    if (!Func::ImportController($controller))
+                    if (!Func::include_once_exists("Controller/$controller.controller.php"))
                         return false;
 
                     # new [NameController]Controller()

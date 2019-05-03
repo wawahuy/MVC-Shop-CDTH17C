@@ -1,6 +1,6 @@
 <?php
-    include_once dirname(__FILE__)."/../Model/ProductModel.class.php";
-    if (!IN_SITE)
+    Func::Import("Model/ProductModel.class");
+
 
     /* Trang chí tiết thông tin của sản phẩm
      * 
