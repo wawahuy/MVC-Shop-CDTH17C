@@ -1,6 +1,4 @@
 <?php
-    //test 2
-
     /**
      * Đối với Windows Version PHP >= 7.3.1
      * Đối với Linux Version PHP >= 7.0.33

@@ -5,9 +5,6 @@
  * Bắt đầu: 12-04-2019
  * Hoạt động: 15-04-2019
  * 
- * Sửa đổi 01-05-2019:
- *      Cập nhật regexp _foreach_split, giảm matches xuống ~ 5%
- *      Nâng phiên bản PHP >= 7.3.1
  * 
  * View hỗ trợ loại bỏ code php ra khỏi phần View/
  * View hỗ trợ truyền data dễ dàng hơn
