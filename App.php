@@ -1,5 +1,5 @@
 <?php
-    //Test dev-test
+    //Test dev
     
     /**
      * Đối với Windows Version PHP >= 7.3.1
