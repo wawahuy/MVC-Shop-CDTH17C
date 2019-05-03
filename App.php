@@ -1,8 +1,4 @@
 <?php
-    //test hhhhh r đó oki, biết làm ko, h tui sửa nhiêu đó, h commit lên thử coi
-    //xin chao cac ban minh la nguoi moi, roi nhan cai có số 1 anh đo, ghi comment do comment dắn thôi
-    // ròi ấn tich
-
     /**
      * Đối với Windows Version PHP >= 7.3.1
      * Đối với Linux Version PHP >= 7.0.33
