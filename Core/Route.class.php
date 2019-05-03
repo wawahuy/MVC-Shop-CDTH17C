@@ -47,6 +47,7 @@ class Route {
 
     /**
      * Accept all method, get, post,...
+     * $process là string sẽ tự động truyền cho Func::Call_method_of_class_empty
      *
      * @param string $path
      * @param string|function $process
@@ -60,6 +61,7 @@ class Route {
 
     /**
      * GET Method
+     * $process là string sẽ tự động truyền cho Func::Call_method_of_class_empty
      * $path : dont use [] and :
      * 
      * @param string $path
@@ -75,6 +77,7 @@ class Route {
     
     /**
      * POST Method
+     * $process là string sẽ tự động truyền cho Func::Call_method_of_class_empty
      *
      * @param string $path
      * @param string|function $process
@@ -89,6 +92,7 @@ class Route {
 
     /**
      * Được gọi nếu từ đầu đến hiện tại chưa có route được khớp
+     * $process là string sẽ tự động truyền cho Func::Call_method_of_class_empty
      *
      * @param function|string $process
      * @return void
@@ -115,6 +119,7 @@ class Route {
 
     /**
      * Cấu hình router với json array tahay vì dùng get|post|all 
+     * $process là string sẽ tự động truyền cho Func::Call_method_of_class_empty
      *
      * Mỗi child có câu trúc bao gồm các thông tin sau:
      *      - "method"      : "get|post|all"
@@ -176,16 +181,18 @@ class Route {
         #Gọi process
         if(is_string($process)){
             #kiểm tra controller
-            $matches = array();
-            if(!preg_match("/Controller:([\d|\w]+)([@]?)([\d|\w]*)/", $process, $matches))
-            {
-                throw new Exception("Lỗi process!");
-                return;
-            }
+            // $matches = array();
+            // if(!preg_match("/Controller:([\d|\w]+)([@]?)([\d|\w]*)/", $process, $matches))
+            // {
+            //     throw new Exception("Lỗi process!");
+            //     return;
+            // }
 
-            $controller = $matches[1];
-            $action = $matches[3];
-            Func::RunController($controller, $action, $params);
+            // $controller = $matches[1];
+            // $action = $matches[3];
+            // Func::RunController($controller, $action, $params);
+            Func::Call_method_of_class_empty($process, $params);
+
         }
         #gọi callback
         else {

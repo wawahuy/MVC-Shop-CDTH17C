@@ -1,44 +1,45 @@
 <?php
 
+    //proccess sử dụng Func::Call_method_of_class_empty được gọi tự động trong Route khi proccess là string
     //Cấu hình route
     $routes = [
         //Check login
         [
             "method"   => "get",
             "path"     => "*",
-            "process"  => "Controller:Login@AutoLogin"
+            "process"  => "Controller/Login.controller(LoginController)->AutoLogin"
         ],
 
         //Home Page
         [
             "method"  => "get",
             "path"    => "/",
-            "process" => "Controller:Home"
+            "process" => "Controller/Home.controller(HomeController)"
         ],
 
         //Login & Logout Page
         [
             "method"  => "get",
             "path"    => "/login",
-            "process" => "Controller:Login"
+            "process" => "Controller/Login.controller(LoginController)"
         ],
 
         [
             "method"  => "post",
             "path"    => "/login/submit",
-            "process" => "Controller:Login@LoginSubmit"
+            "process" => "Controller/Login.controller(LoginController)->LoginSubmit"
         ],
 
         [
             "method"  => "get",
             "path"    => "/logout",
-            "process" => "Controller:Login@Logout"
+            "process" => "Controller/Login.controller(LoginController)->Logout"
         ],
 
         [
             "method"        => "get",
             "path"          => "/login/app/[app]",
-            "process"       => "Controller:Login@LoginApp",
+            "process"       => "Controller/Login.controller(LoginController)->LoginApp",
             "constraint"    => [
                 "app" => "[\w|\d]+"
             ]
@@ -49,13 +50,13 @@
         [
             "method"  => "get",
             "path"    => "/register",
-            "process" => "Controller:Register"
+            "process" => "Controller/Register.controller(RegisterController)"
         ],
 
         [
             "method"  => "post",
             "path"    => "/register/submit",
-            "process" => "Controller:Register@RegisterSubmit"
+            "process" => "Controller/Register.controller(RegisterController)->RegisterSubmit"
         ],
 
 
@@ -63,13 +64,13 @@
         [
             "method"    =>  "get",
             "path"      =>  "/categories",
-            "process"   =>  "Controller:Categories"
+            "process"   =>  "Controller/Categories.controller(CategoriesController)"
         ],
 
         [
             "method"    =>  "get",
             "path"      =>  "/categories/[id]/[name]",
-            "process"   =>  "Controller:Categories@View",
+            "process"   =>  "Controller/Categories.controller(CategoriesController)->View",
             "constraint" => [
                 "id" => "[\d]+"
             ]
@@ -78,7 +79,7 @@
         [
             "method"    =>  "get",
             "path"      =>  "/categories/[id]/page/[page]/[name]",
-            "process"   =>  "Controller:Categories@View",
+            "process"   =>  "Controller/Categories.controller(CategoriesController)->View",
             "constraint" => [
                 "id" => "[\d]+",
                 "page" => "[\d]+"
@@ -91,13 +92,13 @@
         [
             "method"    =>  "get",
             "path"      =>  "/product",
-            "process"   =>  "Controller:Product"
+            "process"   =>  "Controller/Product.controller(ProductController)"
         ],
 
         [
             "method"    =>  "get",
             "path"      =>  "/product/[id]",
-            "process"   =>  "Controller:Product@View",
+            "process"   =>  "Controller/Product.controller(ProductController)->View",
             "constraint" => [
                 "id" => "[\d]*"
             ]
@@ -108,20 +109,20 @@
         [
             "method"    =>  "get",
             "path"      =>  "/bag",
-            "process"   =>  "Controller:Bag"
+            "process"   =>  "Controller/Bag.controller(BagController)"
         ],
 
         [
             "method"    =>  "post",
             "path"      =>  "/bag/add",
-            "process"   =>  "Controller:Bag@Add"
+            "process"   =>  "Controller/Bag.controller(BagController)->Add"
         ],
 
 
         //Error Page
         [
             "method"  => "notraffic",
-            "process" => "Controller:PageError"
+            "process" => "Controller/PageError.controller(PageErrorController)"
         ]
     ];
 

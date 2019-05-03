@@ -3,7 +3,7 @@
     /**
      * Coder: Nguyễn Gia Huy
      * Bắt đầu: 01-04-2019
-     * Sửa đổi cuối: 10-04-2019
+     * Sửa đổi cuối: 03-05-2019
      * 
      * 
      */
@@ -28,13 +28,44 @@
         }
 
 
+
         /**
-         * Include Once nếu file tồn tại
+         * Gọi phương thức của class (tạo mới) rỗng
+         * Ứng dụng gọi action của controller
+         *      <path>[(ClassName)][->Method]
+         *      path: đương dẫn tương đối bắt đầu từ App.php (chỉ chấp nhận a-zA-Z0-9 _ và .)
+         *      classname: tên class mặc định "phần cuối tính từ / đến . hoặc hết"
+         *      method: tên phuowg thức mặc định là Index
+         *
+         * @param string $str
+         * @return void
+         */
+        public static function Call_method_of_class_empty(string $str, $params = null){
+             $matches = null;
+             if(!preg_match("/^(?P<path>[\d|\w\/\.\_]+)(\((?P<class>.*)\))?(->(?P<method>.*))?/", $str, $matches)){
+                echo "Lối Call_method_of_class_empty";
+                exit();
+             }
+
+             $path = $matches["path"];
+             $class = $matches["class"] ?? preg_replace("/(.*)\(|\)(.*)/", "", $str);
+             $method = $matches["method"] ?? "Index";
+
+             Func::Import($path);
+             if(isset($params))
+                (new $class)->$method($params);
+             else
+                (new $class)->$method();
+        }
+
+
+        /**
+         * Require Once nếu file tồn tại
          *
          * @param string $path
          * @return bool
          */
-        public static function include_once_exists($path){
+        public static function require_once_exists($path){
             if(!file_exists($path)) 
                 return false;
             require_once $path; 
@@ -54,40 +85,6 @@
 
 
         
-        /**
-         * Import & thực hiện Action controller qua tên tương ứng
-         *
-         * @param string $controller
-         * @param string $action
-         * @return bool
-         */
-        public static function RunController($controller, $action = "Index", $params = null)
-        {
-                $action = $action == "" ? "Index" : $action;
-                try {
-                    $controller = ucwords($controller);
-                    $action = ucwords($action);
-
-                    #include [ControllerName].controller.php
-                    if (!Func::include_once_exists("Controller/$controller.controller.php"))
-                        return false;
-
-                    # new [NameController]Controller()
-                    $controller = $controller . 'Controller';
-                    $controller = new $controller;
-                    if(isset($params))
-                        $controller->$action($params);
-                    else
-                        $controller->$action();
-
-                    return true;
-                } catch (\Exception $e) {
-                    echo '<pre>' . $e . '</pre>';
-                } catch (\Throwable $e) {
-                    echo '<pre>' . $e . '</pre>';
-                }
-                return false;
-        }
     }
 
 
