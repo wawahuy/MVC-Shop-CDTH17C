@@ -85,15 +85,19 @@
 
 
     
-    include_once "Config/DB.config.php";
-    include_once "Core/Database.class.php";
-    include_once "Core/Session.class.php";
-    include_once "Core/Cookie.class.php";
-    include_once "Core/Javascript.class.php";
-    include_once "Core/Function.class.php";
-    include_once "Core/Route.class.php";
-    include_once "Core/View.class.php";
+    include_once "../Config/DB.config.php";
+    include_once "../Core/Database.class.php";
+    include_once "../Core/Session.class.php";
+    include_once "../Core/Cookie.class.php";
+    include_once "../Core/Javascript.class.php";
+    include_once "../Core/Function.class.php";
+    include_once "../Core/Route.class.php";
+    include_once "../Core/View.class.php";
     include_once "Controller/Base.controller.php";
+
+    define("YUH_URI_RESOURCE", preg_replace("/\/(.*)$/", "", YUH_URI_ROOT));
+    echo preg_replace('/\/(.*)$/', "", YUH_URI_ROOT);
+    exit;
 
 
     /**
@@ -105,5 +109,5 @@
     /**
      * Cấu hình route trong file Route.config.php
      */
-    include_once "Config/Route.config.php";
+    include_once "Route.config.php";
 ?>

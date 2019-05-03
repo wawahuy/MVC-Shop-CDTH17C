@@ -1,6 +1,4 @@
 <?php
-    Func::Import("Model/UserModel.class");
-    Func::Import("Model/ConfigModel.class");
 
     /**
      * Lớp trừu tượng controller
@@ -40,9 +38,6 @@
         protected function renderPage($title, $path_layout, $path_content){
             #Bind Data Page
             View::bind_data("page_title", $title);
-            View::bind_data("page_menu", (new ConfigModel)->getsJsonMenu());
-            View::bind_data("page_logged", Session::IsLogged());
-            View::bind_data("page_name_logged", Session::IsLogged() ? (new UserModel)->GetFullNameWithID(Session::GetIDLogged()) : null);
             View::bind_data("page_code_body", View::get_code_compile($path_content));
             View::render($path_layout);
             Javascript::Run();

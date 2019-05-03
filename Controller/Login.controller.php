@@ -1,6 +1,5 @@
 <?php
-    include_once dirname(__FILE__)."/../Model/UserModel.class.php";
-    
+    Func::Import("Model/UserModel.class");
 
     class LoginController extends BaseController {
 

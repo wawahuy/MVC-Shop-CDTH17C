@@ -1,6 +1,7 @@
 <?php
-    Func::ImportEntity("ProductCard");
-    Func::ImportEntity("Product");
+    Func::Import("Model/Entity/ProductCardEntity.class");
+    Func::Import("Model/Entity/ProductEntity.class");
+
 
     /**
      * Tập hợp các phương thức xữ lí Product Table

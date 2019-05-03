@@ -1,5 +1,6 @@
 <?php
- Func::ImportModel("Bag");
+ Func::Import("Model/BagModel.class");
+
 
  class BagController extends BaseController {
 
