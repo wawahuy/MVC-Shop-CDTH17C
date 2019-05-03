@@ -8,12 +8,9 @@
  */
 
 
-define("YUH_URI_ROOT", preg_replace('/\/App\.php/', "", $_SERVER['PHP_SELF']));
-define("URI_ROOT", YUH_URI_ROOT);
 define("ROUTE_ERR_VALUES", "route error value");
 define("ROUTE_ERR_MATCH",  "route error match");
 
-$YUH_URI_ROOT = YUH_URI_ROOT;
 
 
 /**
