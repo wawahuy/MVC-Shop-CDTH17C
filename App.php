@@ -1,6 +1,4 @@
 <?php
-    //Test dev
-    
     /**
      * Đối với Windows Version PHP >= 7.3.1
      * Đối với Linux Version PHP >= 7.0.33
@@ -40,15 +38,17 @@
      * 
      */
 
-    $VIEW_DIR = dirname(__FILE__).'/View';
 
+    include_once "Config/Global.config.php";
+    include_once "Config/DB.config.php";
+    include_once "Config/Route.config.php";
+    
 
     /**
      * Kiểm tra version php
      */
     $OS = php_uname('a');
     $PHPVERSION = phpversion();
-    $MIN_VER_PHP = '7.0.33';
 
     if (version_compare($PHPVERSION, $MIN_VER_PHP, '<')) {
         echo "<br>PHP: $PHPVERSION";
@@ -57,7 +57,6 @@
         echo "<br>Nếu bạn đang sử dụng máy chủ 'không phải cục bộ' hãy thự hạ nó xuống >= 7.0.33 nó sẽ làm việc!";
         exit;
     }
-
 
 
 
@@ -85,7 +84,6 @@
 
 
     
-    include_once "Config/DB.config.php";
     include_once "Core/Database.class.php";
     include_once "Core/Session.class.php";
     include_once "Core/Cookie.class.php";
@@ -97,7 +95,7 @@
 
 
     /**
-     * Fix lỗi đương dẫn windows
+     * Fix lỗi đường dẫn windows
      */
     Route::fixPathWindows();
 
@@ -105,5 +103,5 @@
     /**
      * Cấu hình route trong file Route.config.php
      */
-    include_once "Config/Route.config.php";
+    Route::config($ROUTES);
 ?>
