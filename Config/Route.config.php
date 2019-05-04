@@ -1,8 +1,9 @@
 <?php
-
+    //biến chứa cấu trúc cấu hình là $ROUTES, xem cấu trúc tại Core/Route.class.php
     //proccess sử dụng Func::Call_method_of_class_empty được gọi tự động trong Route khi proccess là string
-    //Cấu hình route
-    $routes = [
+    //cấu hình route
+    
+    $ROUTES = [
         //Check login
         [
             "method"   => "get",
@@ -126,7 +127,5 @@
         ]
     ];
 
-
-    Route::config($routes);
 
 ?>

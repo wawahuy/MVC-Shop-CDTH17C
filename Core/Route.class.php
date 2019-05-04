@@ -3,26 +3,14 @@
  * Coder: Nguyễn Gia Huy
  * Bắt đầu: 10-04-2019
  * Hoạt động: 12-04-2019
- * 
- * Sửa đổi ngày: 20-04-2019
- *          - thêm function notraffic
- *          - cập nhật function makeRouting : thêm hasRouting
- * 
- * Sửa đổi ngày: 01-05-2019
- *          - thêm chấp nhận tấc cả luồng với path = "*"
- *            với luồng "tấc cả" (*) cờ hasRouting không được bật
- *          - thêm back_referer trở về page trước đó
  *          
  * 
  */
 
 
-define("YUH_URI_ROOT", preg_replace('/\/App\.php/', "", $_SERVER['PHP_SELF']));
-define("URI_ROOT", YUH_URI_ROOT);
 define("ROUTE_ERR_VALUES", "route error value");
 define("ROUTE_ERR_MATCH",  "route error match");
 
-$YUH_URI_ROOT = YUH_URI_ROOT;
 
 
 /**
