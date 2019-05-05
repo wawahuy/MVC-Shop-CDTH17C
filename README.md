@@ -8,5 +8,5 @@
     <li>Lương Võ Khôi Hưng</li>
 </ul>
 
-Sql Diagram:
+<u>Sql Diagram</u>:<br>
 <img src="Document/sql diagram.png">
