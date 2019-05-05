@@ -7,3 +7,6 @@
     <li>Nguyễn Quốc Đạt</li>
     <li>Lương Võ Khôi Hưng</li>
 </ul>
+
+Sql Diagram:
+<img src="Document/sql diagram.png">
