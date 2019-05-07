@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th5 05, 2019 lúc 03:56 PM
+-- Thời gian đã tạo: Th5 07, 2019 lúc 03:32 PM
 -- Phiên bản máy phục vụ: 5.7.24
 -- Phiên bản PHP: 7.3.1
 
@@ -34,12 +34,21 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `categorie_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `categorie_image` text COLLATE utf8_unicode_ci NOT NULL,
   `categorie_deltail` text COLLATE utf8_unicode_ci NOT NULL,
-  `categorie_parent` int(11) NOT NULL,
+  `categorie_parent` int(11) DEFAULT NULL,
   `employee_id` int(11) NOT NULL,
   PRIMARY KEY (`categorie_id`),
-  UNIQUE KEY `employee_id` (`employee_id`),
-  KEY `categorie_parent` (`categorie_parent`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `employee_id` (`employee_id`) USING BTREE,
+  KEY `categorie_parent` (`categorie_parent`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `categories`
+--
+
+INSERT INTO `categories` (`categorie_id`, `categorie_name`, `categorie_image`, `categorie_deltail`, `categorie_parent`, `employee_id`) VALUES
+(20, 'Riêng nữ 2', 'upload/bn1.jpg', 'Phong cách thời trang tối giản\r\nNhiều sự lựa chọn\r\nGiá thành hợp lí', NULL, 1),
+(22, 'Riêng nữ - Child', 'a', 'a', 20, 1),
+(23, 'Riêng nam', 'upload/bn2.jpg', 'Phong cách thời trang tối giản\r\nNhiều sự lựa chọn\r\nGiá thành hợp lí', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -107,7 +116,14 @@ CREATE TABLE IF NOT EXISTS `employees` (
   `employee_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `employee_birth` date NOT NULL,
   PRIMARY KEY (`employee_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `employees`
+--
+
+INSERT INTO `employees` (`employee_id`, `employee_user`, `employee_pass`, `employee_fullname`, `employee_phone`, `employee_email`, `employee_birth`) VALUES
+(1, 'admin', 'admin123', 'Nguyễn Gia Huy', '857350574', 'kakahuy99@gmail.com', '2019-05-01');
 
 -- --------------------------------------------------------
 
@@ -207,15 +223,15 @@ DROP TABLE IF EXISTS `products`;
 CREATE TABLE IF NOT EXISTS `products` (
   `product_id` int(11) NOT NULL AUTO_INCREMENT,
   `product_name` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
-  `product_view` int(11) NOT NULL,
+  `product_view` int(11) NOT NULL DEFAULT '0',
   `product_star` tinyint(4) NOT NULL,
   `product_deltail` text COLLATE utf8_unicode_ci NOT NULL,
-  `produtc_day` date NOT NULL,
+  `produtc_day` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `product_options` text COLLATE utf8_unicode_ci NOT NULL,
   `product_num_remai` int(11) NOT NULL,
-  `product_num_sold` int(11) NOT NULL,
+  `product_num_sold` int(11) NOT NULL DEFAULT '0',
   `product_price` decimal(10,0) NOT NULL,
-  `product_sale` tinyint(4) NOT NULL,
+  `product_sale` tinyint(4) NOT NULL DEFAULT '0',
   `product_image` text COLLATE utf8_unicode_ci NOT NULL,
   `product_status` varchar(30) COLLATE utf8_unicode_ci NOT NULL,
   `employee_id` int(11) NOT NULL,
@@ -223,7 +239,14 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`product_id`),
   KEY `employee_id` (`employee_id`),
   KEY `categorie_id` (`categorie_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `products`
+--
+
+INSERT INTO `products` (`product_id`, `product_name`, `product_view`, `product_star`, `product_deltail`, `produtc_day`, `product_options`, `product_num_remai`, `product_num_sold`, `product_price`, `product_sale`, `product_image`, `product_status`, `employee_id`, `categorie_id`) VALUES
+(1, 'Áo Test', 0, 4, 'Test', '2019-05-07 22:31:23', '{\"Size\": \"X\", \"XL\"}', 200, 0, '90000', 0, '[\"upload/ao-so-mi-hong.jpg\"]', 'Hoạt Động', 1, 20);
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -233,7 +256,6 @@ CREATE TABLE IF NOT EXISTS `products` (
 -- Các ràng buộc cho bảng `categories`
 --
 ALTER TABLE `categories`
-  ADD CONSTRAINT `categories_ibfk_1` FOREIGN KEY (`categorie_id`) REFERENCES `employees` (`employee_id`),
   ADD CONSTRAINT `categories_ibfk_2` FOREIGN KEY (`categorie_parent`) REFERENCES `categories` (`categorie_id`),
   ADD CONSTRAINT `categories_ibfk_3` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`);
 
