@@ -31,10 +31,7 @@
 
             <div class="pd-deltail">
 
-                <?php
-                    #$DATA->name tên của sản phểm
-                    echo '<div class="pd-title">{{$DATA->name}}</div>';
-                ?>
+                <div class="pd-title">{{$DATA->name}}</div>
 
                 <div class="pd-star-container noselect">
                     <?php

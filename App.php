@@ -40,8 +40,6 @@
 
 
     include_once "Config/Global.config.php";
-    include_once "Config/DB.config.php";
-    include_once "Config/Route.config.php";
     
 
     /**

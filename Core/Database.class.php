@@ -7,6 +7,8 @@
      * 
      */
 
+    include_once dirname(__FILE__)."/../Config/DB.config.php";
+
     /**
      * Kết nối đến CSDL mysql
      */
@@ -263,6 +265,23 @@
                     parent::setParams($params);
                     parent::setQuery("INSERT INTO $this->from($str_column) VALUES ($str_values)");
                     break;
+
+                case 'update' :
+                    $str_upd = "";
+                    $params = $this->params ?? [];
+
+                    foreach ($this->data_query as $key => $value){
+                        $str_upd.= "`$key` = ?,";
+                        array_push($params, $value);
+                    }
+
+                    $str_upd = substr($str_upd, 0, strlen($str_upd) - 1);
+
+                    $where = isset($this->where_) ? " WHERE ".$this->where_ : "";
+                   
+                    parent::setParams($params);
+                    parent::setQuery("UPDATE $this->from SET $str_upd $where");
+                    break;
             }
         }
 
@@ -294,13 +313,25 @@
         }
 
         public function insert(array $data) : bool {
-            $this->type_query = 'insert';
+            return $this->insertAndUpdate("insert", $data);
+        }
+
+
+        public function update(array $data) : bool {
+            return $this->insertAndUpdate("update", $data);
+        }
+
+        private function insertAndUpdate(string $qr, array $data) : bool {
+            $this->type_query = $qr;
             $this->data_query = $data;
             $status = parent::executeNonQuery() > 0;
             $this->type_query = 'select';
             $this->data_query = array();
             return $status;
         }
+
+
+
     }
 
 ?>

@@ -29,17 +29,23 @@
                         <div></div>
                     </div>
                     <div class="lg-input">
-                        <input type="phone" name="sdt" placeholder="SĐT (*)" minlength="8" required>
+                        <input type="phone" name="phone" placeholder="SĐT (*)" minlength="8" required>
                         <div></div>
                     </div>
+
                     <div class="lg-input">
-                        <input type="text" name="address" placeholder="Điạ chỉ (*)" minlength="3" required>
+                        <input type="date" name="birthday" placeholder="Ngày Sinh (*)" required>
                         <div></div>
                     </div>
+
                     <div class="lg-input">
-                        <input type="text" name="cmnd" placeholder="CMND (*)" minlength="7" required>
+                        <select name="sex">
+                            <option value="0">Nam</option>
+                            <option value="1">Nữ</option>
+                        </select>
                         <div></div>
                     </div>
+                    
                     <input type="hidden" name="check_reg" value="1" />
                     <input type="checkbox" class="lg-check" name="private" value="1" required> Đồng ý với <u><a href="rules.html">điều khoản sử dụng</a></u>.
                     <br>

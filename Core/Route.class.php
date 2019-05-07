@@ -6,6 +6,7 @@
  *          
  * 
  */
+include_once dirname(__FILE__)."/../Config/Route.config.php";
 
 
 define("ROUTE_ERR_VALUES", "route error value");
