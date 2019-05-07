@@ -25,6 +25,8 @@
 
         </div>
 
+        @include "CommentProduct.php"
+
         <!--phần sản phẩm yêu thích-->
         <div class="bg-yeuthich" style="margin-top: 70px;">
             <div class="bg-header">

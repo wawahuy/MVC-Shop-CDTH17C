@@ -64,6 +64,12 @@
                 ]);
         }
 
+        
+        public function addComment($id, $comment, $reply = null){
+        }
+
+        public function getComment($id){
+        }
 
 
         /**
