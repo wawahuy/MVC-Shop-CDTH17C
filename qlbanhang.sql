@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th5 07, 2019 lúc 03:32 PM
+-- Thời gian đã tạo: Th5 07, 2019 lúc 05:05 PM
 -- Phiên bản máy phục vụ: 5.7.24
 -- Phiên bản PHP: 7.3.1
 
@@ -46,9 +46,8 @@ CREATE TABLE IF NOT EXISTS `categories` (
 --
 
 INSERT INTO `categories` (`categorie_id`, `categorie_name`, `categorie_image`, `categorie_deltail`, `categorie_parent`, `employee_id`) VALUES
-(20, 'Riêng nữ 2', 'upload/bn1.jpg', 'Phong cách thời trang tối giản\r\nNhiều sự lựa chọn\r\nGiá thành hợp lí', NULL, 1),
-(22, 'Riêng nữ - Child', 'a', 'a', 20, 1),
-(23, 'Riêng nam', 'upload/bn2.jpg', 'Phong cách thời trang tối giản\r\nNhiều sự lựa chọn\r\nGiá thành hợp lí', NULL, 1);
+(20, 'Riêng nữ', 'Resource/upload/girl.jpg', 'Phong cách thời trang tối giản\r\nNhiều sự lựa chọn\r\nGiá thành hợp lí', NULL, 1),
+(23, 'Riêng nam', 'Resource/upload/men.jpg', 'Phong cách thời trang tối giản\r\nNhiều sự lựa chọn\r\nGiá thành hợp lí', NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -82,7 +81,14 @@ CREATE TABLE IF NOT EXISTS `config` (
   `config_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
   `config_data` text COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`config_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `config`
+--
+
+INSERT INTO `config` (`config_id`, `config_name`, `config_data`) VALUES
+(1, 'categories', '[{\"id\":\"20\",\"name\":\"Ri\\u00eang n\\u1eef\",\"deltail\":\"Phong c\\u00e1ch th\\u1eddi trang t\\u1ed1i gi\\u1ea3n\\r\\nNhi\\u1ec1u s\\u1ef1 l\\u1ef1a ch\\u1ecdn\\r\\nGi\\u00e1 th\\u00e0nh h\\u1ee3p l\\u00ed\",\"image\":\"Resource\\/upload\\/girl.jpg\"},{\"id\":\"23\",\"name\":\"Ri\\u00eang nam\",\"deltail\":\"Phong c\\u00e1ch th\\u1eddi trang t\\u1ed1i gi\\u1ea3n\\r\\nNhi\\u1ec1u s\\u1ef1 l\\u1ef1a ch\\u1ecdn\\r\\nGi\\u00e1 th\\u00e0nh h\\u1ee3p l\\u00ed\",\"image\":\"Resource\\/upload\\/men.jpg\"}]');
 
 -- --------------------------------------------------------
 
@@ -246,7 +252,7 @@ CREATE TABLE IF NOT EXISTS `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_name`, `product_view`, `product_star`, `product_deltail`, `produtc_day`, `product_options`, `product_num_remai`, `product_num_sold`, `product_price`, `product_sale`, `product_image`, `product_status`, `employee_id`, `categorie_id`) VALUES
-(1, 'Áo Test', 0, 4, 'Test', '2019-05-07 22:31:23', '{\"Size\": \"X\", \"XL\"}', 200, 0, '90000', 0, '[\"upload/ao-so-mi-hong.jpg\"]', 'Hoạt Động', 1, 20);
+(1, 'Áo Test', 0, 4, 'Test', '2019-05-07 22:31:23', '{\"Size\": \"X\", \"XL\"}', 200, 0, '90000', 0, '[\"Resource/upload/ao-so-mi-hong.jpg\"]', 'Hoạt Động', 1, 20);
 
 --
 -- Các ràng buộc cho các bảng đã đổ

@@ -19,8 +19,8 @@
          */
         public function getProductByID($id) {
             $query = DB::connection()
-                        ->table('product')
-                        ->where('id = ?')
+                        ->table('products')
+                        ->where('product_id = ?')
                         ->setParams([$id]);
             
             #Nếu không tồn tại sản phẩm
@@ -30,20 +30,20 @@
             #Nếu tồn tại
             $data = $query->executeReader()[0];
             $entity = new ProductEntity();
-            $entity->id = $data['id'];
-            $entity->name = $data['name'];
-            $entity->image = json_decode($data['image']);
-            $entity->sale = $data['sale'];
+            $entity->id = $data['product_id'];
+            $entity->name = $data['product_name'];
+            $entity->image = json_decode($data['product_image']);
+            $entity->sale = $data['product_sale'];
             $entity->maxstar = 5;
-            $entity->curstar = $data['star'];
-            $entity->price = $data['price'];
-            $entity->note = $data['note'];
-            $entity->deltail = $data['deltail'];
-            $entity->categoriesId = $data['categories_id'];
-            $entity->numView = $data['view'];
-            $entity->numProductCurrent = $data['num_current'];
-            $entity->numProductSold = $data['num_sold'];
-            $entity->jsonOption = json_decode($data['json_option']);
+            $entity->curstar = $data['product_star'];
+            $entity->price = $data['product_price'];
+            $entity->note = "";
+            $entity->deltail = $data['product_deltail'];
+            $entity->categoriesId = $data['categorie_id'];
+            $entity->numView = $data['product_view'];
+            $entity->numProductCurrent = $data['product_num_remai'];
+            $entity->numProductSold = $data['product_num_sold'];
+            $entity->jsonOption = json_decode($data['product_options']);
             
             return $entity;
         }
