@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th5 07, 2019 lúc 05:05 PM
+-- Thời gian đã tạo: Th5 07, 2019 lúc 05:42 PM
 -- Phiên bản máy phục vụ: 5.7.24
 -- Phiên bản PHP: 7.3.1
 
@@ -148,7 +148,14 @@ CREATE TABLE IF NOT EXISTS `members` (
   `member_birth` date NOT NULL,
   `member_sex` tinyint(1) NOT NULL,
   PRIMARY KEY (`member_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `members`
+--
+
+INSERT INTO `members` (`member_id`, `member_user`, `member_pass`, `member_fullname`, `member_phone`, `member_email`, `member_birth`, `member_sex`) VALUES
+(1, 'admin', '123456', 'Huy Nguyen', 1697777777, 'kakahuy99@gmail.com', '2019-05-25', 0);
 
 -- --------------------------------------------------------
 
@@ -252,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `products` (
 --
 
 INSERT INTO `products` (`product_id`, `product_name`, `product_view`, `product_star`, `product_deltail`, `produtc_day`, `product_options`, `product_num_remai`, `product_num_sold`, `product_price`, `product_sale`, `product_image`, `product_status`, `employee_id`, `categorie_id`) VALUES
-(1, 'Áo Test', 0, 4, 'Test', '2019-05-07 22:31:23', '{\"Size\": \"X\", \"XL\"}', 200, 0, '90000', 0, '[\"Resource/upload/ao-so-mi-hong.jpg\"]', 'Hoạt Động', 1, 20);
+(1, 'Áo Test', 0, 4, 'Test', '2019-05-07 22:31:23', '{\"Size\": [\"X\", \"XL\"]}', 200, 0, '90000', 0, '[\"Resource/upload/ao-so-mi-hong.jpg\"]', 'Hoạt Động', 1, 20);
 
 --
 -- Các ràng buộc cho các bảng đã đổ

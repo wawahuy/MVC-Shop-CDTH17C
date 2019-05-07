@@ -77,8 +77,8 @@
             $password,
             $fullname,
             $phone,
-            $address,
-            $indentity_card){
+            $sex,
+            $birth){
 
                 //Re - update $address, $indentity card 10-05-2019
 
@@ -90,7 +90,9 @@
                     "member_email"       => $email,
                     "member_pass"        => $password,
                     "member_fullname"    => $fullname,
-                    "member_phone"       => $phone
+                    "member_phone"       => $phone,
+                    "member_sex"         => $sex,
+                    "member_birth"       => $birth
                 ]);
         }
 

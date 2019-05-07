@@ -118,7 +118,7 @@
 }
 
 /*định dạng cho ô input*/
-.lg-input > input {
+.lg-input > input, select {
     font-family: "fAdihaus";
     width: 100%;
     height: 100%;

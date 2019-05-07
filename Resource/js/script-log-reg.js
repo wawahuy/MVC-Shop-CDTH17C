@@ -163,14 +163,8 @@ Reg.change = function (e){
         Reg.form.pass.value = "";
         Reg.form.repass.value = "";
     }
-    else if( !Number(Reg.form.sdt.value) ){
+    else if( !Number(Reg.form.phone.value) ){
         swal("Lỗi", "Vui lòng nhập đúng số điện thoại!", "error");
-    }
-    else if( !Number(Reg.form.sdt.value) ){
-        swal("Lỗi", "Vui lòng nhập đúng số điện thoại!", "error");
-    }
-    else if( !Number(Reg.form.cmnd.value) ){
-        swal("Lỗi", "Vui lòng nhập đúng số CMND!", "error");
     }
     else {
         Reg.form.submit();

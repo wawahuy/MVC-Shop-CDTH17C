@@ -26,9 +26,9 @@
             $email = $_POST['email'];
             $password = $_POST['pass'];
             $fullname = $_POST['fullname'];
-            $phone = $_POST['sdt'];
-            $address = $_POST['address'];
-            $indentity_card = $_POST['cmnd'];
+            $phone = $_POST['phone'];
+            $birth = $_POST['birthday'];
+            $sex = $_POST['sex'];
 
             if(!$model->InvalidUsername($username)){
                 Javascript::InvokeScript("swal('Lỗi', 'Username đã tồn tại', 'error')");
@@ -42,11 +42,38 @@
                 return;
             }
 
-            if(!preg_match('/^[\d]{9,12}$/', $indentity_card)){
-                Javascript::InvokeScript("swal('Lỗi', 'CMND Không hợp lệ', 'error')");
+            if(strlen($password) < 6 || strlen($password) > 32){
+                Javascript::InvokeSwal("Lỗi", "Password phải >= 6 & <=32", "error");
                 $this->render();
                 return;
             }
+
+            if(strlen($fullname) < 2){
+                Javascript::InvokeSwal("Lỗi", "Vui lòng nhập một tên đúng!", "error");
+                $this->render();
+                return;
+            }
+
+            if(strlen($phone) < 9 || strlen($phone) > 13){
+                Javascript::InvokeSwal("Lỗi", "Sai SĐT!", "error");
+                $this->render();
+                return;
+            }
+
+            if($sex != "0" && $sex != "1" ){
+                Javascript::InvokeSwal("Lỗi", "Sai giới tính!", "error");
+                $this->render();
+                return;
+            }
+
+            if (preg_match("/([0-9]{2})\/([0-9]{2})\/([0-9]{4})/", $birth, $matches)) {
+                if (!checkdate($matches[2], $matches[1], $matches[3])) {
+                    Javascript::InvokeSwal("Lỗi", "Sai ngày sinh!", "error");
+                    $this->render();
+                    return;                
+                }
+            } 
+            
             
             $model->CreateAccount(
                 $username,
@@ -54,8 +81,8 @@
                 $password,
                 $fullname,
                 $phone,
-                $address,
-                $indentity_card
+                $sex,
+                $birth
             );
 
             Session::SetLoggedID($model->GetIDWithUsername($username));
