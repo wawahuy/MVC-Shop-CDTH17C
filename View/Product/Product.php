@@ -1,5 +1,11 @@
 @call JS_Call_When_Onload('SSp.init')
 
+<style>
+    .bg-header {
+        padding: 10px;
+    }
+</style>
+
 <div id="body-home" class="pd-top-80">
     <!--container chuyên mục-->
     <div class="sp-container">
@@ -25,7 +31,14 @@
 
         </div>
 
-        @include "CommentProduct.php"
+        <!--phần comment-->
+        <div class="bg-yeuthich" style="margin-top: 70px;">
+            <div class="bg-header">
+                Bình luận
+            </div>
+            @include "CommentProduct.php"
+        </div>
+        
 
         <!--phần sản phẩm yêu thích-->
         <div class="bg-yeuthich" style="margin-top: 70px;">

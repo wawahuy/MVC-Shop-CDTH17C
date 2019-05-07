@@ -700,6 +700,7 @@
     border: 2px solid black;
 }
 .account > .acc-avatar img {
+    margin-top: -10px;
     height: 100%;
     border-radius: 50%;
 }

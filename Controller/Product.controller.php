@@ -56,6 +56,35 @@
             }
         }
 
+
+        public function AddComment($params){
+            if(!Session::IsLogged()){
+                echo json_encode(["message" => "Bạn chưa đăng nhập!", "code" => "error"]);
+            }
+            else {
+                $comment = $_POST["comment"] ?? "";
+                $reply =  $_POST["reply"] ?? null;
+
+                if(strlen($comment) < 3 || strlen($comment) > 1000){
+                    echo json_encode(["message" => "Vui lòng nhập comment >=3 & <=1000 kí tự!", "code" => "error"]);
+                    return;
+                }
+
+                $model = new ProductModel();
+                if(!$model->addComment($params["id"], $comment, $reply)){
+                    echo json_encode(["message" => "Lỗi comment!", "code" => "error"]);
+                    return;
+                }
+                
+                echo json_encode(["message" =>  "Đăng comment thành công!", "code" => "success"]);
+            }
+        }
+
+
+        public function ViewComment($params){
+            echo (new ProductModel())->getComment($params["id"], $params["start"], $params["count"]);
+        }
+
     }
 
 

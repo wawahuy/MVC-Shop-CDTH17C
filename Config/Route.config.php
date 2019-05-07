@@ -97,6 +97,26 @@
         ],
 
         [
+            "method"    =>  "post",
+            "path"      =>  "/product_comment/add/[id]",
+            "process"   =>  "Controller/Product.controller(ProductController)->AddComment",
+            "constraint" => [
+                "id" => "[\d]*"
+            ]
+        ],
+
+        [
+            "method"    =>  "get",
+            "path"      =>  "/product_comment/view/[id]/limit/[start]/[count]",
+            "process"   =>  "Controller/Product.controller(ProductController)->ViewComment",
+            "constraint" => [
+                "id" => "[\d]*",
+                "start" => "[\d]*",
+                "count" => "[\d]*"
+            ]
+        ],
+
+        [
             "method"    =>  "get",
             "path"      =>  "/product/[id]",
             "process"   =>  "Controller/Product.controller(ProductController)->View",
