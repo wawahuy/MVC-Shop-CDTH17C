@@ -11,10 +11,10 @@
     function PushArrCategories(&$categories, $sqldata){
         foreach ($sqldata as $child) {
             $arr = array(
-                "categorie_id"      => $child["categorie_id"],
-                "categorie_name"    => $child["categorie_name"],
-                "categorie_deltail" => $child["categorie_deltail"],
-                "categorie_image"   => $child["categorie_image"]
+                "id"      => $child["categorie_id"],
+                "name"    => $child["categorie_name"],
+                "deltail" => $child["categorie_deltail"],
+                "image"   => $child["categorie_image"]
             );
             array_push($categories, $arr);
         }
@@ -27,7 +27,7 @@
             $data = DB::connection()
                         ->table("categories")
                         ->where("categorie_parent = ?")
-                        ->setParams([$categories[$id]["categorie_id"]])
+                        ->setParams([$categories[$id]["id"]])
                         ->executeReader();
 
             if (count($data) > 0){
@@ -62,12 +62,14 @@
                 ->table("config")
                 ->where("config_name = 'categories'")
                 ->exectuteScalar() > 0){
+
             DB::connection()
                 ->table("config")
                 ->where("`config_name` = 'categories'")
                 ->update([
                     "config_data" => json_encode($categories)
                 ]);
+
         } else {
             DB::connection()->table("config")->insert([
                 "config_name" => "categories",

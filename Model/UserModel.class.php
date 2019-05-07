@@ -5,12 +5,12 @@
         public function GetFullNameWithID($id){
             $data = DB::connection()
                         ->table('members')
-                        ->select('fullname')
-                        ->where('id = ?')
+                        ->select('member_fullname')
+                        ->where('member_id = ?')
                         ->setParams([$id])
                         ->executeReader();
 
-            return $data[0]['fullname'];
+            return $data[0]['member_fullname'];
         }
 
 
@@ -23,26 +23,26 @@
         public function GetIDWithUsername($user){
             return DB::connection()
                     ->table('members')
-                    ->select('id')
-                    ->where('username = ?')
+                    ->select('member_id')
+                    ->where('member_user = ?')
                     ->setParams([$user])
-                    ->executeReader()[0]['id'];
+                    ->executeReader()[0]['member_id'];
         }
 
         public function GetIDWithEmail($email){
             return DB::connection()
                     ->table('members')
-                    ->select('id')
-                    ->where('email = ?')
+                    ->select('member_id')
+                    ->where('member_email = ?')
                     ->setParams([$email])
-                    ->executeReader()[0]['id'];
+                    ->executeReader()[0]['member_id'];
         }
 
 
         public function InvalidUsername($user){
             return (DB::connection()
                     ->table('members')
-                    ->where('username = ?')
+                    ->where('member_user = ?')
                     ->setParams([$user])
                     ->exectuteScalar() <= 0);
         }
@@ -50,7 +50,7 @@
         public function InvalidEmail($email){
             return (DB::connection()
                     ->table('members')
-                    ->where('email = ?')
+                    ->where('member_email = ?')
                     ->setParams([$email])
                     ->exectuteScalar() <= 0);
         }
@@ -58,7 +58,7 @@
         public function InvalidLoginUsername($user, $pass){
             return (DB::connection()
                     ->table('members')
-                    ->where('username = ? and password = ?')
+                    ->where('member_user = ? and member_pass = ?')
                     ->setParams([$user, $pass])
                     ->exectuteScalar() <= 0);
         }
@@ -66,7 +66,7 @@
         public function InvalidLoginEmail($email, $pass){
             return (DB::connection()
                     ->table('members')
-                    ->where('email = ? and password = ?')
+                    ->where('member_email = ? and member_pass = ?')
                     ->setParams([$email, $pass])
                     ->exectuteScalar() <= 0);
         }
@@ -80,17 +80,17 @@
             $address,
             $indentity_card){
 
+                //Re - update $address, $indentity card 10-05-2019
+
 
             return DB::connection()
                 ->table('members')
                 ->insert([
-                    "username"        => $username,
-                    "email"           => $email,
-                    "password"        => $password,
-                    "fullname"        => $fullname,
-                    "phone"           => $phone,
-                    "address"         => $address,
-                    "indentity_card"  => $indentity_card
+                    "member_user"        => $username,
+                    "member_email"       => $email,
+                    "member_pass"        => $password,
+                    "member_fullname"    => $fullname,
+                    "member_phone"       => $phone
                 ]);
         }
 

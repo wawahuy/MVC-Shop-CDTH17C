@@ -59,23 +59,23 @@
             #Script SQL find Top Sale
             #Tiêu chí hình thành top popular: mua nhieu nhat
             $data = DB::connection()
-                        ->table('product')
-                        ->select('id, image, sale, name, star, price, num_sold, note')
-                        ->orderby('num_sold', ORDER_BY_DESC)
+                        ->table('products')
+                        ->select('product_id, product_image, product_sale, product_name, product_star, product_price, product_num_sold')
+                        ->orderby('product_num_sold', ORDER_BY_DESC)
                         ->limit(0, 10)
                         ->executeReader();
             $arr = array();
 
             foreach ($data as $pr) {
                 $e = new ProductCardEntity();
-                $e->id = $pr['id'];
-                $e->image = json_decode($pr['image'])[0];
-                $e->sale = $pr['sale'];
-                $e->name = $pr['name'];
-                $e->curstar = $pr['star'];
+                $e->id = $pr['product_id'];
+                $e->image = json_decode($pr['product_image'])[0];
+                $e->sale = $pr['product_sale'];
+                $e->name = $pr['product_name'];
+                $e->curstar = $pr['product_star'];
                 $e->maxstar = 5;
-                $e->price = $pr['price'];
-                $e->note = $pr['note'];
+                $e->price = $pr['product_price'];
+                $e->note = "LIKE";
                 array_push($arr, $e);
             }
 
@@ -94,10 +94,10 @@
             #Tiêu chí hình thành top sale: phân trăm cao => khả năng cao
             
             $data = DB::connection()
-                     ->table('product')
-                     ->select('id, image, sale, name, star, price, num_sold, note')
-                     ->where('sale != 0')
-                     ->orderby('num_sold', ORDER_BY_DESC)
+                     ->table('products')
+                     ->select('product_id, product_image, product_sale, product_name, product_star, product_price, product_num_sold')
+                     ->where('product_sale != 0')
+                     ->orderby('product_num_sold', ORDER_BY_DESC)
                      ->limit(0, 10)
                      ->executeReader();
 
@@ -105,14 +105,14 @@
 
             foreach ($data as $pr) {
                 $e = new ProductCardEntity();
-                $e->id = $pr['id'];
-                $e->image = json_decode($pr['image'])[0];
-                $e->sale = $pr['sale'];
-                $e->name = $pr['name'];
-                $e->curstar = $pr['star'];
+                $e->id = $pr['product_id'];
+                $e->image = json_decode($pr['product_image'])[0];
+                $e->sale = $pr['product_sale'];
+                $e->name = $pr['product_name'];
+                $e->curstar = $pr['product_star'];
                 $e->maxstar = 5;
-                $e->price = $pr['price'];
-                $e->note = $pr['note'];
+                $e->price = $pr['product_price'];
+                $e->note = "LIKE";
                 array_push($arr, $e);
             }
 
