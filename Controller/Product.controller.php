@@ -33,9 +33,10 @@
                 $this->Index();
             }
             else {
+                $model->increaseView($entity->id);
                 View::bind_data('product', $entity);
                 parent::renderPage(
-                    "SShop - Sản phẩm - Không tồn tại!",
+                    "SShop - Sản phẩm - {$entity->name}",
                     dirname(__FILE__)."/../View/Shared/Layout.php",
                     dirname(__FILE__)."/../View/Product/Product.php"
                 );

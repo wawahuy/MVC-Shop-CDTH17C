@@ -59,7 +59,7 @@
             return (DB::connection()
                     ->table('members')
                     ->where('member_user = ? and member_pass = ?')
-                    ->setParams([$user, $pass])
+                    ->setParams([$user, md5($pass)])
                     ->exectuteScalar() <= 0);
         }
 
@@ -67,7 +67,7 @@
             return (DB::connection()
                     ->table('members')
                     ->where('member_email = ? and member_pass = ?')
-                    ->setParams([$email, $pass])
+                    ->setParams([$email, md5($pass)])
                     ->exectuteScalar() <= 0);
         }
         
@@ -88,7 +88,7 @@
                 ->insert([
                     "member_user"        => $username,
                     "member_email"       => $email,
-                    "member_pass"        => $password,
+                    "member_pass"        => md5($password),
                     "member_fullname"    => $fullname,
                     "member_phone"       => $phone,
                     "member_sex"         => $sex,

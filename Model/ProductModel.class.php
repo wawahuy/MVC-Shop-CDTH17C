@@ -49,6 +49,22 @@
         }
 
 
+        /**
+         * Tăng view sản phẩm
+         *
+         * @param int $id
+         * @return void
+         */
+        public function increaseView($id){
+            DB::connection()
+                ->table("products")
+                ->where("product_id = $id")
+                ->update([
+                    "product_view" => "(`product_view` + 1)"
+                ]);
+        }
+
+
 
         /**
          * Lấy 10 sản phẩm yêu chuộng nhất
