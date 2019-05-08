@@ -139,6 +139,12 @@
             "process"   =>  "Controller/Bag.controller(BagController)->Add"
         ],
 
+        [
+            "method"    =>  "post",
+            "path"      =>  "/bag",
+            "process"   =>  "Controller/Bag.controller(BagController)->Change"
+        ],
+
 
         //Error Page
         [

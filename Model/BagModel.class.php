@@ -48,7 +48,8 @@
                          "price"        => $price,
                          "title"        => $model->name,
                          "allprice"     => $price*$dt->num,
-                         "num"          => $dt->num
+                         "num"          => $dt->num,
+                         "id"           => $model->id
                     ]);
                }
                return $code;
@@ -94,12 +95,34 @@
 
 
 
-          public function remove(){
+          public function remove($id){
+               $data = $this->getDataBag() ?? [];
+               $newdata = [];
+               $hasremove = false;
+               foreach ($data as $dt) {
+                    if($dt->id != $id){
+                         array_push($newdata, $dt);
+                    }
+                    else 
+                         $hasremove = true;
+               }
+               $this->setDataBag($newdata);
+               return $hasremove;
           }
 
 
 
-          public function update(){
+          public function update($id, $num){
+               $data = $this->getDataBag() ?? [];
+               $len = count($data);
+               for($i=0; $i<$len; $i++){
+                    if($data[$i]->id == $id){
+                         if($num <= (new ProductModel)->getProductByID($id)->numProductCurrent && $num > 0)
+                              $data[$i]->num = $num;
+                    }
+               }
+               $this->setDataBag($data);
+               return false;
           }
 
 

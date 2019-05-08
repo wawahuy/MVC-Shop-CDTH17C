@@ -55,6 +55,24 @@
      }
 
 
+     public function Change(){
+         $id = $_POST["product"] ?? "";
+         $num = $_POST["num"] ?? "";
+        
+         if($id != "" && $num!=""){
+            $model = new BagModel();
+            if(isset($_POST["delete"])){
+                $model->remove($id);
+            }
+            else if(isset($_POST["update"])){
+                $model->update($id, $num);
+            }
+         }
+
+         Route::Redirect("/bag");
+     }
+
+
  }
 
 ?>

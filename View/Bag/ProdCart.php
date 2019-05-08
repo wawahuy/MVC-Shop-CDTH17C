@@ -1,3 +1,4 @@
+<form action="{{YUH_URI_ROOT}}/bag" method="post">
 <tr>
     <td data-th="Product">
         <div class="row">
@@ -10,15 +11,15 @@
         </div>
     </td>
     <td data-th="Price">{{number_format(@Data:price, 0, '', ',')}} VNĐ</td>
-    <td data-th="Quantity"><input class="form-control text-center" value="{{@Data:num}}" type="number">
+    <td data-th="Quantity"><input name="num" class="form-control text-center" value="{{@Data:num}}" type="number">
     </td>
     <td data-th="Subtotal" class="text-center">{{number_format(@Data:allprice, 0, '', ',')}} VNĐ</td>
     <td class="actions" data-th="">
-        <button class="btn btn-info btn-sm" style="margin-bottom: 10px;">
-            Sửa
-        </button>
-        <button class="btn btn-danger btn-sm">
-            Xóa
-        </button>
+
+        <input type="hidden" name="product" value="{{@Data:id}}"" />
+        <input type="submit" name="update" class="btn btn-info btn-sm" style="margin-bottom: 10px;" value="Sửa" />
+        <input type="submit" name="delete" class="btn btn-danger btn-sm" style="margin-bottom: 10px;" value="Xóa" />
+
     </td>
 </tr>
+</form>

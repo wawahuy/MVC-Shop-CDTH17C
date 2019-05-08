@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th5 07, 2019 lúc 05:42 PM
+-- Thời gian đã tạo: Th5 08, 2019 lúc 09:58 PM
 -- Phiên bản máy phục vụ: 5.7.24
 -- Phiên bản PHP: 7.3.1
 
@@ -59,15 +59,40 @@ DROP TABLE IF EXISTS `comments`;
 CREATE TABLE IF NOT EXISTS `comments` (
   `comment_id` int(11) NOT NULL AUTO_INCREMENT,
   `comment_content` text COLLATE utf8_unicode_ci NOT NULL,
-  `comment_date` datetime NOT NULL,
-  `comment_parent` int(11) NOT NULL,
+  `comment_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `comment_parent` int(11) DEFAULT NULL,
   `member_id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   PRIMARY KEY (`comment_id`),
-  UNIQUE KEY `member_id` (`member_id`),
   UNIQUE KEY `comment_parent` (`comment_parent`),
-  KEY `product_id` (`product_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `member_id` (`member_id`) USING BTREE,
+  KEY `product_id` (`product_id`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `comments`
+--
+
+INSERT INTO `comments` (`comment_id`, `comment_content`, `comment_date`, `comment_parent`, `member_id`, `product_id`) VALUES
+(3, 'dsadasda', '2019-05-08 04:01:09', NULL, 2, 1),
+(8, 'ádasdas', '2019-05-08 04:02:48', NULL, 2, 1),
+(9, 'dsadasda', '2019-05-08 04:01:09', 3, 2, 1),
+(10, 'dsdsdad', '2019-05-08 04:48:39', NULL, 2, 1),
+(11, 'sfdfsd', '2019-05-08 04:48:43', NULL, 2, 1),
+(12, 'sâsxsa', '2019-05-08 04:51:31', NULL, 2, 1),
+(13, 'sãasxasx', '2019-05-08 04:51:35', NULL, 2, 1),
+(14, 'hhfghgfh', '2019-05-08 04:51:43', NULL, 2, 1),
+(15, 'hfyhyhf', '2019-05-08 04:51:47', NULL, 2, 1),
+(16, 'abvc', '2019-05-08 20:20:36', NULL, 2, 1),
+(17, 'Ok bạn', '2019-05-08 20:21:29', 16, 3, 1),
+(18, 'Ok haha', '2019-05-08 20:22:23', 17, 2, 1),
+(27, 'What', '2019-05-08 20:23:04', NULL, 2, 1),
+(29, 'đaèàeằ', '2019-05-09 01:10:42', NULL, 2, 1),
+(30, 'adâscasc', '2019-05-09 02:31:16', NULL, 2, 1),
+(31, 'aqd', '2019-05-09 02:31:23', NULL, 2, 1),
+(32, 'Đẹp TA KK', '2019-05-09 04:05:11', NULL, 2, 2),
+(33, 'QAAAA', '2019-05-09 04:18:29', NULL, 2, 2),
+(34, 'đá', '2019-05-09 04:57:51', NULL, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -104,7 +129,14 @@ CREATE TABLE IF NOT EXISTS `contacts` (
   `member_id` int(11) NOT NULL,
   PRIMARY KEY (`contact_id`),
   KEY `member_id` (`member_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `contacts`
+--
+
+INSERT INTO `contacts` (`contact_id`, `contact_address`, `contact_phone`, `member_id`) VALUES
+(1, 'số nhà C1, khu dân cư Nam Long, đường Phú Thuận, phường Phú Thuận, Q7, TPHCM', 123456789, 3);
 
 -- --------------------------------------------------------
 
@@ -144,18 +176,20 @@ CREATE TABLE IF NOT EXISTS `members` (
   `member_pass` varchar(32) COLLATE utf8_unicode_ci NOT NULL,
   `member_fullname` varchar(100) COLLATE utf8_unicode_ci NOT NULL,
   `member_phone` int(11) NOT NULL,
+  `member_avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `member_email` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `member_birth` date NOT NULL,
   `member_sex` tinyint(1) NOT NULL,
   PRIMARY KEY (`member_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `members`
 --
 
-INSERT INTO `members` (`member_id`, `member_user`, `member_pass`, `member_fullname`, `member_phone`, `member_email`, `member_birth`, `member_sex`) VALUES
-(1, 'admin', '123456', 'Huy Nguyen', 1697777777, 'kakahuy99@gmail.com', '2019-05-25', 0);
+INSERT INTO `members` (`member_id`, `member_user`, `member_pass`, `member_fullname`, `member_phone`, `member_avatar`, `member_email`, `member_birth`, `member_sex`) VALUES
+(2, 'admin2', 'e10adc3949ba59abbe56e057f20f883e', 'Huy Nguyen', 1697777777, NULL, 'kakahuy104@gmail.com', '1999-06-09', 0),
+(3, 'admin', '38de14bb650bd27f85585a902f7560f5', 'Huy Nguyen', 169777777, NULL, 'kakahuy99@gmail.com', '2019-05-12', 0);
 
 -- --------------------------------------------------------
 
@@ -252,14 +286,15 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`product_id`),
   KEY `employee_id` (`employee_id`),
   KEY `categorie_id` (`categorie_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `products`
 --
 
 INSERT INTO `products` (`product_id`, `product_name`, `product_view`, `product_star`, `product_deltail`, `produtc_day`, `product_options`, `product_num_remai`, `product_num_sold`, `product_price`, `product_sale`, `product_image`, `product_status`, `employee_id`, `categorie_id`) VALUES
-(1, 'Áo Test', 0, 4, 'Test', '2019-05-07 22:31:23', '{\"Size\": [\"X\", \"XL\"]}', 200, 0, '90000', 0, '[\"Resource/upload/ao-so-mi-hong.jpg\"]', 'Hoạt Động', 1, 20);
+(1, 'Áo Test', 210, 4, 'Test', '2019-05-07 22:31:23', '', 200, 0, '90000', 0, '[\"Resource/upload/ao-so-mi-hong.jpg\"]', 'Hoạt Động', 1, 20),
+(2, 'Áo Test 2', 211, 4, 'Test 2', '2019-05-07 22:31:23', '', 200, 0, '90000', 10, '[\"Resource/upload/ao-tre-vai-phoi-mau.jpg\"]', 'Hoạt Động', 1, 20);
 
 --
 -- Các ràng buộc cho các bảng đã đổ
