@@ -46,6 +46,22 @@
         private static function string_connect(string $host, string $db){
             return "mysql:host=$host; dbname=$db";
         }
+
+
+        public static function TestLimit($start, $num){
+            if(!is_numeric($start) || !is_numeric($num)){
+                return false;
+            }
+
+            $start = round($start);
+            $end = round($num);
+
+            if($start < 0 || $num < 1){
+                return false;
+            }
+
+            return true;
+        }
     }
 
 
@@ -84,6 +100,9 @@
             $qr->table($table);
             return $qr;
         }
+
+
+        
 
     }
 

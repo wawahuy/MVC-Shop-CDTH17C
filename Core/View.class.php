@@ -68,6 +68,15 @@ class View {
 
 
 
+    public static function general_code($path, array $data){
+        $old_data = View::$DATA;
+        View::$DATA = $data;
+        return View::get_render_content($path);
+        View::$DATA = $old_data;
+    }
+
+
+
     /**
      * Bind data đến view
      *

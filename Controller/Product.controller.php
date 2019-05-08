@@ -1,5 +1,6 @@
 <?php
     Func::Import("Model/ProductModel.class");
+    Func::Import("Model/CommentModel.class");
 
 
     /* Trang chí tiết thông tin của sản phẩm
@@ -57,32 +58,50 @@
         }
 
 
+        /////
+        /////   Chưa hỗ trọ show comment thêm
+        /////
+
+
         public function AddComment($params){
+            #Kiểm tra đăng nhập
             if(!Session::IsLogged()){
                 echo json_encode(["message" => "Bạn chưa đăng nhập!", "code" => "error"]);
             }
             else {
                 $comment = $_POST["comment"] ?? "";
                 $reply =  $_POST["reply"] ?? null;
+                $id_product = $params["id"];
 
+                #Kiểm tra độ dài comment
                 if(strlen($comment) < 3 || strlen($comment) > 1000){
                     echo json_encode(["message" => "Vui lòng nhập comment >=3 & <=1000 kí tự!", "code" => "error"]);
                     return;
                 }
 
-                $model = new ProductModel();
-                if(!$model->addComment($params["id"], $comment, $reply)){
-                    echo json_encode(["message" => "Lỗi comment!", "code" => "error"]);
+                #Kiểm tra comment trên sản phẩm đúng
+                $modelComment = new CommentModel();
+                if((new ProductModel)->getProductByID($id_product) == null){
+                    echo json_encode(["message" =>  "Sản phẩm không tồn tại!", "code" => "error"]);
                     return;
                 }
-                
-                echo json_encode(["message" =>  "Đăng comment thành công!", "code" => "success"]);
+
+                #Kiểm tra đăng comment
+                if($modelComment->addComment($id_product, $comment, Session::GetIDLogged(), $reply)){
+                    echo json_encode(["message" =>  "Đăng comment thành công!", "code" => "success"]);
+                }
+                else {
+                    echo json_encode(["message" =>  "Đăng comment thất bại!", "code" => "error"]);
+                }
             }
         }
 
 
         public function ViewComment($params){
-            echo (new ProductModel())->getComment($params["id"], $params["start"], $params["count"]);
+            $modelComment = new CommentModel();
+            $data = $modelComment->getCommentParent($params["id"], $params["start"], $params["count"]);
+            $data = $modelComment->createJsonComment($data);
+            echo $modelComment->makeHTMLComment($data);
         }
 
     }

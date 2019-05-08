@@ -65,41 +65,6 @@
                 ]);
         }
 
-        
-
-        /**
-         * Thêm comment
-         *
-         * @param int $id_product
-         * @param string $comment
-         * @param int $id_reply
-         * @return boolean
-         */
-        public function addComment($id_product, $comment, $id_reply = null) : bool {
-
-            $model = new CommentModel();
-            if($this->getProductByID($id_product) == null){
-                return false;
-            }
-            
-            if(isset($id_reply) && $id_reply != null)
-                if($model->hasComment($id_reply, $id_product)){
-                    return $model->addCommentReply($id_product, $comment, $id_reply, Session::GetIDLogged());
-                }
-                else {
-                    return false;
-                }
-
-            return $model->addComment($id_product, $comment, Session::GetIDLogged());
-        }
-
-
-        public function getComment($id, $start , $num){
-            $model = new CommentModel();
-            $data = $model->getCommentParent($id, $start , $num);
-            return $model->createJsonComment($data);
-        }
-
 
         /**
          * Lấy 10 sản phẩm yêu chuộng nhất

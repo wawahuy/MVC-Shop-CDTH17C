@@ -27,7 +27,19 @@
          * @param int $id_member
          * @return void
          */
-        public function addComment($id_product, $comment, $id_member){
+        public function addComment($id_product, $comment, $id_member, $id_reply = null){
+            #Kiểm tra trả lời comment
+                // if(isset($id_reply) && $id_reply != null){
+                //     if($modelComment->hasComment($id_reply, $id_product)){
+                //         //return $modelComment->addCommentReply($id_product, $comment, $id_reply, Session::GetIDLogged());
+                //     }
+                //     else {
+                //         echo json_encode(["message" =>  "Không có comment!", "code" => "error"]);
+                //     }
+                //     return;
+                // }
+
+                
             return DB::connection()
                         ->table("comments")
                         ->insert([
@@ -39,32 +51,59 @@
 
 
         public function getCommentParent($id_product, $start, $num){
-            
-            if(!is_numeric($start) || !is_numeric($num)){
+            if(!DB::TestLimit($start, $num))
                 return false;
-            }
-
-            $start = round($start);
-            $end = round($num);
-
-            if($start < 0 || $num < 1){
-                return false;
-            }
 
             return DB::connection()
-                        ->query("select co.comment_id, co.comment_parent, co.comment_content, co.comment_date, me.member_user, me.member_avatar from members me, comments co where me.member_id = co.member_id and co.product_id = ? and co.comment_parent is null limit $start, $num")
+                        ->query("select co.comment_id, co.comment_parent, co.comment_content, co.comment_date, me.member_user, me.member_avatar from members me, comments co where me.member_id = co.member_id and co.product_id = ? and co.comment_parent is null  order by co.comment_date desc limit $start, $num")
                         ->setParams([$id_product])
                         ->executeReader();
         }
 
 
-
-        public function createJsonComment($data){
+        public function getCommentChild($id_comment){
+            return DB::connection()
+                        ->query("select co.comment_id, co.comment_parent, co.comment_content, co.comment_date, me.member_user, me.member_avatar from members me, comments co where me.member_id = co.member_id and co.comment_parent = ?")
+                        ->setParams([$id_comment])
+                        ->executeReader();
         }
 
-        public function createJsonCommentChild($data, $parent){
 
+        public function createJsonComment($data){
+            $con_data = [];
+            foreach($data as $row){
+                $chid_data = [];
+                $chid_data["id"]        = $row["comment_id"];
+                $chid_data["content"]   = $row["comment_content"];
+                $chid_data["date"]      = $row["comment_date"];
+                $chid_data["user"]      = $row["member_user"];
+                $chid_data["avatar"]    = $row["member_avatar"] ?? "/Resource/img/account.png";
+                if($row["comment_parent"] == null){
+                    $child = $this->getCommentChild($row["comment_id"]);
+                    if(count($child) > 0)
+                        $chid_data["child"] = $this->createJsonComment($child);
+                }
+                array_push($con_data, $chid_data);
+            }
+            return $con_data;
+        }
 
+        public function makeHTMLComment($datas){
+            $code = "";
+            foreach ($datas as $data ) {
+                $code_child = "";
+                if(array_key_exists("child", $data))
+                    $code_child = $this->makeHTMLComment($data["child"]);
+                $code .= View::general_code(dirname(__FILE__)."/../View/Product/CommentChild.php", [
+                    "id"        => $data["id"],
+                    "content"   => $data["content"],
+                    "date"      => $data["date"],
+                    "user"      => $data["user"],
+                    "avatar"    => $data["avatar"],
+                    "child"     => $code_child ?? ""
+                ]);
+            }
+            return $code;
         }
 
     }
