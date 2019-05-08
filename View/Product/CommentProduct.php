@@ -3,6 +3,8 @@
     const CMT_DBL = "<span class=\"spinner-border spinner-border-sm\"></span>Đang Đăng...";
     var comment_reply = null;
     var end_comment = 0;
+    var reply_id = null;
+
 
     function postComment(e){
         if(e.innerHTML == CMT_DB) {
@@ -23,7 +25,7 @@
             
             $.post('{{YUH_URI_ROOT}}/product_comment/add/{{@Data:product->id}}', {
                 comment: tc.value,
-                reply: comment_reply
+                reply: reply_id
             }, (result)  => {
                 setTimeout( () => {
 
@@ -71,6 +73,22 @@
                document.getElementById("comment_box").innerHTML = result;
             });
 
+
+
+
+    function reply(e, id){
+        reply_id = id;
+        document.getElementById("lbreply").innerHTML = "Đang trả lời "+e;
+        var tc = document.getElementById("tex_comment");
+        tc.focus();
+    }
+
+
+    function exit_reply(e){
+        e.innerHTML = "";
+        reply_id = null;
+    }
+
 </script>
 
 <div class="container mt-3" style="border-bottom: none; background-color: white">
@@ -82,6 +100,7 @@
             <textarea class="form-control z-depth-1" id="tex_comment" rows="3" placeholder="Write something here..."></textarea>
         </div>
         <button class="btn btn-primary" onclick = "postComment(this)">Đăng bài</button>
+        <button class="btn" id="lbreply" onclick = "exit_reply(this)"></button>
     </div>
   @endif
 
