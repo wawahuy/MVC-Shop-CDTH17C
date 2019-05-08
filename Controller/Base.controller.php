@@ -1,6 +1,7 @@
 <?php
     Func::Import("Model/UserModel.class");
     Func::Import("Model/ConfigModel.class");
+    Func::Import("Model/BagModel.class");
 
     /**
      * Lớp trừu tượng controller
@@ -45,6 +46,7 @@
             View::bind_data("page_logged_id", Session::GetIDLogged());
             View::bind_data("page_name_logged", Session::IsLogged() ? (new UserModel)->GetFullNameWithID(Session::GetIDLogged()) : null);
             View::bind_data("page_code_body", View::get_code_compile($path_content));
+            View::bind_data("page_cart_product", (new BagModel)->getNumProduct());
             View::render($path_layout);
             Javascript::Run();
         }

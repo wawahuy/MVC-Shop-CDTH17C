@@ -112,7 +112,9 @@
         
             <!--Tạo các Option Custom-->
             <div id="sp-pl">
-                {{CreateOption(@Data:product->jsonOption)}}
+                @if isset(@Data:product->jsonOption)
+                    {{CreateOption(@Data:product->jsonOption)}}
+                    @endif
             </div>
 
             <span>Số lượng:</span>
@@ -150,15 +152,17 @@
     }
 
     function Add(e){
-        opt = document.getElementsByName("option")[0];
-        opt = JSON.parse(opt.value);
-        for( key in opt){
-            if(opt[key] == ""){
-                swal("Lỗi", "Bạn cần chọn đầy đủ thông tin!", "error");
-                e.preventDefault();
-                return;
+        try {
+            opt = document.getElementsByName("option")[0];
+            opt = JSON.parse(opt.value);
+            for( key in opt){
+                if(opt[key] == ""){
+                    swal("Lỗi", "Bạn cần chọn đầy đủ thông tin!", "error");
+                    e.preventDefault();
+                    return;
+                }
             }
-        }
+        } catch (e){}
 
         document.forms["fproduct"].submit();
     }

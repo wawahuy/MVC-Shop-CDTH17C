@@ -5,6 +5,20 @@
  class BagController extends BaseController {
 
      public function Index(){
+        $modelBag = new BagModel;
+        $html_product = $modelBag->makeHTMLCart();
+        $num_product = $modelBag->getNumProduct();
+        $price_product = $modelBag->getPriceProduct();
+        $price_vc = 0;
+
+        View::bind_data("num_product", $num_product);
+        View::bind_data("price_product", $price_product);
+        View::bind_data("price_vc", $price_vc);
+        View::bind_data("price_all", $price_product + $price_vc);
+        View::bind_data("list_cart", $html_product);
+        View::bind_data("contact_addr", "UPDATE");
+        View::bind_data("contact_phone", "UPDATE");
+
         parent::renderPage(
              "SShop - Giỏ hàng",
              "{$GLOBALS['VIEW_DIR']}/../View/Shared/Layout.php",
@@ -25,7 +39,7 @@
         try {
             $id_product = $_POST['id_product'];
             $num_product = $_POST['soluong'];
-            $option_product = json_encode($_POST['option']);
+            $option_product = json_encode($_POST['option'] ?? "");
 
         } catch (Exception $e){
             Func::Redirect($uri_refer."?mess=error");
@@ -35,7 +49,6 @@
         if(!(new BagModel())->add($id_product, $num_product, $option_product)){
             Func::Redirect($uri_refer."?mess=error");
             return;
-            //test  big-update
         }
 
         Func::Redirect($uri_refer."?mess=success");

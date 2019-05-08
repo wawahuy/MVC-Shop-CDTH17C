@@ -246,7 +246,7 @@ CBag.init = function (){
     CBag.dTui = document.getElementById("tuiHang");
     CBag.dDem = document.getElementById("tuiHang-count");
     CBag.dAdd = document.body;
-    CBag.updateHTML();
+    //CBag.updateHTML();
 }
 window.addEventListener( "load", CBag.init, false);
 
