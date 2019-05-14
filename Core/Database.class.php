@@ -287,9 +287,15 @@
 
                 case 'update' :
                     $str_upd = "";
+                    $params_diff = parent::getParams();
+                    $params_upd = array();
+
                     foreach ($this->data_query as $key => $value){
-                        $str_upd.= "$key = $value,";
+                        $str_upd.= "$key = ?,";
+                        array_push($params_upd, $value);
                     }
+
+                    parent::setParams(array_merge($params_upd, $params_diff));
                     $str_upd = substr($str_upd, 0, strlen($str_upd) - 1);
                     $where = isset($this->where_) ? " WHERE ".$this->where_ : "";
                     parent::setQuery("UPDATE $this->from SET $str_upd $where");

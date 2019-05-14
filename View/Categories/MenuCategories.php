@@ -74,7 +74,7 @@
                 @foreach $ct as $value
                     <div class='cm-c-cm {{$root ? "view" : "hidden"}}'>
                             <button id='btn_o_{{$value->id}}' onclick='Click(this)'>+</button>
-                            <a href='categories/{$value->id}/{$value->name}'>{$value->name}</a>
+                            <a href='{{YUH_URI_ROOT}}/categories/{{$value->id}}/{{$value->name}}'>{{$value->name}}</a>
                 
                             @if array_key_exists('child', $value)
                                 @call CreateCategories($value->child)
