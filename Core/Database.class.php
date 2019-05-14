@@ -292,7 +292,7 @@
 
                     foreach ($this->data_query as $key => $value){
                         #Ko sử dụng params khi có chứa column
-                        if(preg_match('`\s*([\d|\w_]+)\s*`', $value)){
+                        if(preg_match('/`\s*([\d|\w_]+)\s*`/', $value)){
                             $str_upd.= "$key = $value ";
                         }
                         else {
