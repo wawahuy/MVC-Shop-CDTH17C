@@ -56,16 +56,15 @@
 
 
      public function Change(){
-         $id = $_POST["product"] ?? "";
+         $id  = $_POST["product"] ?? "";
          $num = $_POST["num"] ?? "";
         
          if($id != "" && $num!=""){
-            $model = new BagModel();
             if(isset($_POST["delete"])){
-                $model->remove($id);
+                (new BagModel())->remove($id);
             }
             else if(isset($_POST["update"])){
-                $model->update($id, $num);
+                (new BagModel())->update($id, $num);
             }
          }
 

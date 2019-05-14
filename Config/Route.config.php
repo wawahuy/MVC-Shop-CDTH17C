@@ -79,7 +79,7 @@
 
         [
             "method"    =>  "get",
-            "path"      =>  "/categories/[id]/page/[page]/[name]",
+            "path"      =>  "/categories/[id]/[name]/page/[page]/[name]",
             "process"   =>  "Controller/Categories.controller(CategoriesController)->View",
             "constraint" => [
                 "id" => "[\d]+",

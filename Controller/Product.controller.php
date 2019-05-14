@@ -58,11 +58,6 @@
         }
 
 
-        /////
-        /////   Chưa hỗ trọ show comment thêm
-        /////
-
-
         public function AddComment($params){
             #Kiểm tra đăng nhập
             if(!Session::IsLogged()){

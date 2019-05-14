@@ -169,19 +169,7 @@ class Route {
 
         #Gọi process
         if(is_string($process)){
-            #kiểm tra controller
-            // $matches = array();
-            // if(!preg_match("/Controller:([\d|\w]+)([@]?)([\d|\w]*)/", $process, $matches))
-            // {
-            //     throw new Exception("Lỗi process!");
-            //     return;
-            // }
-
-            // $controller = $matches[1];
-            // $action = $matches[3];
-            // Func::RunController($controller, $action, $params);
             Func::Call_method_of_class_empty($process, $params);
-
         }
         #gọi callback
         else {
@@ -248,7 +236,6 @@ class Route {
      */
     private static function quotePath($path){
         foreach(str_split("*.?+^|{}:/()") as $q){
-            
             $path = preg_replace("/\\{$q}/", "\\{$q}", $path);   
         }
         return $path;

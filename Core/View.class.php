@@ -60,7 +60,7 @@ class View {
      * Sử dụng trên View có 2 cách
      *      C1:    View::$DATA[name]
      *      C2:    @Data:name
-     * Để hiển thị giá trị cần đặt nó trong {{ ... }}, trong các lệnh if có thể giữ bình thường
+     * Để hiển thị giá trị cần đặt nó trong {{ ... }}, trong các lệnh khác có thể giữ bình thường
      *
      * @var array
      */

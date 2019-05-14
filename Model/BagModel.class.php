@@ -24,7 +24,6 @@
           }
 
 
-
           public function getPriceProduct(){
                $data = $this->getDataBag() ?? [];
                $price = 0;

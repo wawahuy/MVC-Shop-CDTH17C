@@ -5,19 +5,25 @@
     require_once dirname(__FILE__)."/../Model/Entity/CategoriesEntity.class.php";
     require_once dirname(__FILE__)."/../Model/Entity/ProductCardEntity.class.php";
 
-    class CategoriesModel extends Database {
+    class CategoriesModel {
 
         public function GetNumProductCategories($id){
-            $query = "select count(id) num from product where categories_id = ?";
-            $data = parent::query($query, array($id));
-            return $data[0]['num'];
+            return DB::connection()
+                        ->table("products")
+                        ->where("categorie_id = ?")
+                        ->setParams([$id])
+                        ->exectuteScalar();
         }
 
         public function GetIDCategoriesChild($id){
-            $query = "select id_child from categories_child where id_parent = ?";
-            $data = parent::query($query, array($id));
+            $data = DB::connection()
+                        ->table("categories")
+                        ->where("categorie_parent = ?")
+                        ->setParams([$id])
+                        ->executeReader();
+
             $arr = array();
-            foreach ($data as $value) array_push($arr, $value['id_child']);
+            foreach ($data as $value) array_push($arr, $value['categorie_id']);
             return $arr;
         }
 
@@ -32,8 +38,11 @@
         }
 
         public function GetIDCategoriesAll(){
-            $query = "select id from categories";
-            $data = parent::query($query);
+            $data = DB::connection()
+                        ->table("categories")
+                        ->where("categorie_parent is null")
+                        ->executeReader();
+                        
             $arr = array();
             foreach ($data as $value) array_push($arr, $value['id']);
             return $arr;

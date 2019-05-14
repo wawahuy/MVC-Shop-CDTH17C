@@ -1,10 +1,15 @@
 <?php
     //Func::ImportModel("Categories");
+    define("NUM_PRODUCT_PAGE", 16);
 
     class CategoriesController extends BaseController {
 
         public function Index(){
-            $this->View(null);
+            $this->ViewAll();
+        }
+
+
+        public function ViewAll(){
         }
 
 
