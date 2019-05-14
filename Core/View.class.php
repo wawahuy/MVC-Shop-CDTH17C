@@ -99,6 +99,14 @@ class View {
     public static function render($path){
         $code = View::get_code_compile($path);
 
+                    //COde debug
+                    $i = 0;
+
+                    echo '<pre>'.preg_replace_callback('/(?P<cnt>.*)(?P<line>[\r\n])/', function ($m){
+                        global $i;
+                        return '<b>'.$i++.'</b> '.htmlspecialchars($m['cnt']).$m['line'];
+                    }, $code).'</pre>';
+
         //run code
         try {
             //COde debug
@@ -141,11 +149,11 @@ class View {
 
         //Xữ lí các mẫu
         $code = View::_require($code);
+        $code = View::_call($code);
         $code = View::_var($code);
         $code = View::_foreach($code);
         $code = View::_if($code);
         $code = View::_change_var_data($code);
-        $code = View::_call($code);
         $code = View::_eval($code);
         return $code;
     }

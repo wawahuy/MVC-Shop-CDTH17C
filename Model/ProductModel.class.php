@@ -135,5 +135,34 @@
             return $arr;
         }
 
+
+        public function GetProductByCategorieID($id_categorie, $limit_start, $limit_count){
+            $data = DB::connection()
+                        ->table('products')
+                        ->select('product_id, product_image, product_sale, product_name, product_star, product_price, product_num_sold')
+                        ->where('categorie_id = ?')
+                        ->orderby('product_day', ORDER_BY_DESC)
+                        ->limit($limit_start, $limit_count)
+                        ->setParams([$id_categorie])
+                        ->executeReader();
+
+            $arr = array();
+
+            foreach ($data as $pr) {
+                $e = new ProductCardEntity();
+                $e->id = $pr['product_id'];
+                $e->image = json_decode($pr['product_image'])[0];
+                $e->sale = $pr['product_sale'];
+                $e->name = $pr['product_name'];
+                $e->curstar = $pr['product_star'];
+                $e->maxstar = 5;
+                $e->price = $pr['product_price'];
+                $e->note = "LIKE";
+                array_push($arr, $e);
+            }
+
+            return $arr;
+        }
+
     }
 ?>

@@ -65,22 +65,28 @@
     <div class="cm-c-chuyenmuc">
         <div class="cm-c-title">Chuyên mục</div>
         
-        <?php
-            $ids = $YUH_ENTITY_CONTENT->categoriesId;
+            @call $ids = @Data:categorie_id
 
-            #Lấy từ YUH_ENTITY_PAGE->menu
-            function CreateCategories($ct, $root = false){
-                foreach ($ct as $value) {
-                    echo "<div class='cm-c-cm ".($root ? "view" : "hidden")."'>".
-                            "<button id='btn_o_{$value->id}' onclick='Click(this)'>+</button>".
-                            "<a href='categories.php?id={$value->id}&name={$value->name}'>{$value->name}</a>";
-                    if(array_key_exists('child', $value)) CreateCategories($value->child);
-                    echo '</div>';
+            <?php
+                function CreateCategories($ct, $root = false){
+            ?>
+
+                @foreach $ct as $value
+                    <div class='cm-c-cm {{$root ? "view" : "hidden"}}'>
+                            <button id='btn_o_{{$value->id}}' onclick='Click(this)'>+</button>
+                            <a href='categories/{$value->id}/{$value->name}'>{$value->name}</a>
+                
+                            @if array_key_exists('child', $value)
+                                @call CreateCategories($value->child)
+                            @endif
+                    </div>
+                @endforeach
+
+            <?php
                 }
-            }
+            ?>
 
-            CreateCategories($YUH_ENTITY_PAGE->menu, true);
-        ?>
+            @call CreateCategories(@Data:page_menu, true)
 
         <script>
             Click(document.getElementById("btn_o_<?=$ids; ?>"), true);

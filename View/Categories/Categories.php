@@ -4,19 +4,14 @@
 
         <div class="cm-path" id="cmpath">
             <span>
-                <a href="index.php">Trang chủ</a>
+                <a href="{{YUH_URI_ROOT}}/">Trang chủ</a>
             </span>
             <span>
-                <a href="categories.php">Chuyên Mục</a>
+                <a href="{{YUH_URI_ROOT}}/categories">Chuyên Mục</a>
             </span>
 
-            <?php
-                require dirname(__FILE__)."/Func.php";
-
-                #Tạo phân cấp chuyên mục đến sản phẩm thông qua $caterogies cua entity page
-                #EX: / Riêng Nữ/ Áo/ Áo Thun
-                echo GetCategoriesPath($YUH_ENTITY_CONTENT->categoriesId, $YUH_ENTITY_PAGE->menu);
-            ?>
+                @include "Func.php";
+                {{GetCategoriesPath(@Data:categorie_id, @Data:page_menu)}}
 
         </div>
 
@@ -25,12 +20,10 @@
         </div>
 
         <div class="cm-bor">
-            <?php
-                #Menu chuyên mục
-                include dirname(__FILE__)."/MenuCategories.php";
-                #Danh sách sản phẩm
-                include dirname(__FILE__)."/ListProduct/ListProduct.php";
-            ?>
+                <!--Menu chuyên mục-->
+                @include "MenuCategories.php";
+                <!--Danh sách sản phẩm-->
+                <!--include dirname(__FILE__)."/ListProduct/ListProduct.php"-->
         </div>
     </div>
 </div> 
