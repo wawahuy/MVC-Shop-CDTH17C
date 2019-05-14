@@ -80,9 +80,29 @@
                         ->executeReader();
 
             $arr = array();
-            foreach ($data as $value) array_push($arr, $value['id']);
+            foreach ($data as $value) array_push($arr, $value['categorie_id']);
             return $arr;
         }
+
+
+        /**
+         * Lấy tấc cả chuyên mục xuất phát từ Lá $id
+         * NULL sẽ mặc định là nhánh cao nhất
+         *
+         * @param int $id
+         * @return void
+         */
+        function GetAllCategoriesChildByIDParent($id = null){
+            $arr = [];
+            $categories = $id != null ? $this->GetIDCategoriesChild($id) : $this->GetIDCategoriesRoot();
+            foreach($categories as $cg){
+                array_push($arr, $cg);
+                $arr = array_merge($arr, $this->GetAllCategoriesChildByIDParent($cg));
+            }
+            return $arr;
+        }
+        
+
 
         // public function GetProductWithIDCategories($id, $limit_start = 0, $limit_count = 8){
         //     $list_id = array();

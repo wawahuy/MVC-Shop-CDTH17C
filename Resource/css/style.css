@@ -20,6 +20,15 @@
 }
 
 
+@font-face {
+  font-family: 'Glyphicons Halflings';
+
+  src: url('../font/glyphicons-halflings-regular.eot');
+  src: url('../font/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'), url('../font/glyphicons-halflings-regular.woff') format('woff'), url('../font/glyphicons-halflings-regular.ttf') format('truetype'), url('../font/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}
+
+
+
 body {
     font-family: "fAdihaus";
     margin: 0;

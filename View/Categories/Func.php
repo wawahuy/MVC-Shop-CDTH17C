@@ -6,7 +6,7 @@
      */
     function GetCategoriesPath($id, $data){
         foreach ($data as $value) {
-            $tag = "<span><a href='{{YUH_URI_ROOT}}/categories/{$value->id}/{$value->name}'>{$value->name}</a></span>";
+            $tag = "<span><a href='".YUH_URI_ROOT."/categories/{$value->id}/{$value->name}'>{$value->name}</a></span>";
 
             if($value->id == $id) return $tag;
 

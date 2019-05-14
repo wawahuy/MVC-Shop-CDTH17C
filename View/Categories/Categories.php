@@ -21,9 +21,10 @@
 
         <div class="cm-bor">
                 <!--Menu chuyên mục-->
-                @include "MenuCategories.php";
+                @include "MenuCategories.php"
                 <!--Danh sách sản phẩm-->
-                <!--include dirname(__FILE__)."/ListProduct/ListProduct.php"-->
+                @include "ListProduct/ListProduct.php"
+
         </div>
     </div>
 </div> 
