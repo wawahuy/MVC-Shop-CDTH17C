@@ -291,8 +291,14 @@
                     $params_upd = array();
 
                     foreach ($this->data_query as $key => $value){
-                        $str_upd.= "$key = ?,";
-                        array_push($params_upd, $value);
+                        #Ko sử dụng params khi có chứa column
+                        if(preg_match('`\s*([\d|\w_]+)\s*`', $value)){
+                            $str_upd.= "$key = $value ";
+                        }
+                        else {
+                            $str_upd.= "$key = ?,";
+                            array_push($params_upd, $value);
+                        }
                     }
 
                     parent::setParams(array_merge($params_upd, $params_diff));
