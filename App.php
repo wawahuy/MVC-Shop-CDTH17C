@@ -12,7 +12,7 @@
      *                           |
      *                           |
      *                           |
-     *                   Controller@Action      (Controller/...) , Action là tên phương thức public của class
+     *                   Proccess sử dụng lambda hoặc Func::call_empty... 
      *                      |    |   
      *                      |    |
      *         Model---------    ------------------------- --------(View::render)  (View.class.php)

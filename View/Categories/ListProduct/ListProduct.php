@@ -43,9 +43,8 @@
 
         <!--sản phẩm-->
         <div id="cmProduct">
-            
+            {{@Data:categories_product}}
         </div>
 
-        @include "SelectPage.php"
     </div>
 </div> 

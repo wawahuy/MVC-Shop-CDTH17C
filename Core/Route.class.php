@@ -107,7 +107,7 @@ class Route {
 
 
     /**
-     * Cấu hình router với json array tahay vì dùng get|post|all 
+     * Cấu hình router với json array thay vì dùng get|post|all 
      * $process là string sẽ tự động truyền cho Func::Call_method_of_class_empty
      *
      * Mỗi child có câu trúc bao gồm các thông tin sau:
@@ -148,7 +148,7 @@ class Route {
      */
     private static function makeRouting($path, $process, $constraint){
         #Fix URI
-        $uri = $_SERVER["REQUEST_URI"];
+        $uri = preg_replace('/\?(.*)$/', '', $_SERVER["REQUEST_URI"]);
         $path = YUH_URI_ROOT.$path;
 
         #Lấy các parameter trên path

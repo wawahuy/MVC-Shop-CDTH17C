@@ -10,14 +10,9 @@
      * Index() là Action mặc định
      * 
      * Cách kết hợp nó với Route
-     *      Route::<method>(path, "Controller:<name>[@action]");
-     *      Chú thích:
-     *          method: get|post|all
-     *          name:   tên controller, có class AbcController => name là Abc
-     *          action: không có nó sẽ gọi action Index, nếu tồn tại @... nó sẽ gọi ->....
+     *      Route::<method>(path, "PathController(NameClass)->NameMetod");
      * 
      * PHP Version >= 7.0.33
-     * 
      * 
      * 
      */
@@ -40,17 +35,21 @@
          */
         protected function renderPage($title, $path_layout, $path_content){
             #Bind Data Page
+            $this->bindPage($title);
             View::bind_data("page_title", $title);
-            View::bind_data("page_menu", (new ConfigModel)->getsJsonMenu());
-            View::bind_data("page_logged", Session::IsLogged());
-            View::bind_data("page_logged_id", Session::GetIDLogged());
-            View::bind_data("page_name_logged", Session::IsLogged() ? (new UserModel)->GetFullNameWithID(Session::GetIDLogged()) : null);
             View::bind_data("page_code_body", View::get_code_compile($path_content));
-            View::bind_data("page_cart_product", (new BagModel)->getNumProduct());
             View::render($path_layout);
             Javascript::Run();
         }
 
+
+        protected function bindPage(){
+            View::bind_data("page_menu", (new ConfigModel)->getsJsonMenu());
+            View::bind_data("page_logged", Session::IsLogged());
+            View::bind_data("page_logged_id", Session::GetIDLogged());
+            View::bind_data("page_name_logged", Session::IsLogged() ? (new UserModel)->GetFullNameWithID(Session::GetIDLogged()) : null);
+            View::bind_data("page_cart_product", (new BagModel)->getNumProduct());
+        }
     }
 
 ?>

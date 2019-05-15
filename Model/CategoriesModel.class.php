@@ -1,6 +1,6 @@
 <?php
 
-    require_once dirname(__FILE__)."/../Model/Entity/CategoriesEntity.class.php";
+    //require_once dirname(__FILE__)."/../Model/Entity/CategoriesEntity.class.php";
     require_once dirname(__FILE__)."/../Model/Entity/ProductCardEntity.class.php";
 
 
@@ -32,6 +32,23 @@
                         ->where("categorie_id = ? and not exists (select * from categories where categorie_parent = ?)")
                         ->setParams([$id, $id])
                         ->exectuteScalar() > 0; 
+        }
+        
+
+
+        /**
+         * Lấy tên chuyên mục
+         *
+         * @param [type] $id
+         * @return string
+         */
+        public function GetName($id) : string {
+            return DB::connection()
+                        ->table("categories")
+                        ->where("categorie_id = ?")
+                        ->select("categorie_name")
+                        ->setParams([$id])
+                        ->executeReader()[0]['categorie_name'];
         }
 
 
@@ -102,50 +119,6 @@
             return $arr;
         }
         
-
-
-        // public function GetProductWithIDCategories($id, $limit_start = 0, $limit_count = 8){
-        //     $list_id = array();
-
-        //     if($id == null){
-        //         $list_id = $this->GetIDCategoriesAll();
-        //     } else {
-        //         $list_id = $this->GetIDCategoriesAllChild($id);
-        //     }
-
-        //     $categoriesProducts = array();
-
-        //     foreach($list_id as $idc){
-        //         $categoriesProduct = new CategoriesProduct();
-        //         $categoriesProduct->id = $idc;
-        //         $categoriesProduct->product = array();
-
-        //         $query = " select id, image, sale, name, star, price, note".
-        //                 " from product".
-        //                 " where categories_id = ".$idc.
-        //                 " order by id desc".
-        //                 " limit {$limit_start}, {$limit_count}";
-        //         $data = parent::query($query);
-
-        //         foreach ($data as $pr) {
-        //             $e = new ProductCard();
-        //             $e->id = $pr['id'];
-        //             $e->image = json_decode($pr['image'])[0];
-        //             $e->sale = $pr['sale'];
-        //             $e->note = $pr['note'];
-        //             $e->name = $pr['name'];
-        //             $e->curstar = $pr['star'];
-        //             $e->maxstar = 5;
-        //             $e->price = $pr['price'];
-        //             array_push($categoriesProduct->product, $e);
-        //         }
-
-        //         if(count( $categoriesProduct->product) > 0)
-        //             array_push($categoriesProducts, $categoriesProduct);
-        //     }
-
-        //     return $categoriesProducts;
-        // }
 
     }
 ?>

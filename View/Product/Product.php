@@ -12,10 +12,10 @@
 
         <div class="sp-path" id="sppath">
             <span>
-                <a href="index.php">Trang chủ</a>
+                <a href="{{YUH_URI_ROOT}}">Trang chủ</a>
             </span>
             <span>
-                <a href="categories.php">Chuyên Mục</a>
+                <a href="{{YUH_URI_ROOT}}/categories">Chuyên Mục</a>
             </span>
 
             @include "../Categories/Func.php"

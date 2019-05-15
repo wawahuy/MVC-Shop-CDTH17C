@@ -136,14 +136,59 @@
         }
 
 
-        public function GetProductByCategorieID($id_categorie, $limit_start, $limit_count){
+        public function GetProductByCategorieID($id_categorie, $limit_start, $limit_count, $sort = null, $search = null ){
+
+            $order_name = 'product_day';
+            $order_stmt = ORDER_BY_DESC;
+            switch($sort ?? ""){
+                case "price-max":
+                    $order_name = 'product_price';
+                    $order_stmt = ORDER_BY_DESC;
+                    break;
+
+                case "price-min":
+                    $order_name = 'product_price';
+                    $order_stmt = ORDER_BY_ASC;
+                    break;
+
+                case "view":
+                    $order_name = 'product_view';
+                    $order_stmt = ORDER_BY_DESC;
+                    break;
+
+                case "sale":
+                    $order_name = 'product_sale';
+                    $order_stmt = ORDER_BY_DESC;
+                    break;
+
+                case "sold":
+                    $order_name = 'product_num_sold';
+                    $order_stmt = ORDER_BY_DESC;
+                    break;
+            }
+
+            $params = [$id_categorie];
+            
+            #general search
+            $search_where = "";
+            if($search != null && $search != ""){
+                $exp_search = explode(" ", $search);
+                $search_where = " AND (";
+                foreach($exp_search as $es){
+                    $search_where .= "product_name like ? or ";
+                    array_push($params, "%".$es."%");
+                }
+                $search_where = substr($search_where, 0, strlen($search_where)-3).")";
+            }
+            
+
             $data = DB::connection()
                         ->table('products')
-                        ->select('product_id, product_image, product_sale, product_name, product_star, product_price, product_num_sold')
-                        ->where('categorie_id = ?')
-                        ->orderby('product_day', ORDER_BY_DESC)
+                        ->select('product_id, product_image, product_sale, product_name, product_star, product_price, product_num_sold, product_view')
+                        ->where("categorie_id = ? $search_where")
+                        ->orderby($order_name, $order_stmt)
                         ->limit($limit_start, $limit_count)
-                        ->setParams([$id_categorie])
+                        ->setParams($params)
                         ->executeReader();
 
             $arr = array();

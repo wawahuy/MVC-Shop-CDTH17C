@@ -19,7 +19,7 @@
     <div class="pd-container">
         <div class="pd-look">
             
-            <div class="pd-image"><img src="{{$DATA->image}}"></div>
+            <div class="pd-image"><img src="{{YUH_URI_ROOT}}/{{$DATA->image}}"></div>
 
             @if isset($DATA->note)
                     <div class="pd-sale"><span>{{$DATA->note}}</span></div>

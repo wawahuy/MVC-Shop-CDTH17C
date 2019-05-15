@@ -70,7 +70,7 @@ class View {
 
     public static function general_code($path, array $data){
         $old_data = View::$DATA;
-        View::$DATA = $data;
+        View::$DATA = array_merge(View::$DATA, $data);
         return View::get_render_content($path);
         View::$DATA = $old_data;
     }
@@ -99,6 +99,7 @@ class View {
     public static function render($path){
         $code = View::get_code_compile($path);
 
+        
         //run code
         try {
             //COde debug
