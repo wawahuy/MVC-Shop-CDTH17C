@@ -52,6 +52,9 @@
                 foreach($categorie_tree as $ct){
                     $categories_product_code .= $this->generalHTMLCodeProductInCategories($ct, 1, $sort_data, $search_data, 8);
                 }
+
+                if($categories_product_code == "" && $search_data != "")
+                    $categories_product_code = "<center class='padding:100px;'><h1>Không có sản phẩm!</h1></center>";
             }
 
             

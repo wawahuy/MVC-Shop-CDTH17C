@@ -185,11 +185,14 @@
     font-family: "fBlodBungee";
     text-align: center;
     color: white;
-    opacity: 0;
+    opacity: 1;
+    position: absolute;
+    z-index: 100;
+    left: 30%;
 }
 
 /*hiệu ứng xuất hiện đầu tiên*/
-.pd-container:hover .pd-title, .hv-title {
+.pd-container:hover .hv-title {
     animation: 0.3s 0.3s efXuat forwards;
 }
 

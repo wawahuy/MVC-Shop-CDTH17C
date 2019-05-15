@@ -1,5 +1,5 @@
 
-<form action="" method="GET" onsubmit="return search_();" id="fse">
+<form action="" method="GET" id="fse">
     <div class="input-group">
         <select class="form-control col-3" name="sort" onchange="return sort_()">
             <option value="new"  {{@Data:sort_data == "new" ? "selected" : ""}}>Mới nhất</option>

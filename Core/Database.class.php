@@ -326,7 +326,7 @@
         }
 
         public function orderby(string $ordby, string $sort = DB_QueryBuilder::DESC) : DB_QueryBuilder {
-            $this->orderby_ =$ordby;
+            $this->orderby_ =$ordby." ".$sort." ";
             return $this; 
         }
 
