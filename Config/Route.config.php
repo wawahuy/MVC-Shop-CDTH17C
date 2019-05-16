@@ -146,6 +146,34 @@
         ],
 
 
+        //User profile user
+        [
+            "method"    =>  "get",
+            "path"      =>  "/profile/user",
+            "process"   =>  "Controller/ProfileUser.controller(ProfileUserController)"
+        ],
+
+        [
+            "method"    =>  "post",
+            "path"      =>  "/profile/user/update",
+            "process"   =>  "Controller/ProfileUser.controller(ProfileUserController)->Update"
+        ],
+
+
+        //User profile contacts
+        [
+            "method"    =>  "get",
+            "path"      =>  "/profile/contact",
+            "process"   =>  "Controller/ProfileContact.controller(ProfileContactController)"
+        ],
+
+        //User profile order
+        [
+            "method"    =>  "get",
+            "path"      =>  "/profile/order",
+            "process"   =>  "Controller/ProfileOrder.controller(ProfileOrderController)"
+        ],
+
         //Error Page
         [
             "method"  => "notraffic",
