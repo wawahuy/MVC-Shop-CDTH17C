@@ -145,6 +145,12 @@
             "process"   =>  "Controller/Bag.controller(BagController)->Change"
         ],
 
+        [
+            "method"    =>  "post",
+            "path"      =>  "/bag/checkout",
+            "process"   =>  "Controller/Bag.controller(BagController)->Checkout"
+        ],
+
 
         //User profile user
         [
@@ -159,6 +165,19 @@
             "process"   =>  "Controller/ProfileUser.controller(ProfileUserController)->UpdateAvatar"
         ],
 
+        //User profile change password
+        [
+            "method"    =>  "get",
+            "path"      =>  "/profile/changepassword",
+            "process"   =>  "Controller/ProfileUser.controller(ProfileUserController)->ChangePasswordIndex"
+        ],
+
+        [
+            "method"    =>  "post",
+            "path"      =>  "/profile/changepassword",
+            "process"   =>  "Controller/ProfileUser.controller(ProfileUserController)->ChangePasswordSubmit"
+        ],
+
 
         //User profile contacts
         [
@@ -166,6 +185,13 @@
             "path"      =>  "/profile/contact",
             "process"   =>  "Controller/ProfileContact.controller(ProfileContactController)"
         ],
+
+        [
+            "method"    =>  "post",
+            "path"      =>  "/profile/contact",
+            "process"   =>  "Controller/ProfileContact.controller(ProfileContactController)->Action"
+        ],
+
 
         //User profile order
         [

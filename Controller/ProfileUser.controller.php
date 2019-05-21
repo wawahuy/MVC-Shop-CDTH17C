@@ -62,4 +62,29 @@
         }
 
 
+
+        public function ChangePasswordIndex(){
+            parent::renderPage(
+                "Đổi mật khẩu",
+                $GLOBALS['VIEW_DIR']."/Profile/Layout.php",
+                $GLOBALS['VIEW_DIR']."/Profile/Password/Password.php"
+            );
+        }
+
+        public function ChangePasswordSubmit(){
+            $modeUser = new UserModel();
+
+            if(strlen($_POST['passnew']) <6 && $_POST['passnew']>32){
+                Javascript::InvokeSwal("Lỗi", "Mật khẩu phải >=6 & <=32 kí tự!", "error");
+            }
+            else
+                if($modeUser->NewPassword(Session::GetIDLogged(), ($_POST['passold']), ($_POST['passnew']))){
+                    Javascript::InvokeSwal("Thành công", "Đổi mật khẩu thành công!", "success");
+                }
+                else 
+                    Javascript::InvokeSwal("Lỗi", "Mật khẩu cũ không đúng, hoặc bạn sử dụng mật khẩu cũ!", "error");
+            
+            $this->ChangePasswordIndex();
+        }
+
     }

@@ -82,6 +82,15 @@
                     ->exectuteScalar() <= 0);
         }
 
+        public function InvalidLoginID($id, $pass){
+            return (DB::connection()
+                    ->table('members')
+                    ->where('member_id = ? and member_pass = ?')
+                    ->setParams([$id, md5($pass)])
+                    ->exectuteScalar() <= 0);
+        }
+
+
         public function SetAvatarPathFile($id, $path){
             return (DB::connection()
                         ->table("members")
@@ -93,11 +102,26 @@
         }
 
         public function GetAvatarPathFile($id){
-            return $this->GetUserWithID($id)["member_avatar"];
+            return $id==null ? null : $this->GetUserWithID($id)["member_avatar"];
         }
 
         public function DeleteAvatar($id){
-            @unlink(dirname(__FILE__)."/..".$this->GetAvatarPathFile($id));
+            $file = dirname(__FILE__)."/..".$this->GetAvatarPathFile($id);
+            if(file_exists($file))
+                @unlink($file);
+        }
+
+        public function NewPassword($id, $old, $new){
+            if(!$this->InvalidLoginID($id, $old)){
+                return DB::connection()
+                            ->table("members")
+                            ->where("member_id = ?")
+                            ->setParams([$id])
+                            ->update([
+                                "member_pass" => md5($new)
+                            ]);
+            }
+            return false;
         }
         
         public function CreateAccount(

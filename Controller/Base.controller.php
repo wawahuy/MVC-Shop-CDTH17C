@@ -46,9 +46,13 @@
         protected function bindPage(){
             View::bind_data("page_menu", (new ConfigModel)->getsJsonMenu());
             View::bind_data("page_logged", Session::IsLogged());
-            View::bind_data("page_logged_id", Session::GetIDLogged());
-            View::bind_data("page_name_logged", Session::IsLogged() ? (new UserModel)->GetFullNameWithID(Session::GetIDLogged()) : null);
             View::bind_data("page_cart_product", (new BagModel)->getNumProduct());
+
+            if(Session::IsLogged()){
+                View::bind_data("page_avatar", (new UserModel)->GetAvatarPathFile(Session::GetIDLogged()) ?? "/Resource/img/account.png");
+                View::bind_data("page_name_logged", (new UserModel)->GetFullNameWithID(Session::GetIDLogged()));
+                View::bind_data("page_logged_id", Session::GetIDLogged());
+            }
         }
     }
 

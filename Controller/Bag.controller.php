@@ -1,5 +1,6 @@
 <?php
  Func::Import("Model/BagModel.class");
+ Func::Import("Model/ContactModel.class");
 
 
  class BagController extends BaseController {
@@ -9,15 +10,13 @@
         $html_product = $modelBag->makeHTMLCart();
         $num_product = $modelBag->getNumProduct();
         $price_product = $modelBag->getPriceProduct();
-        $price_vc = 0;
+        $contacts = (new ContactModel)->GetContactList(Session::GetIDLogged());
 
         View::bind_data("num_product", $num_product);
         View::bind_data("price_product", $price_product);
-        View::bind_data("price_vc", $price_vc);
-        View::bind_data("price_all", $price_product + $price_vc);
+        View::bind_data("price_all", $price_product);
         View::bind_data("list_cart", $html_product);
-        View::bind_data("contact_addr", "UPDATE");
-        View::bind_data("contact_phone", "UPDATE");
+        View::bind_data("contacts", $contacts);
 
         parent::renderPage(
              "SShop - Giỏ hàng",
@@ -69,6 +68,13 @@
          }
 
          Route::Redirect("/bag");
+     }
+
+
+     public function Checkout(){
+
+
+        
      }
 
 

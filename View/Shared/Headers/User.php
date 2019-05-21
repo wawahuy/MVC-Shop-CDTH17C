@@ -10,7 +10,7 @@
             <div></div>
         </div>
         <div class="acc-avatar">
-            <a href="{{YUH_URI_ROOT}}/profile"><img src="{{YUH_URI_ROOT}}/Resource/img/account.png"></a>
+            <a href="{{YUH_URI_ROOT}}/profile"><img src="{{YUH_URI_ROOT}}{{@Data:page_avatar}}"></a>
         </div>
         <div class="acc-menu">
             <div class="menu-container">

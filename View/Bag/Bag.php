@@ -42,27 +42,47 @@
                 <span>Sản phẩm: </span>
                 <span id="giaSP">{{number_format(@Data:price_product, 0, '', ',')}} VNĐ</span>
             </div>
-            <div class="bg-dl-child">
-                <span>Vận chuyển: </span>
-                <span id="giaVC">{{number_format(@Data:price_vc, 0, '', ',')}} VNĐ</span>
-
-                <div style="margin-top: 10px; border-left: 5px orange solid; padding-left: 5px">
-                    <small>
-                        <b>Địa chỉ:</b> <i>{{@Data:contact_addr}}</i><br>
-                        <b>Phone:</b> <i>{{@Data:contact_phone}}</i><br>
-                        <a href="" style="color: blue">chọn</a>
-                    </small>
-                </div>
-            </div>
 
             <div class="bg-dl-child">
                 <span>Tổng: </span>
                 <span id="giaTC" style="font-weight: bold;">{{number_format(@Data:price_all, 0, '', ',')}} VNĐ</span>
             </div>
-            <div class="bg-dl-child" style="border: none;">
-                <button class="buy">Đặt Hàng</button>
-            </div>
 
+            @if Session::IsLogged()
+                <form action="{{YUH_URI_ROOT}}/bag/checkout" method="post">
+                    <div class="bg-dl-child">
+                        <span>Vận chuyển: </span>
+
+                        <div style="margin-top: 10px; border-left: 5px orange solid; padding-left: 5px">
+                            <small>
+                                @if count(@Data:contacts) == 0
+                                    Chưa có liên hệ [<a href="{{YUH_URI_ROOT}}/profile/contact">Thêm</a>]
+                                @else
+                                    <select name="contacts">
+                                    @foreach @Data:contacts as $contact 
+                                        <option value="{{$contact['contact_id']}}">
+                                        {{$contact["contact_phone"]}} - {{$contact["contact_address"]}}
+                                        </option>
+                                        @endforeach
+                                    </select>
+                                @endif
+                            </small>
+                        </div>
+                    </div>
+
+                    <div class="bg-dl-child" style="border: none;">
+                            <button class="buy">Đặt Hàng</button>
+                    </div>
+                </form>
+            @else
+                <div class="bg-dl-child" style="border: none; text-align:center;">
+                    Vui lòng 
+                        <a href="{{YUH_URI_ROOT}}/login" style="color: green">Đăng nhập</a>
+                        Để đặt hàng
+                </div>
+                @endif
+
+            
         </div>
     </div>
     <div class="bg-yeuthich">
