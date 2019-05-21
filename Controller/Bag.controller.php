@@ -1,5 +1,6 @@
 <?php
  Func::Import("Model/BagModel.class");
+ Func::Import("Model/OrderModel.class");
  Func::Import("Model/ContactModel.class");
 
 
@@ -71,10 +72,44 @@
      }
 
 
+
+
      public function Checkout(){
+        if(!Session::IsLogged()) Route::Redirect("/login");
+
+        $id_contact = $_POST["contact"] ?? -1;
+
+        $modelContact = new ContactModel;
+        $contact = $modelContact->GetContactByID($id_contact, Session::GetIDLogged());
+        if(count($contact) <= 0){
+            Route::Redirect("/bag");
+            return;
+        }
 
 
-        
+        $modelBag = new BagModel;
+        $bag = $modelBag->getDataBag() ?? [];
+        if(count($bag) <= 0  && $modelBag->checkBag()){
+            $modelBag->setDataBag([]);
+            Route::Redirect("/bag");
+            return;
+        }
+
+
+        #thêm giỏ hàng
+        $orderModel = new OrderModel();
+        if(!$orderModel->Insert(Session::GetIDLogged(), $bag, $contact["contact_address"], $contact["contact_phone"])){
+            (new BagModel())->setDataBag([]);
+            Javascript::InvokeSwal("Lỗi", "Đặt hàng gặp vấn đề!", "error");
+            Javascript::InvokeRedirect(YUH_URI_ROOT."/bag", 1000);
+        }
+
+
+        parent::renderPage(
+            "SShop - Giỏ hàng",
+            "{$GLOBALS['VIEW_DIR']}/../View/Shared/Layout.php",
+            "{$GLOBALS['VIEW_DIR']}/../View/Bag/Checkout.php"
+        );
      }
 
 

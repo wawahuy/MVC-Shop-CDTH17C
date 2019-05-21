@@ -58,7 +58,7 @@
                                 @if count(@Data:contacts) == 0
                                     Chưa có liên hệ [<a href="{{YUH_URI_ROOT}}/profile/contact">Thêm</a>]
                                 @else
-                                    <select name="contacts">
+                                    <select name="contact">
                                     @foreach @Data:contacts as $contact 
                                         <option value="{{$contact['contact_id']}}">
                                         {{$contact["contact_phone"]}} - {{$contact["contact_address"]}}

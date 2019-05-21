@@ -124,6 +124,17 @@
                return false;
           }
 
+          public function checkBag(){
+               $bag = $this->getDataBag() ?? [];
+               foreach ($bag as $ele) {
+                    $profd = (new ProductModel)->getProductByID($ele->id);
+                    if($profd->numProductCurrent < $ele->num){
+                        return false;
+                    }
+               }
+               return true;
+          }
+
 
      }
 ?>

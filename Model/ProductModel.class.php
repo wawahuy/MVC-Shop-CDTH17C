@@ -67,6 +67,24 @@
 
 
         /**
+         * Update Sold
+         *
+         * @param int $id
+         * @return void
+         */
+        public function Sold($id, $num){
+            DB::connection()
+                ->table("products")
+                ->where("product_id = ?")
+                ->setParams([$id])
+                ->update([
+                    "product_num_sold" => "(`product_num_sold` + $num)",
+                    "product_num_remai" => "(`product_num_remai` - $num)"
+                ]);
+        }
+
+
+        /**
          * Lấy 10 sản phẩm yêu chuộng nhất
          *
          * @return array
@@ -172,7 +190,7 @@
             #general search
             $search_where = "";
             if($search != null && $search != ""){
-                $exp_search = explode(" ", $search);
+                $exp_search = explode(",", $search);
                 $search_where = " AND (";
                 foreach($exp_search as $es){
                     $search_where .= "product_name like ? or ";

@@ -16,7 +16,7 @@
                         ->table("contacts")
                         ->where("member_id = ? and contact_id = ?")
                         ->setParams([$id_member, $id_contact])
-                        ->executeReader();
+                        ->executeReader()[0];
         }
 
         public function Insert($id, $phone, $address){
