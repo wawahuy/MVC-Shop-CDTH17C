@@ -2,6 +2,17 @@
     class UserModel {
 
 
+        public function GetUserWithID($id){
+            $data = DB::connection()
+                        ->table("members")
+                        ->where("member_id = ?")
+                        ->setParams([$id])
+                        ->executeReader();
+
+            return (count($data) == 0) ? null : $data[0];
+        }
+
+
         public function GetFullNameWithID($id){
             $data = DB::connection()
                         ->table('members')
@@ -69,6 +80,24 @@
                     ->where('member_email = ? and member_pass = ?')
                     ->setParams([$email, md5($pass)])
                     ->exectuteScalar() <= 0);
+        }
+
+        public function SetAvatarPathFile($id, $path){
+            return (DB::connection()
+                        ->table("members")
+                        ->setParams([$id])
+                        ->where("member_id = ?")
+                        ->update([
+                            "member_avatar" => $path
+                        ]));
+        }
+
+        public function GetAvatarPathFile($id){
+            return $this->GetUserWithID($id)["member_avatar"];
+        }
+
+        public function DeleteAvatar($id){
+            @unlink(dirname(__FILE__)."/..".$this->GetAvatarPathFile($id));
         }
         
         public function CreateAccount(

@@ -7,6 +7,10 @@
                 YUH_URI_ROOT."/profile/user"
             ],
             [
+                "Đổi mật khẩu",
+                YUH_URI_ROOT."/profile/changepassword"
+            ],
+            [
                 "Danh sách liên hệ",
                 YUH_URI_ROOT."/profile/contact"
             ],

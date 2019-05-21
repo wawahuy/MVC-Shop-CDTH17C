@@ -155,8 +155,8 @@
 
         [
             "method"    =>  "post",
-            "path"      =>  "/profile/user/update",
-            "process"   =>  "Controller/ProfileUser.controller(ProfileUserController)->Update"
+            "path"      =>  "/profile/user",
+            "process"   =>  "Controller/ProfileUser.controller(ProfileUserController)->UpdateAvatar"
         ],
 
 
