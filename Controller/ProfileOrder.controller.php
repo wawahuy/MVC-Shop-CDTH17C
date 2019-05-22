@@ -26,7 +26,7 @@
             if($orderModel->CancleOrder($params['id'])){
                 Javascript::InvokeSwal("Hủy thành công", "", "success");
             } else {
-                Javascript::InvokeSwal("Hủy thành bại", "", "error");
+                Javascript::InvokeSwal("Hủy thất bại", "", "error");
             }
 
             $this->ViewDeltail($params);            
