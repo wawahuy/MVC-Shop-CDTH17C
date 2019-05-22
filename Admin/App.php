@@ -39,7 +39,7 @@
      */
 
 
-    include_once "Config/Global.config.php";
+    include_once "../Config/Global.config.php";
     
 
     /**
@@ -82,13 +82,13 @@
 
 
     
-    include_once "Core/Database.class.php";
-    include_once "Core/Session.class.php";
-    include_once "Core/Cookie.class.php";
-    include_once "Core/Javascript.class.php";
-    include_once "Core/Function.class.php";
-    include_once "Core/Route.class.php";
-    include_once "Core/View.class.php";
+    include_once "../Core/Database.class.php";
+    include_once "../Core/Session.class.php";
+    include_once "../Core/Cookie.class.php";
+    include_once "../Core/Javascript.class.php";
+    include_once "../Core/Function.class.php";
+    include_once "../Core/Route.class.php";
+    include_once "../Core/View.class.php";
     include_once "Controller/Base.controller.php";
 
 
@@ -102,5 +102,4 @@
      */
     include_once dirname(__FILE__)."/Config/Route.config.php";
     Route::config($ROUTES);
-
 ?>

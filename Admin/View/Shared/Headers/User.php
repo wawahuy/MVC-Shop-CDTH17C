@@ -1,7 +1,7 @@
 <div class="header-left-top" id="header-user">
 
         
-        @if @Data:page_logged
+        @if @Data:page_logged 
         <div class="account">
         <div class="acc-name">
             <span>

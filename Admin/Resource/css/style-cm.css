@@ -1,0 +1,153 @@
+.cm-container {
+    margin: 10px 2.5%;
+    width: 95%;
+}
+
+.cm-container::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.cm-path {
+    font-size: 15px;
+}
+.cm-path>span::before {
+    content: '/';
+    margin: 0 5px;    
+}
+.cm-path>span:nth-child(1)::before {
+    content: '';
+}
+
+.cm-title {
+    margin-top: 10px;
+    font-size: 25px;
+}
+.cm-title>span{
+    font-family: "fBlodBungee";
+}
+.cm-title>span::before {
+    font-family: "fIcon";
+    content: '\e93a';
+}
+.cm-title>span:nth-child(1)::before {
+    content: '';
+}
+
+
+
+
+.cm-bor {
+    width: 100%;
+    margin-top: 10px;
+}
+.cm-bor::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.cm-chuyenmuc {
+    float: left;
+    width: 20%;
+    padding: 10px
+}
+
+.cm-sanpham {
+    float: left;
+    width: 80%;
+    padding: 10px;
+}
+
+.cm-c-chuyenmuc {
+    background-color: white;
+    border: 0.5px solid #e0e0e0;
+    box-shadow: 1px 1px 2px #cccccc;
+    width: 100%;
+}
+
+.cm-c-sanpham {
+    background-color: white;
+    width: 100%;
+    box-shadow: 1px 1px 2px #cccccc;
+    padding: 15px;
+}
+
+.cm-c-title {
+    text-align: center;
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 30px;
+    background-color: orangered;
+    color: white;
+}
+.cm-c-title::before {
+    font-family: 'fIcon';
+    content: '\e988';
+    padding-right: 10px;
+    display: inline-block;
+    transform: rotate(0deg);
+    transition: 0.5s all;
+}
+.cm-c-title:hover::before {
+    transform: rotate(360deg);
+}
+
+.cm-c-page {
+    padding: 10px;
+}
+.cm-c-page::after {
+    clear: both;
+    display: block;
+    content: '';
+}
+.cm-c-page>select.sort {
+    float: left;
+    font-family: "fAdihaus";
+    padding: 5px;
+    border: 0.5px solid #cccccc;
+}
+.cm-c-page>.cm-c-right {
+    float: right;
+}
+.cm-c-right>select.page {
+    font-family: "fAdihaus";
+    padding: 5px;
+    border: 0.5px solid #cccccc;
+    margin: 0 5px;
+}
+.cm-c-right .btLeft {
+    margin-left: 20px;
+    background-color: orangered;
+    padding: 5px;
+    border: none;
+}
+.cm-c-right .btLeft::after {
+    font-family: "fIcon";
+    color: white;
+    content: '\e929';
+}
+.cm-c-right .btRight {
+    margin-left: 10px;
+    background-color: orangered;
+    padding: 5px;
+    border: none;
+}
+.cm-c-right .btRight::after {
+    font-family: "fIcon";
+    color: white;
+    content: '\e92a';
+}
+.cm-c-right .btRight:hover, .cm-c-right .btLeft:hover {
+    background-color: #cccccc;
+}
+
+
+#cmProduct {}
+#cmProduct::after {
+    clear: both;
+    display: block;
+    content: '';
+}
+

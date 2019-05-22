@@ -1,0 +1,285 @@
+.body-home-fixed {
+    position: fixed;
+    z-index: -99;
+    width: 100%;
+}
+
+
+#body-home {
+    padding-top: 80px;
+    background-color: white;
+}
+
+.ho-top10 {
+    margin-top: 50px;
+}
+
+/*định dạng cho header*/
+.ho-header {
+    position: relative;
+    font-family: "fBlodBungee";
+    font-size: 30px;
+    text-align: center;
+}
+.ho-header>span  {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+}
+.ho-header>span::after {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    content: '';
+    display: block;
+    width: 25%;
+    height: 2px;
+    background-color: black;
+}
+
+
+/*định dạng cho phần video*/
+
+.ho-video {
+    position: relative;
+    margin-top: 100px;
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+}
+
+.ho-video-bg {
+    position: absolute; 
+    width: 100%;
+    padding: 25px 15px;
+    min-height: 100px;
+    height: 100%;
+    z-index:13;
+    background-image: url('../img/video_play_backg.png');
+    background-color: rgba(0,0,0, 0.15);
+    background-repeat: repeat;
+    background-position: center center;
+}
+
+.ho-video-header {
+    position: absolute; 
+    z-index: 14;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    padding-top: 100px;
+}
+
+.ho-video-header > div {
+    font-family: "fBlodBungee";
+    color: white;
+    font-size: 40px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+
+
+/*chuyên mục*/
+.cm-main {
+    /*padding: 5px;*/
+}
+
+.cl-white {
+    color: white;
+}
+
+.cm-main::after {
+    clear: both;
+    display: block;
+    content: '';
+}
+
+.cm-col-50 {
+    position: relative;
+    float: left;
+    width: 50%;
+    height: 450px;
+    overflow: hidden;
+    /*padding: 5px;*/
+}
+
+
+.cm-col-50::after {
+    content: '';
+    display: block;
+}
+
+.cm-col-50 > .bgImg {
+    position: absolute;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.door-cover-bot, .door-cover-top {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    height: 50%;
+    transition: 0.5s all;
+}
+
+.door-cover-bot {
+   transform: translateY(200%);
+   background-color: rgba(0,0,0,0.2);
+}
+
+.door-cover-top {
+    transform: translateY(-100%);
+    background-color: rgba(0,0,0,0.3);
+}
+
+.cm-col-50:hover > .door-cover-bot {
+    transform: translateY(100%);
+}
+
+.cm-col-50:hover > .door-cover-top {
+    transform: translateY(0);
+}
+
+.cm-col-50:not(:nth-child(even)):hover+.cm-col-50>.cm-center.cm-delatil {
+    transform: translate(-50%, -100%);
+    top: 0;
+}
+
+
+.cm-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    transition: 0.5s all;
+}
+
+.cm-view {
+    text-align: left;
+    top: 100%;
+    transform: translate(-50%, 0);
+}
+
+.cm-view>ul {
+    list-style-type: none;
+}
+
+.cm-view>ul>li {
+    padding: 5px;
+}
+
+.cm-view>ul> li::before {
+    font-family: 'fIcon';
+    content: '\e97d';
+    color: green;
+    padding-right: 10px;
+}
+
+.cm-col-50:not(:nth-child(even)):hover+.cm-col-50>.cm-center.cm-view {
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.cm-col-50:hover>.cm-delatil2 {
+    top: 25%;
+}
+.cm-col-50:hover>.cm-delatil2+.cm-center.cm-view {
+    top: 75%;
+    transform: translate(-50%, -50%);
+}
+
+.cm-header {
+    font-family: "fBlodBungee";
+    font-size: 30px;
+}
+
+.cm-bt, .cm-bt-w {
+    position: relative;
+    z-index: 2;
+    font-family: "fAdihaus";
+    padding: 16px;
+    font-weight: bold;
+    font-size: 14px;
+    transition: 0.5s all;
+}
+
+.cm-bt::after, .cm-bt-w::after {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    transition: 0.5s all;
+}
+
+.cm-bt:hover {
+    color: black;
+    border: 0.5px solid black;
+}
+
+.cm-bt:hover::after, .cm-bt-w:hover::after {
+    width: 0%;
+}
+
+.cm-bt-w:hover {
+    color: white;
+    border: 0.5px solid white;
+}
+
+.cm-bg-red {
+    color: white;
+    border: 0.5px solid red;
+    background-color: rgba(0,0,0,0);
+}
+
+.cm-bg-red::after {
+    background-color: red;    
+}
+
+.cm-bg-black {
+    color: white;
+    border: 0.5px solid black;
+    background-color: rgba(0,0,0,0);
+}
+.cm-bg-black::after {
+    background-color: black;
+}
+
+
+/*định dạng chi sign-footer*/
+.sign-footer {
+    position: relative;
+    overflow: hidden;
+    height: 270px;
+}
+.sign-footer::after {
+    content: "";
+    display: block;
+}
+.sign-footer img {
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+.sign-deltail {
+    position: absolute;
+    left: 50%;
+    margin-top: 120px;
+    top: 0;
+    transform: translateX(-50%)
+}
+.dl2 {
+    text-align: center;
+    font-size: 12px;
+    font-weight: bold;
+    margin-top: 20px;
+}

@@ -7,14 +7,9 @@
      * Index() là Action mặc định
      * 
      * Cách kết hợp nó với Route
-     *      Route::<method>(path, "Controller:<name>[@action]");
-     *      Chú thích:
-     *          method: get|post|all
-     *          name:   tên controller, có class AbcController => name là Abc
-     *          action: không có nó sẽ gọi action Index, nếu tồn tại @... nó sẽ gọi ->....
+     *      Route::<method>(path, "PathController(NameClass)->NameMetod");
      * 
      * PHP Version >= 7.0.33
-     * 
      * 
      * 
      */
@@ -38,10 +33,13 @@
         protected function renderPage($title, $path_layout, $path_content){
             #Bind Data Page
             View::bind_data("page_title", $title);
+            View::bind_data("page_logged", Session::IsAdminLogged());
+            View::bind_data("page_name_logged", "Test");
             View::bind_data("page_code_body", View::get_code_compile($path_content));
             View::render($path_layout);
             Javascript::Run();
         }
+
 
     }
 

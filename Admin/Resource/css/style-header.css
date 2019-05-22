@@ -1,0 +1,839 @@
+
+* {
+    box-sizing: border-box;
+}
+
+/*header cho home page*/
+.header-home-abs {
+    top: 0;
+    position: absolute;
+    width: 100%;
+    user-select: none;
+}
+.header-home-rel {
+    top: 0;
+    position: relative;
+    width: 100%;
+    user-select: none;
+}
+
+/*phần header*/
+.header-top-abs {
+    position: absolute;
+    z-index: 20;
+    animation: 0.6s aimHeaderAbs forwards;
+}
+
+.header-top-fix {
+    position: fixed;
+    z-index: 100;
+    animation: 0.6s aimHeader forwards;
+}
+/*hiệu ứng dịch chuyển từ từ cho phần header*/
+@keyframes aimHeader {
+    0% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    70% {
+        transform: translateY(10%);
+        opacity: 1;
+    }
+    80% {
+        transform: translateY(-5%);
+        opacity: 1;
+    }
+    90% {
+        transform: translateY(5%);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+@keyframes aimHeaderBack {
+    0% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+.header-top-abs,  .header-top-fix{
+    height: 70px;
+    width: 100%;
+    transition: 0.3s ease-in-out background-color;
+
+    background-color: rgba(100,100,100,0.1);
+    border-bottom: 0.5px solid rgba(0,0,0,0.1);
+    
+    /*
+    box-shadow: 1px 1px 1px rgba(0,0,0,0.8),
+                1px 2px 3px rgba(0,0,0,0.5);
+    */
+}
+
+/*định dạng logo*/
+#header-top > .logo {
+    float: left;
+    width: 15%;
+    height: 100%;
+    position: relative;
+    /*không cho phép quét khối*/
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none; 
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.logo > img {
+    width: 90%;
+    margin-bottom: 0;
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -110%);
+    transition: 0.2s ease-in-out;
+}
+
+#header-top:hover .logo {
+    background-color: #fbfbfb;
+    border-right: 1px solid #cccccc;
+    box-shadow: inset -1px 0px 1px #cccccc;
+}
+
+/*dịch chuyển logo đên giữa*/
+#header-top:hover .logo > img {
+    top: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/*Định dạng nền chung khi hover menu*/
+#header-top:hover, .bgwhite {
+    background: #fbfbfb;
+    box-shadow: 1px 1px 1px #cccccc
+                
+}
+
+
+/*phần header bên phải logo*/
+.header-left {
+    float: left;
+    width: 85%;
+    height: 100%;
+    font-weight: bold;
+}
+
+/*bao gồm 2 phần phía trên và phía dưới*/
+.header-left-top, .header-left-bottom {
+    position: relative;
+    height: 50%;
+    width: 100%;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 16px;
+}
+.header-left-top {
+    text-align: right;
+    font-size: 16px;
+}
+
+#header-top:hover .header-left-top {
+    /*border-bottom: 0.1px solid #cccccc;*/
+}
+
+/*định dạng menu đa cấp*/
+.nav-bar {
+    position: relative;
+    list-style-type: none;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    display: inline-block;
+}
+
+
+.nav-bar li:not([class]) {
+    height: 100%;
+    position: relative;
+    display: inline-block;
+    padding-left: 30px;
+    padding-right: 11px;
+    transition: 0.5s ease-in-out background-color;
+    z-index: 99;
+}
+
+.nav-bar li {
+    padding: 8px;
+}
+
+.nav-bar > li > .sub {
+    top: 100%;
+    left: 0;
+    border-top-width: 0;
+}
+
+/*định danng cho các li ở trong .sub ngoại trừ có class*/
+.nav-bar .sub>li:not([class]) {
+    padding-left: 30px;
+    padding-right: 11px;
+    width: 100%;
+    font-weight: normal;
+    border: 0.5px solid #cccccc;
+    opacity: 1;
+    animation: liEffect 0.5s forwards;
+}
+
+/*riêng li ở thứ tự 1 ko cần border top*/
+.nav-bar .sub>li:not([class]):nth-child(1) {
+    border-top-width: 0;    
+}
+
+/* hiệu ứng chuyển đối tượng*/
+@keyframes liEffect {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/*định dạng cho sub menu*/
+.nav-bar .sub {
+    list-style-type: none;
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 100%;
+    padding: 0;
+    font-size: 17px;
+    width: 150px;
+    transition: 0.4s ease-in-out;
+}
+
+/*khi header được hover, thay đổi li ngoại - chưa class*/
+#header-top:hover .nav-bar>li:not([class]) {
+    padding-right: 10px;
+    border-right: 1px solid #cccccc;
+}
+
+
+/* chỉ các li ở nav-bar mới được thay đổi*/
+.nav-bar>li:hover {
+    background-color: white;
+    box-shadow: inset 0.5px 0.5px 2px rgba(0,0,0,0.5),
+                inset -0.5px -0.5px 2px rgba(0,0,0,0.2),
+                inset 1px 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+
+/*khi li được hover, cho sub menu của nó xuất hiện*/
+.nav-bar li:hover>.sub {
+    display: block;
+    animation: inOutSubMenu 0.2s ease-in-out;
+}
+
+.nav-bar>li:hover>.sub {
+    /*margin-top: 1px;*/
+}
+
+@keyframes inOutSubMenu {
+    0% {
+        opacity: 0;
+        transform: scale(0) skewX(-20deg);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) skewX(0);
+    }
+}
+
+/*hover li*/
+.nav-bar .sub>li:hover {
+    background-color: whitesmoke;
+}
+
+
+
+/*effect cho các li ở sub khi li cha được hover được hover*/
+.nav-bar li:hover>.sub>li {
+    transform: scale(0);
+    animation: effectLi 0.4s forwards;
+}
+
+.nav-bar li:hover>.sub>li:nth-child(1) {
+    transform: scale(0);
+    animation: effectLi1 0.4s forwards;
+}
+
+.nav-bar li:hover>.sub>li:not(:hover) {
+    background-color: rgba(255, 255, 255, 1);
+}
+
+/*thời gian ngủ cho các effect ở phía dưới tăng dần , tối đa 15 chuyên mục, chắc ko có nhiều hơn @@*/
+.nav-bar li:hover>.sub>li:nth-child(1)  { animation-delay: 0; }
+.nav-bar li:hover>.sub>li:nth-child(2)  { animation-delay: 0.1s; }
+.nav-bar li:hover>.sub>li:nth-child(3)  { animation-delay: 0.2s; }
+.nav-bar li:hover>.sub>li:nth-child(4)  { animation-delay: 0.3s; }
+.nav-bar li:hover>.sub>li:nth-child(5)  { animation-delay: 0.4s; }
+.nav-bar li:hover>.sub>li:nth-child(6)  { animation-delay: 0.5s; }
+.nav-bar li:hover>.sub>li:nth-child(7)  { animation-delay: 0.6s; }
+.nav-bar li:hover>.sub>li:nth-child(8)  { animation-delay: 0.7s; }
+.nav-bar li:hover>.sub>li:nth-child(9)  { animation-delay: 0.8s; }
+.nav-bar li:hover>.sub>li:nth-child(10) { animation-delay: 0.9s; }
+.nav-bar li:hover>.sub>li:nth-child(11) { animation-delay: 1.0s; }
+.nav-bar li:hover>.sub>li:nth-child(12) { animation-delay: 1.1s; }
+.nav-bar li:hover>.sub>li:nth-child(13) { animation-delay: 1.2s; }
+.nav-bar li:hover>.sub>li:nth-child(14) { animation-delay: 1.3s; }
+.nav-bar li:hover>.sub>li:nth-child(15) { animation-delay: 1.4s; }
+
+
+@keyframes effectLi1 {
+    0% {
+        border: 0.5px solid #cccccc;
+        transform: scale(0) translateZ(-10px);
+    }
+    99% {
+        border: 0.5px solid #cccccc;
+        transform: scale(1) translateZ(0px);
+    }
+    100% {
+        border-color: white;
+        border: 0.5px solid #cccccc;
+        transform: scale(1) translateZ(0px);
+    }
+}
+
+
+
+@keyframes effectLi {
+    0% {
+        border: 0.5px solid #cccccc;
+        transform: scale(0) translateZ(-10px);
+    }
+    99% {
+        border: 0.5px solid #cccccc;
+        transform: scale(1) translateZ(0px);
+    }
+    100% {
+        border-color: white;
+        border: 0.5px solid #cccccc;
+        border-top-width: 0;
+        transform: scale(1) translateZ(0px);
+    }
+}
+
+
+
+
+/*tìm kiếm */
+.search {
+    position: relative;
+    float: right;
+    height: 100%;
+    margin-right: 10px;
+}
+.search input[type="text"] {
+    display: none;
+    font-family: "fAdihaus";
+    position: absolute;
+    top: 100%;
+    left: 100%;
+    transform: translateX(-100%);
+    border: 1px solid #cccccc;
+    padding: 5px;
+    background-color: rgba(0,0,0,0);
+    height: 35px;
+    width: 250px;
+    font-size: 18px;
+}
+
+.search .bts {
+    position: relative;
+    height: 34px;
+    width: 28px;
+}
+.search .bts::after {
+    margin-top: -1px;
+    font-family: "fIcon";
+    content: '\e9d9';
+    position: absolute;
+    font-size: 18px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.search input:focus {
+    outline: none;
+}
+
+.search input[type="text"]:focus {
+    display: block;
+}
+
+
+
+.search input[type="text"]:focus ~  .bts{
+    /*border: 1px solid #cccccc;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.5);*/
+}
+
+.search:hover input[type="text"] {
+    display: block;
+    background-color: white;
+    transform: translateX(-100%);
+    animation: 0.5s searchAim forwards;
+}
+
+
+/* bag */
+.icon-bag {
+    font-family: "fIcon";
+    float: right;
+    height: 100%;
+    width: 32px;
+    position: relative;
+}
+
+.icon-bag::after {
+    content: '\ea13';
+    position: absolute;
+    top: 55%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#tuiHang {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 100%;
+    transform: translateX(-100%);
+    width: 300px;
+    height: 250px;
+    background-color: white;
+    border: 1px solid #cccccc;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.5);
+}
+
+.bag-empty {
+    font-family: "fBlodBungee";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+
+.icon-bag:hover > #tuiHang {
+    display: block;
+    animation: 0.3s searchAim forwards;
+}
+
+
+/*thêm phần số lượng cho tui hàng*/
+#tuiHang-count {
+    position: absolute;
+    z-index: 10;
+    border-radius: 50%;
+    border: 1px solid black;
+    color: black;
+    top: 50%;
+    left: 50%;
+    transform: translate(40%, 10%);
+    font-size: 10px;
+    padding: 2px;
+    width: 17px;
+    height: 17px;
+    text-align: center;
+    transition: 0.5s all;
+}
+
+.icon-bag:hover > #tuiHang-count {
+    opacity: 0;
+}
+
+/*hiệu ứng thêm sản phảm*/
+.tuiHang-add::after {
+    font-family: 'fIcon';
+    content: '\ea13';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.tuiHang-add {
+    position: fixed;
+    z-index: 1;
+    display: none;
+    text-align: center;
+    border-radius: 50%;
+    border: 1px solid orangered;
+    color: orangered;
+    font-size: 10px;
+    width: 17px;
+    height: 17px;
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+    transition: 1s all;
+}
+
+.tH-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 220px;
+    overflow-y: auto;
+}
+
+.tH-container::-webkit-scrollbar {
+    width: 7px;
+}
+
+.tH-container::-webkit-scrollbar-track {
+    background: #f1f1f1; 
+}
+
+.tH-container::-webkit-scrollbar-thumb {
+    background: #cccccc; 
+}
+
+.tH-container::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}
+
+.tH-show {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    transform: translateY(-100%);
+    width: 100%;
+    height: 25px;
+    border-top: #cccccc solid 0.3px;
+    padding: 8px;
+    color: orangered;
+    font-size: 11px;
+}
+
+.efAddBag {
+    display: block;
+    animation: 1.2s efAddBag forwards;
+}
+
+
+@keyframes efAddBag {
+    80% {
+        top: 70px;
+        left: 100%;
+        transform: translateX(-100%) scale(1);
+        margin-top: 2px;
+        margin-left: -2px;
+        opacity: 1;
+    }
+    100% {
+        top: 70px;
+        left: 100%;
+        transform: translate(-100%, -100%) scale(1);
+        margin-top: 2px;
+        margin-left: -2px;
+        opacity: 0;
+    }
+}
+
+
+
+@keyframes searchAim {
+    0% {
+        opacity: 0;
+        transform: scale(0) translateX(0);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1) translateX(-100%);
+    }
+}
+
+@keyframes rungAim {
+    0% {
+        transform: skewX(10deg) translateX(-100%);
+    }
+    25% {
+        transform: SkewX(-10deg) translateX(-100%);
+    }
+    75% {
+        transform: skewX(5deg) translateX(-100%);
+    }
+    100% {
+        transform: SkewX(-5deg) translateX(-100%);
+    }
+}
+
+/*phần sản phẩm tui hàng trên header*/
+.tH-child {
+    position: relative;
+    padding: 10px;
+    font-size: 14px;
+    border-bottom: 0.5px dotted #cccccc;
+    transition: 0.5s all;
+    overflow: hidden;
+}
+.tH-child::after {
+    display: block;
+    content: '';
+    clear: both;
+}
+.tH-child:hover {
+    background-color: rgba(0,0,0,0.02);
+}
+
+.tH-sale {
+    background-color: #fa4141;
+    z-index: 4;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 50px;
+    height: 50px;
+}
+
+.tH-sale > span {
+    position: absolute;
+    display: inline-block;
+    font-size: 10px;
+    top: 100%;
+    left: 50%;
+    transform: translate(-50%, -100%);
+    color: white;
+}
+
+.tH-img {
+    border: 0.5px solid #cccccc;
+    width: 50px;
+    height: 50px;
+    float: left;
+    margin-right: 10px;
+}
+.tH-img > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tH-del {
+    float: left;
+    height: 50px;
+}
+
+.tH-name {
+    height: 50%;
+}
+
+.tH-coin {
+    height: 50%;
+    font-weight: normal;
+    font-size: 12px;
+    color: orangered;
+}
+
+.tH-coin .real {
+    margin-right: 20px;
+    font-size: 9px;
+    text-decoration: line-through;
+    color: black;
+}
+
+.tH-coin .sale {
+    
+}
+
+/* đăng nhập đăng kí */
+.login_:hover , .reg_:hover  {
+    border: 1px solid #cccccc;
+    box-shadow: inset 0px 0px 2px #cccccc;
+}
+
+.login_, .reg_, .account {
+    position: relative;
+    display: inline-block;
+    height: 100%;
+    box-sizing: border-box;
+    border: 1px solid rgba(0,0,0,0);
+    padding: 5px;
+    margin-left: 10px;
+}
+
+.login_::after {
+    font-family: "fIcon";
+    margin-left: 5px;
+    content: '\e9d4'
+}
+
+.reg_::after {
+    font-family: "fIcon";
+    margin-left: 5px;
+    content: '\e9d6'
+}
+
+/* tài khoản*/
+.acc-avatar::after {
+    content: '';
+    display: block;
+    clear: both;
+}
+.account > .acc-avatar {
+    height: 100%;
+    float: left;
+    margin-left: 10px;
+    border-radius: 50%;
+    border: 2px solid black;
+}
+.account > .acc-avatar img {
+    margin-top: -10px;
+    height: 100%;
+    border-radius: 50%;
+}
+
+.account > .acc-name {
+    position: relative;
+    height: 100%;
+    top: 50%;
+    transform: translateY(-40%);
+    float: left;
+}
+
+.acc-name>div {
+    position: absolute;
+    top: 100%;
+    width: 0;
+    height: 1px;
+    background-color: black;
+    transform: translateY(-1px);
+    transition: 0.5s all;
+}
+.account:hover>.acc-name>div {
+    width: 100%;
+}
+
+.account:hover>.acc-menu {
+    display: block;
+}
+
+.account>.acc-menu {
+    display: none;
+    position: absolute;
+    z-index: 100000;
+    text-align: left;
+    top: 100%;
+    padding-top: 5px;
+    min-width: 200px;
+}
+
+.account>.acc-menu::before {
+    content: " ";
+    position: absolute;
+    left: 50%;
+    top: -9px;
+    margin-left: -5px;
+    border-width: 7px;
+    border-style: solid;
+    border-color: transparent transparent #cccccc transparent;
+}
+
+.account>.acc-menu>.menu-container {
+    background-color: white;
+    border: 0.5px solid #cccccc;
+}
+
+.account>.acc-menu>.menu-container>div {
+    padding: 10px;
+    border-top: 0.5px solid #cccccc;
+}
+
+.account>.acc-menu>.menu-container>div:hover {
+    color: #cccccc;
+}
+
+.account>.acc-menu>.menu-container>div:nth-child(1) {
+    border: none;
+}
+
+
+/* Scroll To top */
+#backTop {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    background: rgba(0, 0, 0, 0.1);
+    width: 50px;
+    height: 50px;
+    display: none;
+    text-decoration: none;
+    border-radius: 35px;
+    transition: all 0.3s ease;
+}
+#backTop b {
+    color: #fff;
+    margin: 0;
+    position: relative;
+    left: 15px;
+    top: 13px;
+    font-size: 22px;
+    transition: all 0.3s ease;
+}
+#backTop b::after {
+    font-family: 'fIcon';
+    content: '\e92b';
+}
+
+#backTop:hover {
+    background: rgba(0, 0, 0, 0.5);
+}
+
+
+#backTop:hover b {
+    animation: 1s AimBTT infinite;
+}
+
+#backTop:active {
+    background-color: white;
+}
+
+@keyframes AimBTT {
+    0% {
+        top: 10px;
+    }
+    50% {
+        top: 14px;
+    }
+    100% {
+        top: 10px;
+    }
+}
+
+
+
+/*phần hiện thị dành cho di động*/
+@media screen and (max-width: 700px){
+    #header-top > .logo {
+        width: 150px;
+    }
+    #header-top {
+        height: 55px;
+    }
+    #header-left {
+        display: none;
+    }
+}
