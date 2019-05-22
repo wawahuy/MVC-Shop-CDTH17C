@@ -200,6 +200,24 @@
             "process"   =>  "Controller/ProfileOrder.controller(ProfileOrderController)"
         ],
 
+        [
+            "method"    =>  "get",
+            "path"      =>  "/profile/order/[id]",
+            "process"   =>  "Controller/ProfileOrder.controller(ProfileOrderController)->ViewDeltail",
+            "constraint" => [
+                "id" => "[\d]*"
+            ]
+        ],
+
+        [
+            "method"    =>  "post",
+            "path"      =>  "/profile/order/[id]",
+            "process"   =>  "Controller/ProfileOrder.controller(ProfileOrderController)->CancleOrder",
+            "constraint" => [
+                "id" => "[\d]*"
+            ]
+        ],
+
         //Error Page
         [
             "method"  => "notraffic",

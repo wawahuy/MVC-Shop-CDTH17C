@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Máy chủ: 127.0.0.1:3306
--- Thời gian đã tạo: Th5 08, 2019 lúc 09:58 PM
+-- Thời gian đã tạo: Th5 22, 2019 lúc 12:55 AM
 -- Phiên bản máy phục vụ: 5.7.24
 -- Phiên bản PHP: 7.3.1
 
@@ -39,7 +39,7 @@ CREATE TABLE IF NOT EXISTS `categories` (
   PRIMARY KEY (`categorie_id`),
   KEY `employee_id` (`employee_id`) USING BTREE,
   KEY `categorie_parent` (`categorie_parent`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `categories`
@@ -47,7 +47,9 @@ CREATE TABLE IF NOT EXISTS `categories` (
 
 INSERT INTO `categories` (`categorie_id`, `categorie_name`, `categorie_image`, `categorie_deltail`, `categorie_parent`, `employee_id`) VALUES
 (20, 'Riêng nữ', 'Resource/upload/girl.jpg', 'Phong cách thời trang tối giản\r\nNhiều sự lựa chọn\r\nGiá thành hợp lí', NULL, 1),
-(23, 'Riêng nam', 'Resource/upload/men.jpg', 'Phong cách thời trang tối giản\r\nNhiều sự lựa chọn\r\nGiá thành hợp lí', NULL, 1);
+(23, 'Riêng nam', 'Resource/upload/men.jpg', 'Phong cách thời trang tối giản\r\nNhiều sự lựa chọn\r\nGiá thành hợp lí', NULL, 1),
+(25, 'Áo thun', '', '', 20, 1),
+(26, 'Áo thun - Test CM', '', '', 25, 1);
 
 -- --------------------------------------------------------
 
@@ -67,32 +69,20 @@ CREATE TABLE IF NOT EXISTS `comments` (
   UNIQUE KEY `comment_parent` (`comment_parent`),
   KEY `member_id` (`member_id`) USING BTREE,
   KEY `product_id` (`product_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `comments`
 --
 
 INSERT INTO `comments` (`comment_id`, `comment_content`, `comment_date`, `comment_parent`, `member_id`, `product_id`) VALUES
-(3, 'dsadasda', '2019-05-08 04:01:09', NULL, 2, 1),
-(8, 'ádasdas', '2019-05-08 04:02:48', NULL, 2, 1),
-(9, 'dsadasda', '2019-05-08 04:01:09', 3, 2, 1),
-(10, 'dsdsdad', '2019-05-08 04:48:39', NULL, 2, 1),
-(11, 'sfdfsd', '2019-05-08 04:48:43', NULL, 2, 1),
-(12, 'sâsxsa', '2019-05-08 04:51:31', NULL, 2, 1),
-(13, 'sãasxasx', '2019-05-08 04:51:35', NULL, 2, 1),
-(14, 'hhfghgfh', '2019-05-08 04:51:43', NULL, 2, 1),
-(15, 'hfyhyhf', '2019-05-08 04:51:47', NULL, 2, 1),
-(16, 'abvc', '2019-05-08 20:20:36', NULL, 2, 1),
-(17, 'Ok bạn', '2019-05-08 20:21:29', 16, 3, 1),
-(18, 'Ok haha', '2019-05-08 20:22:23', 17, 2, 1),
-(27, 'What', '2019-05-08 20:23:04', NULL, 2, 1),
-(29, 'đaèàeằ', '2019-05-09 01:10:42', NULL, 2, 1),
-(30, 'adâscasc', '2019-05-09 02:31:16', NULL, 2, 1),
-(31, 'aqd', '2019-05-09 02:31:23', NULL, 2, 1),
-(32, 'Đẹp TA KK', '2019-05-09 04:05:11', NULL, 2, 2),
-(33, 'QAAAA', '2019-05-09 04:18:29', NULL, 2, 2),
-(34, 'đá', '2019-05-09 04:57:51', NULL, 2, 2);
+(41, 'xã', '2019-05-16 02:01:35', NULL, 2, 1),
+(42, 'fafaf', '2019-05-16 02:01:40', NULL, 2, 1),
+(43, 'Test comment', '2019-05-16 02:03:41', NULL, 2, 3),
+(44, 'hello', '2019-05-17 01:32:56', NULL, 2, 1),
+(45, 'abva', '2019-05-21 20:50:40', NULL, 2, 2),
+(46, 'hello', '2019-05-21 23:49:33', NULL, 2, 2),
+(47, 'avbc', '2019-05-22 03:13:05', NULL, 2, 2);
 
 -- --------------------------------------------------------
 
@@ -113,7 +103,7 @@ CREATE TABLE IF NOT EXISTS `config` (
 --
 
 INSERT INTO `config` (`config_id`, `config_name`, `config_data`) VALUES
-(1, 'categories', '[{\"id\":\"20\",\"name\":\"Ri\\u00eang n\\u1eef\",\"deltail\":\"Phong c\\u00e1ch th\\u1eddi trang t\\u1ed1i gi\\u1ea3n\\r\\nNhi\\u1ec1u s\\u1ef1 l\\u1ef1a ch\\u1ecdn\\r\\nGi\\u00e1 th\\u00e0nh h\\u1ee3p l\\u00ed\",\"image\":\"Resource\\/upload\\/girl.jpg\"},{\"id\":\"23\",\"name\":\"Ri\\u00eang nam\",\"deltail\":\"Phong c\\u00e1ch th\\u1eddi trang t\\u1ed1i gi\\u1ea3n\\r\\nNhi\\u1ec1u s\\u1ef1 l\\u1ef1a ch\\u1ecdn\\r\\nGi\\u00e1 th\\u00e0nh h\\u1ee3p l\\u00ed\",\"image\":\"Resource\\/upload\\/men.jpg\"}]');
+(1, 'categories', '[{\"id\":\"20\",\"name\":\"Ri\\u00eang n\\u1eef\",\"deltail\":\"Phong c\\u00e1ch th\\u1eddi trang t\\u1ed1i gi\\u1ea3n\\r\\nNhi\\u1ec1u s\\u1ef1 l\\u1ef1a ch\\u1ecdn\\r\\nGi\\u00e1 th\\u00e0nh h\\u1ee3p l\\u00ed\",\"image\":\"Resource\\/upload\\/girl.jpg\",\"child\":[{\"id\":\"25\",\"name\":\"\\u00c1o thun\",\"deltail\":\"\",\"image\":\"\",\"child\":[{\"id\":\"26\",\"name\":\"\\u00c1o thun - Test CM\",\"deltail\":\"\",\"image\":\"\"}]}]},{\"id\":\"23\",\"name\":\"Ri\\u00eang nam\",\"deltail\":\"Phong c\\u00e1ch th\\u1eddi trang t\\u1ed1i gi\\u1ea3n\\r\\nNhi\\u1ec1u s\\u1ef1 l\\u1ef1a ch\\u1ecdn\\r\\nGi\\u00e1 th\\u00e0nh h\\u1ee3p l\\u00ed\",\"image\":\"Resource\\/upload\\/men.jpg\"}]');
 
 -- --------------------------------------------------------
 
@@ -125,18 +115,19 @@ DROP TABLE IF EXISTS `contacts`;
 CREATE TABLE IF NOT EXISTS `contacts` (
   `contact_id` int(11) NOT NULL AUTO_INCREMENT,
   `contact_address` text COLLATE utf8_unicode_ci NOT NULL,
-  `contact_phone` int(11) NOT NULL,
+  `contact_phone` char(13) COLLATE utf8_unicode_ci NOT NULL,
   `member_id` int(11) NOT NULL,
   PRIMARY KEY (`contact_id`),
   KEY `member_id` (`member_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `contacts`
 --
 
 INSERT INTO `contacts` (`contact_id`, `contact_address`, `contact_phone`, `member_id`) VALUES
-(1, 'số nhà C1, khu dân cư Nam Long, đường Phú Thuận, phường Phú Thuận, Q7, TPHCM', 123456789, 3);
+(7, 'Vĩnh Long, Vũng Liêm, Hiếu Phụng', '84125735057', 2),
+(8, 'Vĩnh Long, Vũng Liêm, Hiếu Phụng', '1697777777', 2);
 
 -- --------------------------------------------------------
 
@@ -188,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `members` (
 --
 
 INSERT INTO `members` (`member_id`, `member_user`, `member_pass`, `member_fullname`, `member_phone`, `member_avatar`, `member_email`, `member_birth`, `member_sex`) VALUES
-(2, 'admin2', 'e10adc3949ba59abbe56e057f20f883e', 'Huy Nguyen', 1697777777, NULL, 'kakahuy104@gmail.com', '1999-06-09', 0),
+(2, 'admin2', '38de14bb650bd27f85585a902f7560f5', 'Huy Nguyen', 1697777777, '/Resource/upload/f9c1eabad80d2cfa68c4dc0514b9b679148639.jpg', 'kakahuy104@gmail.com', '1999-06-09', 0),
 (3, 'admin', '38de14bb650bd27f85585a902f7560f5', 'Huy Nguyen', 169777777, NULL, 'kakahuy99@gmail.com', '2019-05-12', 0);
 
 -- --------------------------------------------------------
@@ -201,15 +192,25 @@ DROP TABLE IF EXISTS `orders`;
 CREATE TABLE IF NOT EXISTS `orders` (
   `order_id` int(11) NOT NULL AUTO_INCREMENT,
   `order_status` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  `order_date` datetime NOT NULL,
+  `order_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `member_id` int(11) NOT NULL,
-  `employee_id` int(11) NOT NULL,
-  `contact_id` int(11) NOT NULL,
+  `employee_id` int(11) DEFAULT NULL,
+  `contact_address` text COLLATE utf8_unicode_ci NOT NULL,
+  `contact_phone` char(13) COLLATE utf8_unicode_ci NOT NULL,
+  `order_price` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`order_id`),
   KEY `member_id` (`member_id`),
-  KEY `employee_id` (`employee_id`),
-  KEY `contact_id` (`contact_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+  KEY `employee_id` (`employee_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `orders`
+--
+
+INSERT INTO `orders` (`order_id`, `order_status`, `order_date`, `member_id`, `employee_id`, `contact_address`, `contact_phone`, `order_price`) VALUES
+(23, 'Hủy', '2019-05-22 06:49:31', 2, NULL, 'Vĩnh Long, Vũng Liêm, Hiếu Phụng', '84125735057', 90000),
+(24, 'Hủy', '2019-05-22 06:53:53', 2, NULL, 'Vĩnh Long, Vũng Liêm, Hiếu Phụng', '84125735057', 90000),
+(25, 'Hủy', '2019-05-22 07:53:30', 2, NULL, 'Vĩnh Long, Vũng Liêm, Hiếu Phụng', '84125735057', 90000);
 
 -- --------------------------------------------------------
 
@@ -223,11 +224,23 @@ CREATE TABLE IF NOT EXISTS `order_elements` (
   `product_id` int(11) NOT NULL,
   `order_ele_price` decimal(10,0) NOT NULL,
   `order_ele_num` int(11) NOT NULL,
-  `order_ele_options` int(11) NOT NULL,
+  `order_ele_options` text COLLATE utf8_unicode_ci NOT NULL,
+  `order_ele_allprice` int(11) NOT NULL,
   PRIMARY KEY (`order_id`,`product_id`),
   KEY `product_id` (`product_id`),
   KEY `order_id` (`order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+
+--
+-- Đang đổ dữ liệu cho bảng `order_elements`
+--
+
+INSERT INTO `order_elements` (`order_id`, `product_id`, `order_ele_price`, `order_ele_num`, `order_ele_options`, `order_ele_allprice`) VALUES
+(23, 1, '90000', 1, '', 90000),
+(23, 3, '8000', 1, '', 8000),
+(24, 1, '90000', 1, '', 90000),
+(25, 1, '90000', 1, '', 90000),
+(25, 3, '8000', 1, '', 8000);
 
 -- --------------------------------------------------------
 
@@ -273,7 +286,7 @@ CREATE TABLE IF NOT EXISTS `products` (
   `product_view` int(11) NOT NULL DEFAULT '0',
   `product_star` tinyint(4) NOT NULL,
   `product_deltail` text COLLATE utf8_unicode_ci NOT NULL,
-  `produtc_day` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `product_day` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `product_options` text COLLATE utf8_unicode_ci NOT NULL,
   `product_num_remai` int(11) NOT NULL,
   `product_num_sold` int(11) NOT NULL DEFAULT '0',
@@ -286,15 +299,16 @@ CREATE TABLE IF NOT EXISTS `products` (
   PRIMARY KEY (`product_id`),
   KEY `employee_id` (`employee_id`),
   KEY `categorie_id` (`categorie_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 --
 -- Đang đổ dữ liệu cho bảng `products`
 --
 
-INSERT INTO `products` (`product_id`, `product_name`, `product_view`, `product_star`, `product_deltail`, `produtc_day`, `product_options`, `product_num_remai`, `product_num_sold`, `product_price`, `product_sale`, `product_image`, `product_status`, `employee_id`, `categorie_id`) VALUES
-(1, 'Áo Test', 210, 4, 'Test', '2019-05-07 22:31:23', '', 200, 0, '90000', 0, '[\"Resource/upload/ao-so-mi-hong.jpg\"]', 'Hoạt Động', 1, 20),
-(2, 'Áo Test 2', 211, 4, 'Test 2', '2019-05-07 22:31:23', '', 200, 0, '90000', 10, '[\"Resource/upload/ao-tre-vai-phoi-mau.jpg\"]', 'Hoạt Động', 1, 20);
+INSERT INTO `products` (`product_id`, `product_name`, `product_view`, `product_star`, `product_deltail`, `product_day`, `product_options`, `product_num_remai`, `product_num_sold`, `product_price`, `product_sale`, `product_image`, `product_status`, `employee_id`, `categorie_id`) VALUES
+(1, 'Áo Test', 259, 4, 'Test', '2019-05-07 22:31:23', '', 189, 11, '90000', 0, '[\"Resource/upload/ao-so-mi-hong.jpg\"]', 'Hoạt Động', 1, 23),
+(2, 'Áo Test 2', 305, 4, 'Test 2', '2019-05-07 22:31:23', '', 0, 1, '90000', 10, '[\"Resource/upload/ao-tre-vai-phoi-mau.jpg\"]', 'Hoạt Động', 1, 26),
+(3, 'Áo Test 3', 301, 4, 'Test 3', '2019-05-16 22:31:23', '', 194, 8, '10000', 20, '[\"Resource/upload/ao-tre-vai-phoi-mau.jpg\"]', 'Hoạt Động', 1, 26);
 
 --
 -- Các ràng buộc cho các bảng đã đổ
@@ -325,10 +339,8 @@ ALTER TABLE `contacts`
 -- Các ràng buộc cho bảng `orders`
 --
 ALTER TABLE `orders`
-  ADD CONSTRAINT `orders_ibfk_1` FOREIGN KEY (`order_id`) REFERENCES `employees` (`employee_id`),
   ADD CONSTRAINT `orders_ibfk_2` FOREIGN KEY (`member_id`) REFERENCES `members` (`member_id`),
-  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`),
-  ADD CONSTRAINT `orders_ibfk_4` FOREIGN KEY (`contact_id`) REFERENCES `contacts` (`contact_id`);
+  ADD CONSTRAINT `orders_ibfk_3` FOREIGN KEY (`employee_id`) REFERENCES `employees` (`employee_id`);
 
 --
 -- Các ràng buộc cho bảng `order_elements`

@@ -53,9 +53,69 @@
                 $modelProd->Sold($ele->id, $ele->num);
             }
 
+            DB::connection()
+                ->table("orders")
+                ->where("order_id = ?")
+                ->setParams([$id_order])
+                ->update([
+                    "order_price" => $price
+                ]);
+
+            return $id_order;
+        }
+
+
+        public function CancleOrder($idorder){
+            $elements_order = $this->GetElementOrderByIDOrder($idorder);
+            foreach($elements_order as $element){
+                (new ProductModel)->Sold($element["product_id"], -1*$element["order_ele_num"]);
+            }
+
+            DB::connection()
+                ->table("orders")
+                ->where("order_id = ?")
+                ->setParams([$idorder])
+                ->update([
+                    "order_status" => "Hủy"
+                ]);
 
             return true;
         }
+
+
+        public function GetListOrderByIDMember($idmember){
+            return DB::connection()
+                    ->table("orders")
+                    ->where("member_id = ?")
+                    ->setParams([$idmember])
+                    ->executeReader();
+        }
+
+        public function GetOrderByIDMember($idmember, $idorder){
+            return DB::connection()
+                    ->table("orders")
+                    ->where("member_id = ? and order_id = ?")
+                    ->setParams([$idmember, $idorder])
+                    ->executeReader();
+        }
+
+        public function ValidOrder($idmember, $idorder){
+            return DB::connection()
+                    ->table("orders")
+                    ->where("member_id = ? and order_id = ?")
+                    ->setParams([$idmember, $idorder])
+                    ->exectuteScalar()();
+        }
+
+
+        public function GetElementOrderByIDOrder($idorder){
+            return DB::connection()
+                    ->table("order_elements")
+                    ->where("order_id = ?")
+                    ->setParams([$idorder])
+                    ->executeReader();
+        }
+
 
 
     }

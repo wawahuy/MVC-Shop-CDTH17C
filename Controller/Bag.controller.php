@@ -98,13 +98,18 @@
 
         #thêm giỏ hàng
         $orderModel = new OrderModel();
-        if(!$orderModel->Insert(Session::GetIDLogged(), $bag, $contact["contact_address"], $contact["contact_phone"])){
+        $idorder = $orderModel->Insert(Session::GetIDLogged(), $bag, $contact["contact_address"], $contact["contact_phone"]);
+        if($idorder < 0){
             (new BagModel())->setDataBag([]);
             Javascript::InvokeSwal("Lỗi", "Đặt hàng gặp vấn đề!", "error");
             Javascript::InvokeRedirect(YUH_URI_ROOT."/bag", 1000);
         }
 
+        $modelBag->setDataBag([]);
 
+        View::bind_data("address", $contact["contact_address"]);
+        View::bind_data("idorder", $idorder);
+        View::bind_data("phone", $contact["contact_phone"]);
         parent::renderPage(
             "SShop - Giỏ hàng",
             "{$GLOBALS['VIEW_DIR']}/../View/Shared/Layout.php",

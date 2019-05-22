@@ -6,7 +6,7 @@
                 <img src="{{YUH_URI_ROOT}}/{{@Data:image}}" alt="{{@Data:title}}" class="img-responsive" width="100">
             </div>
             <div class="col-sm-8">
-                <h4 class="nomargin">{{@Data:title}}</h4>
+                <a href="{{YUH_URI_ROOT}}/product/{{@Data:id}}">{{@Data:title}}</a>
             </div>
         </div>
     </td>
