@@ -32,6 +32,14 @@ $ROUTES= [
         "path"     => "/statistical",
         "process"  => "Controller/Statistical.controller(StatisticalController)"
     ],
+    //trang khach hang
+    [
+        "method"   => "get",
+        "path"     => "/user_management",
+        "process"  => "Controller/User.controller(UserController)"
+    ],
+    //trang quan li don hang
+    
 ];
 
 

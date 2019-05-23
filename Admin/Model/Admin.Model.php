@@ -22,10 +22,6 @@ class AdminModel {
             ->executeReader()[0];
     }
 
-
-     
-
-
 }
 
 ?>
