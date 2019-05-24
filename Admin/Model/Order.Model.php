@@ -1,11 +1,11 @@
 <?php
-    class User {
-        public function getUsersInfo(){
+    class Order {
+        public function getOrders(){
             $data = DB::connection()
-            ->table("members")
+            ->table("orders")
             ->executeReader();
             
             return $data;
-        }
+        } 
     }
 ?>

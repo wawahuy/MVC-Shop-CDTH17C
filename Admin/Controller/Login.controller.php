@@ -16,12 +16,12 @@
             $id = $modelAdmin->TestLogin($user, $pass);
 
             if($id > 0){
-                Javascript::InvokeSwal("Thành công", "", "success");
+                Javascript::InvokeSwal("Đăng nhập thành công", "", "success");
                 Session::SetIDAdminLogged($id);
                 Javascript::InvokeRedirect(YUH_URI_ROOT."/", 1000);
             }
             else 
-                Javascript::InvokeSwal("Thất bại", "", "error");
+                Javascript::InvokeSwal("Đăng nhập không thành công", "", "error");
 
             $this->Index();
         }

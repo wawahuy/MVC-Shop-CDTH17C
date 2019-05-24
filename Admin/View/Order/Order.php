@@ -10,21 +10,21 @@
 <div class="container" style="border: 1px solid #ddd; border-radius: 10px; padding: 20px;">
 
     <div class="page-header" style="margin-bottom: 30px;">
-        <h1>Danh sách khách hàng</h1>
+        <h1>Danh sách đơn hàng</h1>
     </div>
     <table id="cart" class="table table-hover table-condensed">
         <thead>
             <tr>
-                <th style="width:25%">Tên đăng nhập</th>
-                <th style="width:25%">Tên khách hàng</th>
-                <th style="width:15%">SĐT</th>
-                
+                <th style="width:15%">Mã đơn hàng</th>
+                <th style="width:25%">Ngày đặt</th>
+                <th style="width:15%">Thành tiền</th>
+                <th style="width:25%">Trạng thái</th>
                 <th style="width:22%" class="text-center"></th>
                 <th style="width:10%"> </th>
             </tr>
         </thead>
     <tbody>
-                            {{@Data:list_user}}
+                            {{@Data:order_list}}
     </tfoot>
     </table>
 

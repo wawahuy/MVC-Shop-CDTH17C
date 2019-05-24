@@ -1,11 +1,12 @@
 <?php
-    class User {
-        public function getUsersInfo(){
+    class thongke{
+        public function doanhsobanhang(){
             $data = DB::connection()
-            ->table("members")
+            ->table("products")
             ->executeReader();
-            
+
             return $data;
         }
     }
+
 ?>
