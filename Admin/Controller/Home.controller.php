@@ -11,7 +11,7 @@
             parent::renderPage(
                 "SShop - Trang chủ",
                 dirname(__FILE__).'/../View/Home/Layout.php',
-                dirname(__FILE__).'/../View/Home/Home.php'
+                dirname(__FILE__).'/../View/Statistical/Statistical.php'
             );
         }
 

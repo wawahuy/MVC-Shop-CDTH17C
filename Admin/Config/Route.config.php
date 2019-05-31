@@ -45,6 +45,13 @@ $ROUTES= [
         "path"     => "/order_management",
         "process"  => "Controller/Order.controller(OrderController)"
     ],
+     //trang quan li don hang
+    
+     [
+        "method"   => "get",
+        "path"     => "/product_management",
+        "process"  => "Controller/Product.controller(ProductController)"
+    ],
 ];
 
 
