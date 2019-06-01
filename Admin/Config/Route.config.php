@@ -52,6 +52,13 @@ $ROUTES= [
         "path"     => "/product_management",
         "process"  => "Controller/Product.controller(ProductController)"
     ],
+     //trang quan li binh luan
+
+     [
+        "method"   => "get",
+        "path"     => "/comment_management",
+        "process"  => "Controller/Comment.controller(CommentController)"
+     ],
 ];
 
 

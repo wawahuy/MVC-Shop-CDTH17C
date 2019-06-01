@@ -25,23 +25,24 @@
         ];
     ?>
 
-
-    <div class="btn-group-vertical" style="border:1px solid lightgray; border-radius: 5px;">
+    
+    <!-- <div class="btn-group-vertical" style="border:1px solid lightgray; border-radius: 5px;"> -->
+     
     @foreach $DataMenu as $value
-        <a href="{{$value[1]}}" style = " text-decoration: none;}">
+        <!-- <a href="{{$value[1]}}" style = " text-decoration: none;}">
             <button type="button"   style=" background-color:#fff; 
                                             border: none; 
                                             color: black; ">
             {{$value[0] == @Data:page_title ? 'disabled' : ''}}
             {{$value[0]}}
             </button>
-        </a>
-
-        <!--<li class="list-group-item '$value[0].' {{$value[0] == @Data:page_title ? 'disabled' : ''}}">
-            {{ $value[0] == @Data:page_title ? "" : '<a href="'.$value[0].'">'}}
+        </a> -->
+    
+        <li class="list-group-item  {{$value[0] == @Data:page_title ? 'disabled' : ''}}">
+            {{ $value[0] == @Data:page_title ? "" : '<a href="'.$value[1].'">'}}
                 {{$value[0]}}
             {{ $value[0] == @Data:page_title ? "" : '</a>'}}
-        </li> -->
+        </li>
         @endforeach
-    </div>
+     
 </ul>
