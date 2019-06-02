@@ -15,15 +15,16 @@
     <table id="cart" class="table table-hover table-condensed">
         <thead>
             <tr>
-                <th style="width:25%">Mã bình luận</th>
-                <th style="width:15%">Nội dung</th>
-                <th style="width:15%">Thời gian</th>
-                <th style="width:35%">Sản phẩm</th>
+                <th style="width:15%">Mã bình luận</th>
+                <th style="width:30%">Nội dung</th>
+                <th style="width:25%">Thời gian</th>
+                <th style="width:15%">Sản phẩm</th>
                 <th style="width:35%">Tùy chọn</th>
             </tr>
         </thead>
     <tbody>
                             {{@Data:comment_list}}
+    
     </tfoot>
     </table>
 

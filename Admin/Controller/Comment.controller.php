@@ -7,7 +7,7 @@
             $info = $comment -> getComment();
             $code_data ="";
             foreach ($info as $comment_row){
-                $code_data.=View::general_code(dirname(__FILE__).'/../View/Comment/Comment-data.php',[
+                $code_data.=View::general_code(dirname(__FILE__).'/../View/Comment/Comment_data.php',[
                     'id'=>$comment_row['comment_id'],
                     'noidung'=>$comment_row['comment_content'],
                     'thoigian'=>$comment_row['comment_date'],
