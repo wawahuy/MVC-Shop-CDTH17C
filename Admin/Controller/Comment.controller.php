@@ -17,7 +17,7 @@
             View::bind_data('comment_list',$code_data);
             parent::renderPage(
                 "SShop - Trang chủ",
-                dirname(__FILE__).'/../View/Shared/Layout.php',
+                dirname(__FILE__).'/../View/Home/Layout.php',
                 dirname(__FILE__).'/../View/Comment/Comment.php'
             );       
         }   

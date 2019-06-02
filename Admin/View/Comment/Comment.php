@@ -16,7 +16,7 @@
         <thead>
             <tr>
                 <th style="width:15%">Mã bình luận</th>
-                <th style="width:30%">Nội dung</th>
+                <th style="width:25%">Nội dung</th>
                 <th style="width:25%">Thời gian</th>
                 <th style="width:15%">Sản phẩm</th>
                 <th style="width:35%">Tùy chọn</th>
