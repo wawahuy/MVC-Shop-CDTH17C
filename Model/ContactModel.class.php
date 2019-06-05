@@ -42,7 +42,6 @@
         }
 
 
-
         public function Delete($id_member, $id_contact ){
             return DB::connection()
                 ->query("delete from contacts where contact_id=? and member_id=?", [$id_contact, $id_member])

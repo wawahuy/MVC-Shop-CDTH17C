@@ -16,7 +16,7 @@
     <td data-th="Subtotal" class="text-center">{{number_format(@Data:allprice, 0, '', ',')}} VNĐ</td>
     <td class="actions" data-th="">
 
-        <input type="hidden" name="product" value="{{@Data:id}}"" />
+        <input type="hidden" name="product" value="{{@Data:id}}" />
         <input type="submit" name="update" class="btn btn-info btn-sm" style="margin-bottom: 10px;" value="Sửa" />
         <input type="submit" name="delete" class="btn btn-danger btn-sm" style="margin-bottom: 10px;" value="Xóa" />
 

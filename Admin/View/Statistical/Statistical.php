@@ -29,7 +29,7 @@
 
     <!-- bieu do doanh thu -->
     
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <!-- <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript">
         google.charts.load('current', {'packages':['corechart']});
       google.charts.setOnLoadCallback(drawChart);
@@ -55,8 +55,36 @@
       }
        
     </script>
-    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+
+    
+    <div id="curve_chart" style="width: 900px; height: 500px"></div> -->
     
     <div></div>
-    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+        google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Qúy', 'Đơn hàng', 'Sản phẩm đã mua', 'Khách hàng'],
+          ['Qúy 1',  480,      900,    358 ],
+          ['Qúy 2',  558,      860,    450 ],
+          ['Qúy 3',  532,       700,     278 ],
+          ['Qúy 4',  771,      1120,      346 ]
+        ]);
+
+        var options = {
+          title: 'Biểu đồ hiện thị doanh số của của hàng',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+       
+    </script>
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
 </div>

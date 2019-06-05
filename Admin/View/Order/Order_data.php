@@ -12,8 +12,8 @@
         {{@Data:status}}
     </td>
     <td>
-         <button type="button" class="btn btn-success">Xem</button>
-         <button type="button" class="btn btn-info">Chỉnh sửa</button>
+        <a href="#"><button type="button" class="btn btn-success">Xem</button></a>
+        <a href="#"><button type="button" class="btn btn-info">Chỉnh sửa</button></a>
         
       </td>
 </tr>

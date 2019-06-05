@@ -11,7 +11,8 @@
                     'id'=>$comment_row['comment_id'],
                     'noidung'=>$comment_row['comment_content'],
                     'thoigian'=>$comment_row['comment_date'],
-                    'sanpham'=>$comment_row['product_id']
+                    'sanpham'=>$comment_row['product_id'],
+                    'trangthai'=>$comment_row['comment_status']
                 ]);
             } 
             View::bind_data('comment_list',$code_data);
@@ -20,6 +21,21 @@
                 dirname(__FILE__).'/../View/Home/Layout.php',
                 dirname(__FILE__).'/../View/Comment/Comment.php'
             );       
-        }   
+        } 
+        
+        
+        public function comment_confirmed($param){
+            $comment = new Comment();
+            if( $comment -> comment_confirmed($param['id']))
+                Javascript::InvokeSwal('Duyệt thành công', '','success');
+            $this -> Index();
+        }
+        
+        public function comment_remove($param){
+            $comment = new Comment();
+            if( $comment -> comment_remove($param['id']))
+                Javascript::InvokeSwal('Xóa thành công', '','success');
+            $this -> Index();
+        }
     }
 ?>

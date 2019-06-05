@@ -12,6 +12,7 @@
     <div class="page-header" style="margin-bottom: 30px;">
         <h1>Danh sách bình luận</h1>
     </div>
+    
     <table id="cart" class="table table-hover table-condensed">
         <thead>
             <tr>

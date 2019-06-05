@@ -59,6 +59,26 @@ $ROUTES= [
         "path"     => "/comment_management",
         "process"  => "Controller/Comment.controller(CommentController)"
      ],
+
+     //duyet binh luan
+     [
+        "method"   => "get",
+        "path"     => "/comment_management/confirm/[id]",
+        "process"  => "Controller/Comment.controller(CommentController)->comment_confirmed",
+        "constraint" => [
+            "id" => "[\d]*"
+        ]
+     ],
+     //
+
+     [
+        "method"   => "get",
+        "path"     => "/comment_management/remove/[id]",
+        "process"  => "Controller/Comment.controller(CommentController)->comment_remove",
+        "constraint" => [
+            "id" => "[\d]*"
+        ]
+     ],
 ];
 
 

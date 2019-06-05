@@ -12,9 +12,9 @@
       {{@Data:sold }}
       </td>
       <td>
-         <button type="button" class="btn btn-success">Xem</button>
-         <button type="button" class="btn btn-info">Chỉnh sửa</button>
-         <button type="button" class="btn btn-warning">Xóa</button>
+         <a href="#"><button type="button" class="btn btn-success">Xem</button></a>
+         <a href="#"><button type="button" class="btn btn-info">Chỉnh sửa</button></a>
+         <a href="#"><button type="button" class="btn btn-warning">Xóa</button></a>
       </td>
 </tr>
  

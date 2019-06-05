@@ -6,26 +6,26 @@
         <div class="columm">
             <h4>Hỗ trợ khách hàng</h4>
             <div class="list">
-                <a href="404.php">Các câu hỏi thường gặp</a></br>
-                <a href="404.php">Phương thức vận chuyển</a></br>
-                <a href="404.php">Chính sách đổi trả</a></br>
-                <a href="404.php">Hướng dẫn đặt hàng</a></br>
-                <a href="404.php">Gửi yêu cầu hỗ trợ</a></br>
+                <a href="404.php">Các câu hỏi thường gặp</a><br>
+                <a href="404.php">Phương thức vận chuyển</a><br>
+                <a href="404.php">Chính sách đổi trả</a><br>
+                <a href="404.php">Hướng dẫn đặt hàng</a><br>
+                <a href="404.php">Gửi yêu cầu hỗ trợ</a><br>
             </div>
         </div>
         <div class="columm">
             <h4>Về SSHOP</h4>
             <div class="list">
-                <a href="introdution.php">Giới thiệu về SSHOP</a></br>
-                <a href="rules.php">Điều khoản sử dụng</a></br>
-                <a href="404.php">Chính sách bảo mật</a></br>
-                <a href="tuyendung.php">Tuyển dụng</a></br>
+                <a href="introdution.php">Giới thiệu về SSHOP</a><br>
+                <a href="rules.php">Điều khoản sử dụng</a><br>
+                <a href="404.php">Chính sách bảo mật</a><br>
+                <a href="tuyendung.php">Tuyển dụng</a><br>
             </div>
         </div>
         <div class="columm">
             <h4>Hợp tác</h4>
             <div class="list">
-                <a href="404.php">Bán hàng cùng SSHOP</a></br>
+                <a href="404.php">Bán hàng cùng SSHOP</a><br>
 
             </div>
         </div>
@@ -51,7 +51,7 @@
                 </a>
 
 
-                <a href="https://www.instagram.com" target="_blank" target="_blank" class="link instagram tooltip">
+                <a href="https://www.instagram.com"  target="_blank" class="link instagram tooltip">
 
                     <svg class="icon">
                         <use xlink:href="#icon--instagram"></use>

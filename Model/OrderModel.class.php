@@ -115,10 +115,5 @@
                     ->setParams([$idorder])
                     ->executeReader();
         }
-
-
-
     }
-
-
 ?>
