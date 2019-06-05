@@ -7,7 +7,7 @@
                 YUH_URI_ROOT."/statistical"
             ],
             [
-                "Quản lý người dùng",
+                "Quản lý khách hàng",
                 YUH_URI_ROOT."/user_management"
             ],
             [

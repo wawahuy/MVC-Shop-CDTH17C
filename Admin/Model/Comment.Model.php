@@ -1,11 +1,14 @@
 <?php
     class Comment{
+        //show tat ca commment
         public function getComment(){
             $data = DB::connection()
                 ->table("comments")
                 ->executeReader();
             return $data;
         }
+
+        //duyet comment
         public function comment_confirmed($id_comment){
             return DB::connection()
             ->table("comments")
@@ -17,7 +20,7 @@
 
         }
 
-
+        //go bo comment
         public function comment_remove($id_comment){
             return DB::connection()
             ->query('delete  from comments where comment_id = ?')

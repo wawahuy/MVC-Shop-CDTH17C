@@ -22,6 +22,13 @@ Func::Import("Model/User.Model.php");
             );
         }
 
+        //xoa khach hàng
+        public function user_remove($param){
+            $user_info = new User();
+            if( $user_info-> user_remove($param['id']))
+                Javascript::InvokeSwal('Xóa thành công', '','success');
+            $this -> Index();
+        }
     }
 
 ?>

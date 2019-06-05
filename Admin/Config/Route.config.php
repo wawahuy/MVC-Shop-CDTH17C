@@ -69,12 +69,32 @@ $ROUTES= [
             "id" => "[\d]*"
         ]
      ],
-     //
+     //xoa binh luan
 
      [
         "method"   => "get",
         "path"     => "/comment_management/remove/[id]",
         "process"  => "Controller/Comment.controller(CommentController)->comment_remove",
+        "constraint" => [
+            "id" => "[\d]*"
+        ]
+     ],
+
+     //show du lieu khach hang
+    //  [
+    //     "method"   => "get",
+    //     "path"     => "/user_management/profile/[id]",
+    //     "process"  => "Controller/User.controller(UserController)->profile",
+    //     "constraint" => [
+    //         "id" => "[\d]*"
+    //     ]
+    //  ],
+
+     //xoa du lieu khach hang
+     [
+        "method"   => "get",
+        "path"     => "/user_management/remove/[id]",
+        "process"  => "Controller/User.controller(UserController)->user_remove",
         "constraint" => [
             "id" => "[\d]*"
         ]
