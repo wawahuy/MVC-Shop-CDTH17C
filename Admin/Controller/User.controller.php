@@ -1,5 +1,5 @@
 <?php
-Func::Import("Model/User.Model.php");
+Func::Import("Admin/Model/User.Model.php");
     class UserController extends BaseController{
         public function Index(){
             $user = new User();

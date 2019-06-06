@@ -17,12 +17,6 @@
             <p><b>SĐT:</b> {{@Data:order_phone}}</p>
             <p><b>Tổng tiền:</b> {{@Data:order_price}} VNĐ</p>
             
-            @if @Data:order_status == "Chờ xữ lí"
-                <form action="" method="POST">  
-                    <input type="submit" name="action" value="Hủy" class="btn btn-info"/>
-                </form>
-                @endif
-
         </div>
         <div class="box">
             <table id="cart" class="table table-hover table-condensed">

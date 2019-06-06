@@ -99,6 +99,14 @@
                     ->executeReader();
         }
 
+        public function GetOrderByIDOrder($idorder){
+            return DB::connection()
+                    ->table("orders")
+                    ->where("order_id = ?")
+                    ->setParams([$idorder])
+                    ->executeReader();
+        }
+
         public function ValidOrder($idmember, $idorder){
             return DB::connection()
                     ->table("orders")

@@ -1,5 +1,5 @@
 <?php
-    Func::Import("Model/Comment.Model.php");
+    Func::Import("Admin/Model/Comment.Model.php");
 
     class CommentController extends BaseController{
         public function Index(){

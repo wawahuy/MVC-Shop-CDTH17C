@@ -1,6 +1,6 @@
 <?php
-    Func::Import("Model/Product.Model.php");
-    Func::Import("Model/Categories.Model.php");
+    Func::Import("Admin/Model/Product.Model.php");
+    Func::Import("Admin/Model/Categories.Model.php");
 
     class ProductController extends BaseController{
         public function Index(){

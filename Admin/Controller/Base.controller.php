@@ -1,5 +1,5 @@
 <?php
-    Func::Import("Model/Admin.Model");
+    Func::Import("Admin/Model/Admin.Model");
 
     /**
      * Lớp trừu tượng controller

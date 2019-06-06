@@ -23,7 +23,7 @@
          */
         public static function Import(string $path){
             $path = preg_replace("/\.php$/", "", $path);
-            require_once $path.".php";
+            require_once dirname(__FILE__)."/../".$path.".php";
         }
 
 
