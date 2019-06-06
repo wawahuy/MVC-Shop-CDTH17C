@@ -23,11 +23,12 @@
             $server = HOSTDB,
             $user   = USERDB,
             $pass   = PASSDB,
-            $db     = NAMEDB
+            $db     = NAMEDB,
+            $port   = PORTDB
             ) : DB_Connection {
 
             try {
-                $pdo = new PDO(DB::string_connect($server, $db), $user, $pass, DB::options());
+                $pdo = new PDO(DB::string_connect($server, (int)$port, $db), $user, $pass, DB::options());
                 return new DB_Connection($pdo);
             }
             catch(PDOException $e ){
@@ -43,8 +44,8 @@
             );
         }
 
-        private static function string_connect(string $host, string $db){
-            return "mysql:host=$host; dbname=$db";
+        private static function string_connect(string $host, int $port, string $db){
+            return "mysql:host=$host; dbname=$db; port = $port";
         }
 
 
