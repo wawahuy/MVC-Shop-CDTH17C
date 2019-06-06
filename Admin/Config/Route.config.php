@@ -46,6 +46,17 @@ $ROUTES= [
         "path"     => "/order_management",
         "process"  => "Controller/Order.controller(OrderController)"
     ],
+
+
+    [
+        "method"   => "get",
+        "path"     => "/order_management/[id]",
+        "process"  => "Controller/Order.controller(OrderController)->updateStatus",
+        "constraint" => [
+            "id" => "[\d]*"
+        ]
+    ],
+ 
  
      //trang quan li binh luan
 
@@ -126,6 +137,34 @@ $ROUTES= [
         "method"   => "post",
         "path"     => "/product_management/addproduct",
         "process"  => "Controller/Product.controller(ProductController)->add_product_submit"
+    ],
+
+    [
+        "method"   => "get",
+        "path"     => "/product_management/edit/[id]",
+        "process"  => "Controller/Product.controller(ProductController)->edit_product",
+        "constraint" => [
+            "id" => "[\d]*"
+        ]
+    ],
+
+
+    [
+        "method"   => "post",
+        "path"     => "/product_management/edit/[id]",
+        "process"  => "Controller/Product.controller(ProductController)->edit_product_submit",
+        "constraint" => [
+            "id" => "[\d]*"
+        ]
+    ],
+
+    [
+        "method"   => "get",
+        "path"     => "/product_management/remove/[id]",
+        "process"  => "Controller/Product.controller(ProductController)->delete_product",
+        "constraint" => [
+            "id" => "[\d]*"
+        ]
     ],
 ];
 

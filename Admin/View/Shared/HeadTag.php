@@ -41,7 +41,6 @@
     <script type="text/javascript" src="{{YUH_URI_ROOT}}/Resource/js/popper.min.js"></script>
     <script type="text/javascript" src="{{YUH_URI_ROOT}}/Resource/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://plugins.krajee.com/assets/22d674c3/js/fileinput.min.js?ver=201904201807"></script>
-    
 </head>
 
 <body>

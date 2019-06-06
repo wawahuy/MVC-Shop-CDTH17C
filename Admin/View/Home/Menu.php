@@ -17,12 +17,18 @@
             [
                 "Quản lý bình luận",
                 YUH_URI_ROOT."/comment_management"
+            ],
+            [
+                "Quản lý chuyên mục",
+                YUH_URI_ROOT."/categorie_management"
             ]
         ];
     ?>
 
     
-    <!-- <div class="btn-group-vertical" style="border:1px solid lightgray; border-radius: 5px;"> -->
+    <li class="list-group-item" style="background-color: orange ; text-align: center;">
+        <b>Menu</b>
+    </li>
      
     @foreach $DataMenu as $value
         <!-- <a href="{{$value[1]}}" style = " text-decoration: none;}">

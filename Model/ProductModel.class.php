@@ -204,7 +204,7 @@
             $data = DB::connection()
                         ->table('products')
                         ->select('product_id, product_image, product_sale, product_name, product_star, product_price, product_num_sold, product_view')
-                        ->where("categorie_id = ? and product_status = \'Hoạt Động\' $search_where")
+                        ->where("product_status = 'Hoạt Động' and categorie_id = ? $search_where")
                         ->orderby($order_name, $order_stmt)
                         ->limit($limit_start, $limit_count)
                         ->setParams($params)
