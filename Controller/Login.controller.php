@@ -59,16 +59,32 @@
          * @return void
          */
         public function AutoLogin(){
+
+            if(Session::IsLogged()){
+                $st = (new UserModel)->getStatusUserID(Session::GetIDLogged());
+                if($st == 1){
+                    Javascript::InvokeScript("swal('Lỗi', 'Tài khoản bị khóa!', 'error')");
+                    Cookie::Del("cmem");
+                    Session::SetLoggedID(null);
+                }
+                else if($st == 2){
+                    Javascript::InvokeScript("swal('Lỗi', 'Tài khoản bị xóa!', 'error')");
+                    Cookie::Del("cmem");
+                    Session::SetLoggedID(null);
+                }
+                
+            }
+
+
             if(!Cookie::Exists("islogged")
-                || Session::IsLogged() 
+                || Session::IsLogged()
                 || !Cookie::Exists("cmem")) return;
 
             $email = Cookie::Get("umem") ?? "";
             $pass = Cookie::Get("pmem") ?? "";
             $id = $this->testLogin($email, $pass);
-            if($id == -1){
-                Cookie::Del("cmem");
-            }
+            if($id >= 0) return;
+            Cookie::Del("cmem");
         }
 
 
@@ -87,6 +103,14 @@
 
             if($id == -1){
                 Javascript::InvokeScript("swal('Lỗi', 'Đăng nhập thất bại!', 'error')");
+                $this->render("Đăng nhập");
+            }
+            else if($id == -2){
+                Javascript::InvokeScript("swal('Lỗi', 'Tài khoản bị khóa!', 'error')");
+                $this->render("Đăng nhập");
+            }
+            else if($id == -3){
+                Javascript::InvokeScript("swal('Lỗi', 'Tài khoản bị xóa!', 'error')");
                 $this->render("Đăng nhập");
             }
             else {
@@ -115,7 +139,7 @@
          *
          * @param String $email
          * @param String $pass
-         * @return integer
+         * @return integer // -1 sai, -2 banned, -3 xóa
          */
         private function testLogin(String $email, String $pass) : int {
             $model = new UserModel();
@@ -139,6 +163,10 @@
             else  if (preg_match("/^[^\d|\w_]*$/",$email)) {
                 return -1;
             }
+
+            $status = $model->getStatusUserID($id);
+            if($status == 1) return -2;
+            if($status == 2) return -3;
 
             Session::SetLoggedID($id);
             return $id;

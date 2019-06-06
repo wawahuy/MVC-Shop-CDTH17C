@@ -3,10 +3,6 @@
     <?php
         $DataMenu = [
             [
-                "Thống kê ",
-                YUH_URI_ROOT."/statistical"
-            ],
-            [
                 "Quản lý khách hàng",
                 YUH_URI_ROOT."/user_management"
             ],

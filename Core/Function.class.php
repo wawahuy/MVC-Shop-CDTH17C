@@ -107,6 +107,37 @@
               return false;
             }
           }
+
+
+        public static function UploadImage($files){
+          $file_name = $files['name'];
+          $file_exte = strtolower(pathinfo($file_name,PATHINFO_EXTENSION));
+          $file_size = $files["size"];
+          $file_type = Func::GetMime($files["tmp_name"]);
+
+          $target_dir_upload = "/Resource/upload/";
+          $rand_file_name =  md5(date('Y-m-d H:i:s.') . gettimeofday()['usec']).rand(0, 1000).rand(0, 1000).".".$file_exte;
+          $target_file_upload = $target_dir_upload.$rand_file_name;
+
+          if(!preg_match("/^image\//", $file_type)){
+              Javascript::InvokeSwal("Lỗi", "Vui lòng upload một hình ảnh!", "error");
+              $this->Index();
+              return;
+          }
+
+          if($file_size > 1024*1024){
+              Javascript::InvokeSwal("Lỗi", "Vui lòng upload một hình ảnh >= 1MB!", "error");
+              $this->Index();
+              return;
+          }
+
+
+          if (move_uploaded_file($files["tmp_name"], dirname(__FILE__)."/..".$target_file_upload)) {
+              return $target_file_upload;
+          } else {
+              return "";
+          }
+        }
     }
 
 

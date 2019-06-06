@@ -1,6 +1,16 @@
 <?php
     class UserModel {
 
+        public function getStatusUserID($id){
+            $data = DB::connection()
+                        ->table("members")
+                        ->where("member_id = ?")
+                        ->select("member_status")
+                        ->setParams([$id])
+                        ->executeReader()[0]["member_status"];
+
+            return $data;
+        }
 
         public function GetUserWithID($id){
             $data = DB::connection()

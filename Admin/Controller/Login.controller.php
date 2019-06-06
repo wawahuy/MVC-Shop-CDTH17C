@@ -18,7 +18,7 @@
             if($id > 0){
                 Javascript::InvokeSwal("Đăng nhập thành công", "", "success");
                 Session::SetIDAdminLogged($id);
-                Javascript::InvokeRedirect(YUH_URI_ROOT."/statistical", 1000);
+                Javascript::InvokeRedirect(YUH_URI_ROOT."/user_management", 1000);
             }
             else 
                 Javascript::InvokeSwal("Đăng nhập không thành công", "", "error");
@@ -32,6 +32,12 @@
             Session::SetIDAdminLogged(null);
             Javascript::InvokeRedirect(YUH_URI_ROOT."/", 1000);
             $this->Index();
+        }
+
+        public function CheckLogin(){
+            if(!Session::IsAdminLogged() 
+                    && $_SERVER["REDIRECT_URL"] != YUH_URI_ROOT."/login")
+                    Route::Redirect("/login");
         }
     }
 ?>

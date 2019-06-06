@@ -5,14 +5,11 @@
         public function Index(){
             if(!Session::IsAdminLogged()){
                 Route::Redirect("/login");
+                return;
             }
 
             #Render View
-            parent::renderPage(
-                "SShop - Trang chủ",
-                dirname(__FILE__).'/../View/Home/Layout.php',
-                dirname(__FILE__).'/../View/Statistical/Statistical.php'
-            );
+            Route::Redirect("/user_management");
         }
 
     }

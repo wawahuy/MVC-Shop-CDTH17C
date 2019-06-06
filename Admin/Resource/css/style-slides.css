@@ -1,0 +1,298 @@
+
+
+/*slides*/
+#container-slides {
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    box-shadow: 0 1px 20px rgba(0,0,0,0.5);
+    background-color: white;
+}
+
+#container-slides > .slides {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    display: none;
+}
+#container-slides > .slides > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* định dang 2 button back và forward */
+#container-slides > .btLeft {
+    font-family: "fIcon";
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 10;
+    padding: 7px;
+    margin-left:1px;
+    color: white;
+}
+.btLeft::after {
+    content: "\e922";
+    font-size: 30px;
+}
+
+
+#container-slides > .btRight {
+    font-family: "fIcon";
+    position: absolute;
+    top: 50%;
+    left: 100%;
+    transform: translate(-100%, -50%);
+    z-index: 10;
+    padding: 7px;
+    margin-right: 1px;
+    color: white;
+}
+.btRight::after {
+    content: "\e923";
+    font-size: 30px;
+}
+
+
+#container-slides>.btLeft:hover, #container-slides>.btRight:hover {
+    color: black;
+    background: rgba(0, 0, 0, 0.1);
+}
+
+#container-slides>.btLeft:hover {
+    animation: efBTLeft 1s infinite alternate-reverse;
+}
+
+#container-slides>.btRight:hover {
+    animation: efBTRight 1s infinite alternate-reverse;
+}
+
+#container-slides>.btLeft:active, #container-slides>.btRight:active {
+    color: white;
+}
+
+
+
+/*hiệu úng phóng to*/
+@keyframes efView {
+    0% {
+        transform: scale(1);
+    }
+    80% {
+        transform: scale(1.2);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+
+@keyframes efBTLeft {
+    0% {
+        transform: translate(-2%, -50%);
+    }
+    100% {
+        transform: translate(2%, -50%);
+    }
+}
+@keyframes efBTRight {
+    0% {
+        transform: translate(-104%, -50%);
+    }
+    100% {
+        transform: translate(-100%, -50%);
+    }
+}
+
+
+
+/*
+    - định dang danh sách đại diện button
+*/
+#container-slides > .listBTSlides {
+    position: absolute;
+    z-index: 11;
+    top: 100%;
+    left: 50%;
+    padding: 10px;
+    transform: translate(-50%, -100%);
+}
+.listBTSlides > div {
+    border-radius: 5px;
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0.2;
+    width: 10px;
+    height: 10px;
+    float: left;
+    margin-left: 10px;
+}
+.listBTSlides>div:hover {
+    background-color: rgba(0,0,0,0.8);
+}
+.btSlideActive {
+    background-color: black;
+}
+
+/* hiệu ứng 1, dịch chuyển từ phải sang trái */
+@keyframes efRL {
+    0% {
+        left: 100%;
+        opacity: 0.5;
+    }
+    100% {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+
+
+/* hiệu ứng 1, dịch chuyển từ phải sang trái */
+@keyframes efRL {
+    0% {
+        left: 100%;
+        opacity: 0.5;
+    }
+    100% {
+        left: 0;
+        opacity: 1;
+    }
+}
+
+
+
+
+/*
+ hiệu ứng dịch chuyển dưới -> trên
+*/
+@keyframes efBT {
+    0% {
+        top: 100%;
+        opacity: 0.5;
+    }
+    100% {
+        top: 0;
+        opacity: 1;
+    }
+}
+
+
+/* hiệu ứng xoay nhỏ và mất, tạo ảnh mới lớn -> nhỏ*/
+@keyframes ef4In {
+    0% {
+        transform: scale(10) rotate(-40deg);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+}
+@keyframes ef4Out {
+    0% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+    }
+    100% {
+        transform: scale(0) rotate(20deg);
+        opacity: 0;
+    }
+}
+
+
+/* dịch chuyển kéo dãn các đối tượng từ trên xuống dưới */
+@keyframes ef5In {
+    0% {
+        transform: 
+            translateY(-100%)
+    }
+    100% {
+        transform: 
+            translateY(0)
+    }
+}
+@keyframes ef5Out {
+    0% {
+        transform: 
+            translateY(0)
+    }
+    100% {
+        transform: 
+            translateY(100%)
+    }
+}
+
+
+/* dịch chuyển kéo dãn các đối tượng từ trái sang phải */
+@keyframes ef6In {
+    0% {
+        transform: 
+            translateX(-100%)
+    }
+    100% {
+        transform: 
+            translateY(0)
+    }
+}
+@keyframes ef6Out {
+    0% {
+        transform: 
+            translateX(0)
+    }
+    100% {
+        transform: 
+            translateX(100%)
+    }
+}
+
+/* thu nhỏ -> dịch trên ẩn, xuất hiện nhỏ -> dịch trên hiện */
+@keyframes ef7In {
+    0% {
+        transform: 
+            scale(0.2)
+            translateY(100%);
+        opacity: 0;
+    }
+    30% {
+        transform: 
+            scale(0.5)
+            translateY(70%);
+        opacity: 0.5;
+    }
+    100% {
+        transform: 
+            scale(1)
+            translateY(0);
+        opacity: 1;
+    }
+}
+
+/* scale đối tượng nằm ngang */
+@keyframes ef8Out {
+    0% {
+        transform: 
+            scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: 
+            scale(10);
+        opacity: 0;
+    }
+}
+@keyframes ef8In {
+    0% {
+        transform: 
+            scale(10);
+        opacity: 0;
+    }
+    100% {
+        transform: 
+            scale(1);
+        opacity: 1;
+    }
+}

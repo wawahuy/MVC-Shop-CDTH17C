@@ -3,6 +3,11 @@
 
     class CommentController extends BaseController{
         public function Index(){
+            if(!Session::IsAdminLogged()){
+                Route::Redirect("/login");
+                return;
+            }
+
             $comment = new Comment();
             $info = $comment -> getComment();
             $code_data ="";
@@ -25,6 +30,11 @@
         
         
         public function comment_confirmed($param){
+            if(!Session::IsAdminLogged()){
+                Route::Redirect("/login");
+                return;
+            }
+
             $comment = new Comment();
             if( $comment -> comment_confirmed($param['id']))
                 Javascript::InvokeSwal('Duyệt thành công', '','success');
@@ -32,6 +42,11 @@
         }
         
         public function comment_remove($param){
+            if(!Session::IsAdminLogged()){
+                Route::Redirect("/login");
+                return;
+            }
+            
             $comment = new Comment();
             if( $comment -> comment_remove($param['id']))
                 Javascript::InvokeSwal('Xóa thành công', '','success');

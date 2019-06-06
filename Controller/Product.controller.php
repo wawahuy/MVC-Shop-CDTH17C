@@ -83,7 +83,7 @@
 
                 #Kiểm tra đăng comment
                 if($modelComment->addComment($id_product, $comment, Session::GetIDLogged(), $reply)){
-                    echo json_encode(["message" =>  "Đăng comment thành công!", "code" => "success"]);
+                    echo json_encode(["message" =>  "Đăng comment thành công, đợi Admin phê duyệt!", "code" => "success"]);
                 }
                 else {
                     echo json_encode(["message" =>  "Đăng comment thất bại!", "code" => "error"]);

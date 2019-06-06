@@ -1,0 +1,106 @@
+
+.intro-header{
+    font-family: 'fBlodBungee';
+    margin-top: 30px;
+	padding: 5px;
+	margin-bottom: 10px;
+    text-transform: uppercase;
+    font-size: 35px;
+    color: rgb(107, 107, 107);
+}
+
+
+.container-full{
+	margin-top: 30px;
+}
+
+.container{
+	min-height:50%;
+	width: 100%;
+	border-bottom: 5px solid lightgrey; 
+	background-color:white;
+}
+
+.container:nth-child(even){
+	background-color: #fbfcfe;
+}
+.container::after {
+	clear: both;
+	content: '';
+	display: block;
+	box-sizing: border-box;
+}
+.text_1{
+	margin: 50px;
+	font-size:21px;
+	float:left;
+	padding: 10px;
+	line-height: 30px;
+	width: 49.5%;
+	left:50%;
+	
+}
+.text_1>h2{
+	color:lightgrey;
+	font-size:50px;
+	line-height: normal;
+}
+
+.img1{
+	margin:5% 50px	;
+ 	float:left;
+ 	left: 50%;
+ 	
+ 
+
+}
+
+div.img1>img{
+width: 100%;
+height: 100%
+}
+
+
+
+/*Phần nhân vật*/
+.avatar_container{
+	width: 100%;
+	display: inline-block;
+	margin-bottom: 30px;
+	padding: 0;
+	background-color: rgb(240, 234, 234);
+}
+
+.avatar_container::after {
+	content: '';
+	clear: both;
+	display: block;
+}
+
+.avatar {
+	border:1px solid #cccccc;
+	float:left;
+	width: 20%;
+	min-width: 200px;
+	margin-bottom: 20px;
+}
+
+.avatar > .img2, .avatar>.img2>img {
+	width: 100%;
+}
+
+.gioi_thieu {
+	text-align: center;
+}
+.name {
+	padding: 10px;
+	font-size: 25px;
+    color: #080808;
+    background-color: whitesmoke;
+	min-height: 50px;
+}
+.text {
+	padding: 10px;
+	background-color:#3a3a31;
+	color:white;
+}

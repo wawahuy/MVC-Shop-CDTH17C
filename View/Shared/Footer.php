@@ -89,6 +89,7 @@
     </div>
 
     <div class="footer-bottom">
+        <div class="ctx" style="font-size: 14px; color: black;"><b>Lược xem: {{@Data:page_view}}</b></div>
         <div class="ctx">Địa chỉ: 65 Huỳnh Thúc Kháng, Phường Bến Nghé, Quận 1, TP HCM. Tổng đài hổ trợ: 12340123 -
             Email: support@sshop.ml</div>
         <div class="ctx">© 2018 - Bản quyền thuộc về Tập đoàn TNHH SShop</div>

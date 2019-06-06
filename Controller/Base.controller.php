@@ -46,6 +46,7 @@
         protected function bindPage(){
             View::bind_data("page_menu", (new ConfigModel)->getsJsonMenu());
             View::bind_data("page_logged", Session::IsLogged());
+            View::bind_data("page_view", (new ConfigModel)->counterPageView());
             View::bind_data("page_cart_product", (new BagModel)->getNumProduct());
 
             if(Session::IsLogged()){

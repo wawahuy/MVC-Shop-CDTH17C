@@ -1,0 +1,108 @@
+
+.icon-down::after {
+  content: '\E928';
+  color:red;
+  font-size:22px;
+  font-family: 'fIcon';
+ }
+ .icon-up::after {
+  content: '\E92b';
+  color:red;
+  font-size:22px;
+  font-family: 'fIcon';
+ }
+ @font-face {
+  font-family: "fIcon";
+  src: url("font/icomoon.ttf");
+}
+.pic-face{
+	width:100%;
+	height:300px;
+	background-color:tomato;
+	border:solid #ddd 1px;
+	margin-bottom:10px;
+}
+.tentrang{
+	height:120px;
+	width:80%;
+	margin-left:10%;
+	font-size:90px;
+	padding-left:18%;
+	border-bottom:solid blue 2px;
+	margin-bottom:10px
+}
+.dangki{
+	position:fixed;
+	height:2000px;
+	width:100%;
+	background-color:rgba(0,0,0,0.4);
+	margin:0;
+	display:none;
+}
+.tuyen-dung{
+	clear:both;
+	width:80%;
+	height:100%;
+	margin-left:10%;
+	border-radius:10px;
+	border-color:#ddd;
+}
+.bang-ten{
+	border:solid #ddd 1px;
+	height:40px;
+	background-color:#ed1b24;
+	padding-left:10px;
+	font-size:25px;
+	font-weight:bold;
+	font-family:'arial';
+}
+.vi-tri-tuyen
+{
+	height:100%;
+	width:100%;
+}
+.nutungtuyen{
+	font-size:20px;
+	border-radius:10px;
+	margin-left:2%;
+	background-color:#ed1c24;
+	text-align:center;
+	line-height:50%;
+	color:white;
+	width:20%;
+	height:8%;
+}
+.shiper{
+	height:40px;
+	width:100%;
+	color:red;
+	font-size:22px;
+	padding-top:5px;
+	background-color:#e1e1e1;
+	
+}
+.nut-hien-thi-down{
+	height:100%;
+	width:40px;
+	border:none;
+	background-color:#e1e1e1;
+	float:left;
+}
+.nut-hien-thi-up{
+	height:100%;
+	width:40px;
+	border:none;
+	background-color:#e1e1e1;
+	display:none;
+	float:left;
+}
+.thong-tin-tuyen-dung{
+	height:600px;
+	width:100%;
+	background-color:#ebebeb;
+	border-color:#ddd;
+	display:none;
+}
+.nutungtuyen{
+	
+}

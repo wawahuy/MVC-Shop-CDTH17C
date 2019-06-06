@@ -4,6 +4,7 @@
         public function getComment(){
             $data = DB::connection()
                 ->table("comments")
+                ->orderby('comment_date', ORDER_BY_DESC)
                 ->executeReader();
             return $data;
         }

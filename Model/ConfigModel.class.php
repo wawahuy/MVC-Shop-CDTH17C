@@ -35,6 +35,26 @@
             return json_decode($data);
         }
 
+
+        public function counterPageView(){
+            $data = DB::connection()
+                        ->table("config")
+                        ->select("config_data")
+                        ->where("config_name = 'view'")
+                        ->executeReader()[0]['config_data'];
+            
+            $newview = (int)$data + 1;
+            
+            DB::connection()
+                        ->table("config")
+                        ->where("config_name = 'view'")
+                        ->update([
+                            "config_data" => $newview
+                        ]);
+
+            return $newview;
+        }
+
     }
 
 

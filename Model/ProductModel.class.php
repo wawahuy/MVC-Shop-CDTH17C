@@ -21,7 +21,7 @@
         public function getProductByID($id) {
             $query = DB::connection()
                         ->table('products')
-                        ->where('product_id = ?')
+                        ->where('product_id = ?  and product_status = \'Hoạt Động\'')
                         ->setParams([$id]);
             
             #Nếu không tồn tại sản phẩm
@@ -96,6 +96,7 @@
                         ->table('products')
                         ->select('product_id, product_image, product_sale, product_name, product_star, product_price, product_num_sold')
                         ->orderby('product_num_sold', ORDER_BY_DESC)
+                        ->where('product_status = \'Hoạt Động\'')
                         ->limit(0, 10)
                         ->executeReader();
             $arr = array();
@@ -130,7 +131,7 @@
             $data = DB::connection()
                      ->table('products')
                      ->select('product_id, product_image, product_sale, product_name, product_star, product_price, product_num_sold')
-                     ->where('product_sale != 0')
+                     ->where('product_sale != 0 and product_status = \'Hoạt Động\'')
                      ->orderby('product_num_sold', ORDER_BY_DESC)
                      ->limit(0, 10)
                      ->executeReader();
@@ -203,7 +204,7 @@
             $data = DB::connection()
                         ->table('products')
                         ->select('product_id, product_image, product_sale, product_name, product_star, product_price, product_num_sold, product_view')
-                        ->where("categorie_id = ? $search_where")
+                        ->where("categorie_id = ? and product_status = \'Hoạt Động\' $search_where")
                         ->orderby($order_name, $order_stmt)
                         ->limit($limit_start, $limit_count)
                         ->setParams($params)

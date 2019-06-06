@@ -12,6 +12,9 @@
     <div class="page-header" style="margin-bottom: 30px;">
         <h1>Danh sách sản phẩm</h1>
     </div>
+    <div style="padding:10px">
+        <a href="{{YUH_URI_ROOT}}/product_management/addproduct"><button class="btn btn-success">Thêm mới sản phẩm</button></a>
+    </div>
     <table id="cart" class="table table-hover table-condensed">
         <thead>
             <tr>

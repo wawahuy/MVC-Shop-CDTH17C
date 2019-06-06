@@ -59,7 +59,7 @@
                 return false;
 
             return DB::connection()
-                        ->query("select me.member_id, co.comment_id, co.comment_parent, co.comment_content, co.comment_date, me.member_user, me.member_avatar from members me, comments co where me.member_id = co.member_id and co.product_id = ? and co.comment_parent is null  order by co.comment_date desc limit $start, $num")
+                        ->query("select me.member_id, co.comment_id, co.comment_parent, co.comment_content, co.comment_date, me.member_user, me.member_avatar from members me, comments co where me.member_id = co.member_id and co.product_id = ? and co.comment_parent is null and comment_status = 1  order by co.comment_date desc limit $start, $num")
                         ->setParams([$id_product])
                         ->executeReader();
         }
@@ -67,7 +67,7 @@
 
         public function getCommentChild($id_comment){
             return DB::connection()
-                        ->query("select me.member_id, co.comment_id, co.comment_parent, co.comment_content, co.comment_date, me.member_user, me.member_avatar from members me, comments co where me.member_id = co.member_id and co.comment_parent = ?")
+                        ->query("select me.member_id, co.comment_id, co.comment_parent, co.comment_content, co.comment_date, me.member_user, me.member_avatar from members me, comments co where me.member_id = co.member_id and co.comment_parent = ? and comment_status = 1")
                         ->setParams([$id_comment])
                         ->executeReader();
         }
