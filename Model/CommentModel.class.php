@@ -87,7 +87,7 @@
                 if($row["comment_parent"] == null){
                     $child = $this->getCommentChild($row["comment_id"], $row["comment_id"]);
                     if(count($child) > 0)
-                        $chid_data["child"] = $this->createJsonComment($child, );
+                        $chid_data["child"] = $this->createJsonComment($child);
                 }
                 array_push($con_data, $chid_data);
             }
