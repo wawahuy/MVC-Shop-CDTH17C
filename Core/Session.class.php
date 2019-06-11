@@ -25,7 +25,7 @@
             Session::Set("user_id", $id);
         }
 
-        public static function SetUserAdminLogged($id){
+        public static function SetIDAdminLogged($id){
             Session::Set("admin_id", $id);
         }
 
@@ -33,7 +33,7 @@
             return Session::Get("user_id");
         }
 
-        public static function GetUserAdminLogged(){
+        public static function GetIDAdminLogged(){
             return Session::Get("admin_id");
         }
 

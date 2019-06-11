@@ -12,7 +12,7 @@
      *                           |
      *                           |
      *                           |
-     *                   Controller@Action      (Controller/...) , Action là tên phương thức public của class
+     *                   Proccess sử dụng lambda hoặc Func::call_empty... 
      *                      |    |   
      *                      |    |
      *         Model---------    ------------------------- --------(View::render)  (View.class.php)
@@ -97,9 +97,10 @@
      */
     Route::fixPathWindows();
 
-
     /**
      * Cấu hình route trong file Route.config.php
      */
+    include_once dirname(__FILE__)."/Config/Route.config.php";
     Route::config($ROUTES);
+
 ?>

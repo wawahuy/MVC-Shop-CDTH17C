@@ -5,7 +5,6 @@
     class HomeController extends BaseController {
 
         public function Index(){
-            #Load chuc nang
             $modelProduct = new ProductModel;
             $modelConfig = new ConfigModel;
 

@@ -23,11 +23,12 @@
             $server = HOSTDB,
             $user   = USERDB,
             $pass   = PASSDB,
-            $db     = NAMEDB
+            $db     = NAMEDB,
+            $port   = PORTDB
             ) : DB_Connection {
 
             try {
-                $pdo = new PDO(DB::string_connect($server, $db), $user, $pass, DB::options());
+                $pdo = new PDO(DB::string_connect($server, (int)$port, $db), $user, $pass, DB::options());
                 return new DB_Connection($pdo);
             }
             catch(PDOException $e ){
@@ -43,8 +44,24 @@
             );
         }
 
-        private static function string_connect(string $host, string $db){
-            return "mysql:host=$host; dbname=$db";
+        private static function string_connect(string $host, int $port, string $db){
+            return "mysql:host=$host; dbname=$db; port = $port";
+        }
+
+
+        public static function TestLimit($start, $num){
+            if(!is_numeric($start) || !is_numeric($num)){
+                return false;
+            }
+
+            $start = round($start);
+            $end = round($num);
+
+            if($start < 0 || $num < 1){
+                return false;
+            }
+
+            return true;
         }
     }
 
@@ -84,6 +101,9 @@
             $qr->table($table);
             return $qr;
         }
+
+
+        
 
     }
 
@@ -268,18 +288,23 @@
 
                 case 'update' :
                     $str_upd = "";
-                    $params = $this->params ?? [];
+                    $params_diff = parent::getParams();
+                    $params_upd = array();
 
                     foreach ($this->data_query as $key => $value){
-                        $str_upd.= "`$key` = ?,";
-                        array_push($params, $value);
+                        #Ko sử dụng params khi có chứa column
+                        if(preg_match('/`\s*([\d|\w_]+)\s*`/', $value)){
+                            $str_upd.= "$key = $value,";
+                        }
+                        else {
+                            $str_upd.= "$key = ?,";
+                            array_push($params_upd, $value);
+                        }
                     }
 
+                    parent::setParams(array_merge($params_upd, $params_diff));
                     $str_upd = substr($str_upd, 0, strlen($str_upd) - 1);
-
                     $where = isset($this->where_) ? " WHERE ".$this->where_ : "";
-                   
-                    parent::setParams($params);
                     parent::setQuery("UPDATE $this->from SET $str_upd $where");
                     break;
             }
@@ -302,7 +327,7 @@
         }
 
         public function orderby(string $ordby, string $sort = DB_QueryBuilder::DESC) : DB_QueryBuilder {
-            $this->orderby_ =$ordby;
+            $this->orderby_ =$ordby." ".$sort." ";
             return $this; 
         }
 

@@ -16,7 +16,7 @@
 
         @foreach $menus as $value
             <li>
-            <a href="{{URI_ROOT}}/categories/{{$value->id}}/{{$value->name}}">{{$value->name}}</a>
+            <a href="{{URI_ROOT}}/categories/{{$value->id}}/{{str_replace(' ', '_', $value->name)}}">{{$value->name}}</a>
             @if array_key_exists('child', $value)
                 @call CreateMenu($value->child, true)
                 @endif

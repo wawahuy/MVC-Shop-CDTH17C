@@ -1,0 +1,109 @@
+/*phần footer*/
+#footer-home {
+    width:100%;
+    background-color:aliceblue;
+    line-height: normal;
+    color: rgb(65, 66, 66) ;
+}
+
+#footer-home::after {
+    content: ' ';
+    clear: both;
+    display: block;
+}
+
+
+
+/* phần phía trên của foooter*/
+.top-footer {
+    padding-top: 30px;
+    width:100%;
+}
+
+
+.top-footer::after {
+    content: ' ';
+    clear: both;
+    display: block;
+}
+
+/*các cột*/
+.top-footer > .columm {
+    float: left;
+    width: 25%;
+    min-width: 200px;
+    line-height:30px;
+    padding-left: 30px;
+    margin-left: 85px;
+}
+
+
+/*phần phía dưới*/
+.footer-bottom {
+    width: 100%;
+    padding: 40px 0 10px 0;
+    color: rgb(179, 175, 175);
+}
+
+
+.ctx {
+    text-align: center;
+    font-size: 13px;
+    padding: 5px;
+}
+
+#footer-home h4 {
+    font-family: fBlodBungee;
+    font-style: normal;
+    text-transform: uppercase;
+    letter-spacing: .5px;
+}
+
+ a:hover {
+    color:rgb(70, 150, 255);
+}
+ a {
+    text-decoration:none;
+    color: rgb(112, 113, 113) ;
+    text-align:left;
+    color: inherit;
+}
+
+ .list {
+    display: block;
+    font-size:14px;
+}
+
+ .icon {
+    width:  36px;
+    height: 36px;
+    fill: currentColor;
+    transition: .2s;
+}
+
+.facebook:hover  { color: #3b5998 }
+.google:hover    { color: #dd4b39 }
+.instagram:hover { color: #3a8db4 }
+.twitter:hover    {color:#66cfff}
+
+.facebook:hover::after  { background: #3b5998 }
+.google:hover::after    { background: #dd4b39 }
+.instagram:hover::after { background:  #3a8db4  }
+.twitter:hover::after    {background:#66cfff}
+ .link {
+    position: relative;
+    color: #bbb;
+}
+.link:not(:last-of-type) {
+    margin-right: 8px;
+}
+
+.tooltip::before,
+ .tooltip::after {
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -10px);
+    opacity: 0;
+    transition: .2s;
+}

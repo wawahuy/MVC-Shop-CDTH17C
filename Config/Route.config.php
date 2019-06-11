@@ -79,7 +79,7 @@
 
         [
             "method"    =>  "get",
-            "path"      =>  "/categories/[id]/page/[page]/[name]",
+            "path"      =>  "/categories/[id]/[name]/page/[page]",
             "process"   =>  "Controller/Categories.controller(CategoriesController)->View",
             "constraint" => [
                 "id" => "[\d]+",
@@ -94,6 +94,26 @@
             "method"    =>  "get",
             "path"      =>  "/product",
             "process"   =>  "Controller/Product.controller(ProductController)"
+        ],
+
+        [
+            "method"    =>  "post",
+            "path"      =>  "/product_comment/add/[id]",
+            "process"   =>  "Controller/Product.controller(ProductController)->AddComment",
+            "constraint" => [
+                "id" => "[\d]*"
+            ]
+        ],
+
+        [
+            "method"    =>  "get",
+            "path"      =>  "/product_comment/view/[id]/limit/[start]/[count]",
+            "process"   =>  "Controller/Product.controller(ProductController)->ViewComment",
+            "constraint" => [
+                "id" => "[\d]*",
+                "start" => "[\d]*",
+                "count" => "[\d]*"
+            ]
         ],
 
         [
@@ -119,6 +139,84 @@
             "process"   =>  "Controller/Bag.controller(BagController)->Add"
         ],
 
+        [
+            "method"    =>  "post",
+            "path"      =>  "/bag",
+            "process"   =>  "Controller/Bag.controller(BagController)->Change"
+        ],
+
+        [
+            "method"    =>  "post",
+            "path"      =>  "/bag/checkout",
+            "process"   =>  "Controller/Bag.controller(BagController)->Checkout"
+        ],
+
+
+        //User profile user
+        [
+            "method"    =>  "get",
+            "path"      =>  "/profile/user",
+            "process"   =>  "Controller/ProfileUser.controller(ProfileUserController)"
+        ],
+
+        [
+            "method"    =>  "post",
+            "path"      =>  "/profile/user",
+            "process"   =>  "Controller/ProfileUser.controller(ProfileUserController)->UpdateAvatar"
+        ],
+
+        //User profile change password
+        [
+            "method"    =>  "get",
+            "path"      =>  "/profile/changepassword",
+            "process"   =>  "Controller/ProfileUser.controller(ProfileUserController)->ChangePasswordIndex"
+        ],
+
+        [
+            "method"    =>  "post",
+            "path"      =>  "/profile/changepassword",
+            "process"   =>  "Controller/ProfileUser.controller(ProfileUserController)->ChangePasswordSubmit"
+        ],
+
+
+        //User profile contacts
+        [
+            "method"    =>  "get",
+            "path"      =>  "/profile/contact",
+            "process"   =>  "Controller/ProfileContact.controller(ProfileContactController)"
+        ],
+
+        [
+            "method"    =>  "post",
+            "path"      =>  "/profile/contact",
+            "process"   =>  "Controller/ProfileContact.controller(ProfileContactController)->Action"
+        ],
+
+
+        //User profile order
+        [
+            "method"    =>  "get",
+            "path"      =>  "/profile/order",
+            "process"   =>  "Controller/ProfileOrder.controller(ProfileOrderController)"
+        ],
+
+        [
+            "method"    =>  "get",
+            "path"      =>  "/profile/order/[id]",
+            "process"   =>  "Controller/ProfileOrder.controller(ProfileOrderController)->ViewDeltail",
+            "constraint" => [
+                "id" => "[\d]*"
+            ]
+        ],
+
+        [
+            "method"    =>  "post",
+            "path"      =>  "/profile/order/[id]",
+            "process"   =>  "Controller/ProfileOrder.controller(ProfileOrderController)->CancleOrder",
+            "constraint" => [
+                "id" => "[\d]*"
+            ]
+        ],
 
         //Error Page
         [

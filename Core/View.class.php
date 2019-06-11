@@ -60,11 +60,20 @@ class View {
      * Sử dụng trên View có 2 cách
      *      C1:    View::$DATA[name]
      *      C2:    @Data:name
-     * Để hiển thị giá trị cần đặt nó trong {{ ... }}, trong các lệnh if có thể giữ bình thường
+     * Để hiển thị giá trị cần đặt nó trong {{ ... }}, trong các lệnh khác có thể giữ bình thường
      *
      * @var array
      */
     public static $DATA = array();
+
+
+
+    public static function general_code($path, array $data){
+        $old_data = View::$DATA;
+        View::$DATA = array_merge(View::$DATA, $data);
+        return View::get_render_content($path);
+        View::$DATA = $old_data;
+    }
 
 
 
@@ -90,6 +99,7 @@ class View {
     public static function render($path){
         $code = View::get_code_compile($path);
 
+        
         //run code
         try {
             //COde debug
@@ -132,11 +142,11 @@ class View {
 
         //Xữ lí các mẫu
         $code = View::_require($code);
+        $code = View::_call($code);
         $code = View::_var($code);
         $code = View::_foreach($code);
         $code = View::_if($code);
         $code = View::_change_var_data($code);
-        $code = View::_call($code);
         $code = View::_eval($code);
         return $code;
     }

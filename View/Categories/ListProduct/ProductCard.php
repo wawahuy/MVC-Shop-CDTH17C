@@ -16,10 +16,12 @@
     @call $link = URI_ROOT."/product/$DATA->id"
 
     <a href="{{$link}}">
-    <div class="pd-container">
+    <div class="pd-container" style="position:relative;">
+        <div class="pd-title" style="display:block;">{{$DATA->name}}</div>
+
         <div class="pd-look">
             
-            <div class="pd-image"><img src="{{$DATA->image}}"></div>
+            <div class="pd-image"><img src="{{YUH_URI_ROOT}}/{{$DATA->image}}"></div>
 
             @if isset($DATA->note)
                     <div class="pd-sale"><span>{{$DATA->note}}</span></div>
@@ -30,8 +32,8 @@
             @endif
 
             <div class="pd-deltail">
+                <div style="margin-top: 50px;"></div>
 
-                <div class="pd-title">{{$DATA->name}}</div>
 
                 <div class="pd-star-container noselect">
                     <?php

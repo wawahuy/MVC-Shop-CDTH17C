@@ -6,7 +6,6 @@
  *          
  * 
  */
-include_once dirname(__FILE__)."/../Config/Route.config.php";
 
 
 define("ROUTE_ERR_VALUES", "route error value");
@@ -107,7 +106,7 @@ class Route {
 
 
     /**
-     * Cấu hình router với json array tahay vì dùng get|post|all 
+     * Cấu hình router với json array thay vì dùng get|post|all 
      * $process là string sẽ tự động truyền cho Func::Call_method_of_class_empty
      *
      * Mỗi child có câu trúc bao gồm các thông tin sau:
@@ -148,7 +147,7 @@ class Route {
      */
     private static function makeRouting($path, $process, $constraint){
         #Fix URI
-        $uri = $_SERVER["REQUEST_URI"];
+        $uri = preg_replace('/\?(.*)$/', '', $_SERVER["REQUEST_URI"]);
         $path = YUH_URI_ROOT.$path;
 
         #Lấy các parameter trên path
@@ -169,19 +168,7 @@ class Route {
 
         #Gọi process
         if(is_string($process)){
-            #kiểm tra controller
-            // $matches = array();
-            // if(!preg_match("/Controller:([\d|\w]+)([@]?)([\d|\w]*)/", $process, $matches))
-            // {
-            //     throw new Exception("Lỗi process!");
-            //     return;
-            // }
-
-            // $controller = $matches[1];
-            // $action = $matches[3];
-            // Func::RunController($controller, $action, $params);
             Func::Call_method_of_class_empty($process, $params);
-
         }
         #gọi callback
         else {
@@ -248,7 +235,6 @@ class Route {
      */
     private static function quotePath($path){
         foreach(str_split("*.?+^|{}:/()") as $q){
-            
             $path = preg_replace("/\\{$q}/", "\\{$q}", $path);   
         }
         return $path;

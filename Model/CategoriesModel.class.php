@@ -1,86 +1,124 @@
 <?php
 
-    // Will Update 10/05/2019
-    
-    require_once dirname(__FILE__)."/../Model/Entity/CategoriesEntity.class.php";
+    //require_once dirname(__FILE__)."/../Model/Entity/CategoriesEntity.class.php";
     require_once dirname(__FILE__)."/../Model/Entity/ProductCardEntity.class.php";
 
-    class CategoriesModel extends Database {
 
+    class CategoriesModel {
+
+        /**
+         * Kiểm tra tồn tại chuyên mục
+         *
+         * @param int $id
+         * @return boolean
+         */
+        public function HasCategorieID($id) : bool {
+            return DB::connection()
+                        ->table("categories")
+                        ->where("categorie_id = ?")
+                        ->setParams([$id])
+                        ->exectuteScalar() > 0;
+        }
+
+
+        /**
+         * Kiểm tra có phải là chuyên mục cuối cùng của nhánh không
+         *
+         * @return void
+         */
+        public function IsCategoriesLast($id){
+            return DB::connection()
+                        ->table("categories")
+                        ->where("categorie_id = ? and not exists (select * from categories where categorie_parent = ?)")
+                        ->setParams([$id, $id])
+                        ->exectuteScalar() > 0; 
+        }
+        
+
+
+        /**
+         * Lấy tên chuyên mục
+         *
+         * @param [type] $id
+         * @return string
+         */
+        public function GetName($id) : string {
+            return DB::connection()
+                        ->table("categories")
+                        ->where("categorie_id = ?")
+                        ->select("categorie_name")
+                        ->setParams([$id])
+                        ->executeReader()[0]['categorie_name'];
+        }
+
+
+        /**
+         * Lấy số lượng sản phẩm trong chuyên mục
+         *
+         * @param int $id
+         * @return void
+         */
         public function GetNumProductCategories($id){
-            $query = "select count(id) num from product where categories_id = ?";
-            $data = parent::query($query, array($id));
-            return $data[0]['num'];
+            return DB::connection()
+                        ->table("products")
+                        ->where("categorie_id = ?")
+                        ->setParams([$id])
+                        ->exectuteScalar();
         }
 
+        /**
+         * Lấy các chuyên mục con của chuyên mục
+         *
+         * @param int $id
+         * @return void
+         */
         public function GetIDCategoriesChild($id){
-            $query = "select id_child from categories_child where id_parent = ?";
-            $data = parent::query($query, array($id));
+            $data = DB::connection()
+                        ->table("categories")
+                        ->where("categorie_parent = ?")
+                        ->setParams([$id])
+                        ->executeReader();
+
             $arr = array();
-            foreach ($data as $value) array_push($arr, $value['id_child']);
+            foreach ($data as $value) array_push($arr, $value['categorie_id']);
             return $arr;
         }
 
-        public function GetIDCategoriesAllChild($id){
-            $arr = array($id);
-            $arr_root = $this->GetIDCategoriesChild($id);
-            foreach ($arr_root as $value) {
-                array_push($arr, $value);
-                $arr = array_merge($arr, $this->GetIDCategoriesChild($value));
-            }
-            return $arr;
-        }
 
-        public function GetIDCategoriesAll(){
-            $query = "select id from categories";
-            $data = parent::query($query);
+        /**
+         * Lấy các id chuyên mục là chuyên mục root
+         *
+         * @return void
+         */
+        public function GetIDCategoriesRoot(){
+            $data = DB::connection()
+                        ->table("categories")
+                        ->where("categorie_parent is null")
+                        ->executeReader();
+
             $arr = array();
-            foreach ($data as $value) array_push($arr, $value['id']);
+            foreach ($data as $value) array_push($arr, $value['categorie_id']);
             return $arr;
         }
 
-        public function GetProductWithIDCategories($id, $limit_start = 0, $limit_count = 8){
-            $list_id = array();
 
-            if($id == null){
-                $list_id = $this->GetIDCategoriesAll();
-            } else {
-                $list_id = $this->GetIDCategoriesAllChild($id);
+        /**
+         * Lấy tấc cả chuyên mục xuất phát từ Lá $id
+         * NULL sẽ mặc định là nhánh cao nhất
+         *
+         * @param int $id
+         * @return void
+         */
+        function GetAllCategoriesChildByIDParent($id = null){
+            $arr = [];
+            $categories = $id != null ? $this->GetIDCategoriesChild($id) : $this->GetIDCategoriesRoot();
+            foreach($categories as $cg){
+                array_push($arr, $cg);
+                $arr = array_merge($arr, $this->GetAllCategoriesChildByIDParent($cg));
             }
-
-            $categoriesProducts = array();
-
-            foreach($list_id as $idc){
-                $categoriesProduct = new CategoriesProduct();
-                $categoriesProduct->id = $idc;
-                $categoriesProduct->product = array();
-
-                $query = " select id, image, sale, name, star, price, note".
-                        " from product".
-                        " where categories_id = ".$idc.
-                        " order by id desc".
-                        " limit {$limit_start}, {$limit_count}";
-                $data = parent::query($query);
-
-                foreach ($data as $pr) {
-                    $e = new ProductCard();
-                    $e->id = $pr['id'];
-                    $e->image = json_decode($pr['image'])[0];
-                    $e->sale = $pr['sale'];
-                    $e->note = $pr['note'];
-                    $e->name = $pr['name'];
-                    $e->curstar = $pr['star'];
-                    $e->maxstar = 5;
-                    $e->price = $pr['price'];
-                    array_push($categoriesProduct->product, $e);
-                }
-
-                if(count( $categoriesProduct->product) > 0)
-                    array_push($categoriesProducts, $categoriesProduct);
-            }
-
-            return $categoriesProducts;
+            return $arr;
         }
+        
 
     }
 ?>

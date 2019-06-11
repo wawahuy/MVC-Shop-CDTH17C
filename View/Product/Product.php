@@ -1,15 +1,21 @@
 @call JS_Call_When_Onload('SSp.init')
 
+<style>
+    .bg-header {
+        padding: 10px;
+    }
+</style>
+
 <div id="body-home" class="pd-top-80">
     <!--container chuyên mục-->
     <div class="sp-container">
 
         <div class="sp-path" id="sppath">
             <span>
-                <a href="index.php">Trang chủ</a>
+                <a href="{{YUH_URI_ROOT}}">Trang chủ</a>
             </span>
             <span>
-                <a href="categories.php">Chuyên Mục</a>
+                <a href="{{YUH_URI_ROOT}}/categories">Chuyên Mục</a>
             </span>
 
             @include "../Categories/Func.php"
@@ -24,6 +30,15 @@
             @include "DeltailProduct.php"
 
         </div>
+
+        <!--phần comment-->
+        <div class="bg-yeuthich" style="margin-top: 70px;">
+            <div class="bg-header">
+                Bình luận
+            </div>
+            @include "CommentProduct.php"
+        </div>
+        
 
         <!--phần sản phẩm yêu thích-->
         <div class="bg-yeuthich" style="margin-top: 70px;">

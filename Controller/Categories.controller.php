@@ -1,5 +1,8 @@
 <?php
-    //Func::ImportModel("Categories");
+    define("NUM_PRODUCT_PAGE", 16);
+
+    Func::Import("Model/CategoriesModel.class");
+    Func::Import("Model/ProductModel.class");
 
     class CategoriesController extends BaseController {
 
@@ -10,37 +13,84 @@
 
         public function View($params){
 
-            echo "Đang chuyển đổi code sang core mới!";
-            exit();
+            #Bind data page to view
+            parent::bindPage();
 
-            $_GET['id'] = isset($_GET['id']) ? $_GET['id'] : null;
+            #route value
+            $categorie_id = $params['id'] ?? null;
+            $categorie_page = $params['page'] ?? 1;
 
-            $model = new CategoriesModel();
+            #get value
+            $sort_data = $_GET['sort'] ?? "new";
+            $search_data = $_GET['search'] ?? "";
 
-            $entity = new Categories();
-            $entity->categoriesId = $_GET['id'];
-            $entity->exists_child = count($model->GetIDCategoriesChild($_GET['id'] )) == 0 && $_GET['id']!=null;
+            #model
+            $categorieModel = new CategoriesModel();
 
-            $limit_start = 0;
-            $limit_count = 8;
-            if($entity->exists_child ){
-                $limit_count = 16;
-                $entity->pageMax = $model->GetNumProductCategories($_GET['id']) / $limit_count;
-                $entity->pageMax = $entity->pageMax > round($entity->pageMax) ? round($entity->pageMax) + 1 : $entity->pageMax;
-                $entity->pageCurrent = !isset($_GET['idpage']) ? 1 : $_GET['idpage'];
-                if($entity->pageCurrent > $entity->pageMax) $entity->pageCurrent = $entity->pageMax;
-                if($entity->pageCurrent < 1) $entity->pageCurrent = 1;
-                $limit_start = $limit_count * ($entity->pageCurrent-1);
+            #Kiểm tra tồn tại của categorieID
+            if($categorie_id!=null && !$categorieModel->HasCategorieID($categorie_id) ){
+                Javascript::InvokeSwal("Lỗi", "Không tìm thấy chuyên mục yêu cầu!", "error");
+                $categorie_id = null;
+            } 
+
+            #Code danh sách sản phẩm
+            $categories_product_code = "";
+
+            //Khi là chuyên mục cuối
+            if($categorie_id != null && $categorieModel->IsCategoriesLast($categorie_id)){
+                #Khi không có sản phẩm
+                if($categorieModel->GetNumProductCategories($categorie_id) == 0){
+                    $categories_product_code = "<center><h1>Không có sản phẩm!</h1></center>";
+                }
+                else {
+                    $categories_product_code.= $this->generalHTMLCodeProductInCategories($categorie_id, $categorie_page, $sort_data, $search_data);
+                }
+            } 
+            //Khi là chuyên mục có chuyên mục con
+            else {
+                $categorie_tree = $categorieModel->GetAllCategoriesChildByIDParent($categorie_id);
+                foreach($categorie_tree as $ct){
+                    $categories_product_code .= $this->generalHTMLCodeProductInCategories($ct, 1, $sort_data, $search_data, 8);
+                }
+
+                if($categories_product_code == "" && $search_data != "")
+                    $categories_product_code = "<center class='padding:100px;'><h1>Không có sản phẩm!</h1></center>";
             }
-            $entity->categoriesProduct = $model->GetProductWithIDCategories($_GET['id'], $limit_start, $limit_count);
 
-            #Render View
+            
+            #bind
+            View::bind_data("categorie_id", $categorie_id);
+            View::bind_data("categorie_name", $categorie_id == null ? "Tấc cả" : $categorieModel->GetName($categorie_id));
+            View::bind_data("sort_data", $sort_data);
+            View::bind_data("search_data", $search_data);
+            View::bind_data("categories_product", $categories_product_code);
+            
             parent::renderPage(
                 "SShop - Trang chủ",
                 dirname(__FILE__).'/../View/Shared/Layout.php',
-                dirname(__FILE__).'/../View/Categories/Categories.php',
-                $entity
-            );
+                dirname(__FILE__).'/../View/Categories/Categories.php');
+        }
+
+
+
+        private function generalHTMLCodeProductInCategories($id_categorie, $page, $sort, $search, $num_prod_page = NUM_PRODUCT_PAGE){
+            $modelProduct = new ProductModel;
+            $modelCategorie = new CategoriesModel;
+            $num_product = $modelCategorie->GetNumProductCategories($id_categorie);
+            $max_page = round($num_product/NUM_PRODUCT_PAGE);
+            $page = $page < 0 ? 0 : $page > $max_page ? $max_page : $page;
+            $start = $page*NUM_PRODUCT_PAGE;
+            $products = $modelProduct->GetProductByCategorieID($id_categorie, $start, $num_prod_page, $sort, $search);
+
+            #Không có sản phẩm không render chuyên mục đó
+            if(count($products) == 0) return "";
+
+            return View::general_code($GLOBALS['VIEW_DIR']."/Categories/ListProduct/CategoriesChild.php", [
+                "categorie_id" => $id_categorie,
+                "products" => $products,
+                "max_page" => $max_page,
+                "current_page" => $page
+            ]);
         }
 
     }

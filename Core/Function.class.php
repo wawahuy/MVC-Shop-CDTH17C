@@ -23,7 +23,7 @@
          */
         public static function Import(string $path){
             $path = preg_replace("/\.php$/", "", $path);
-            require_once $path.".php";
+            require_once dirname(__FILE__)."/../".$path.".php";
         }
 
 
@@ -83,7 +83,61 @@
         }
 
 
-        
+        /**
+         * Kiểm tra kiểu dữ liệu file
+         * Copy https://stackoverflow.com/a/44107941/9946233
+         *
+         * @param string $file
+         * @return void
+         */
+        public static function GetMime($file) {
+            if (function_exists("finfo_file")) {
+              $finfo = finfo_open(FILEINFO_MIME_TYPE); // return mime type ala mimetype extension
+              $mime = finfo_file($finfo, $file);
+              finfo_close($finfo);
+              return $mime;
+            } else if (function_exists("mime_content_type")) {
+              return mime_content_type($file);
+            } else if (!stristr(ini_get("disable_functions"), "shell_exec")) {
+              // http://stackoverflow.com/a/134930/1593459
+              $file = escapeshellarg($file);
+              $mime = shell_exec("file -bi " . $file);
+              return $mime;
+            } else {
+              return false;
+            }
+          }
+
+
+        public static function UploadImage($files){
+          $file_name = $files['name'];
+          $file_exte = strtolower(pathinfo($file_name,PATHINFO_EXTENSION));
+          $file_size = $files["size"];
+          $file_type = Func::GetMime($files["tmp_name"]);
+
+          $target_dir_upload = "/Resource/upload/";
+          $rand_file_name =  md5(date('Y-m-d H:i:s.') . gettimeofday()['usec']).rand(0, 1000).rand(0, 1000).".".$file_exte;
+          $target_file_upload = $target_dir_upload.$rand_file_name;
+
+          if(!preg_match("/^image\//", $file_type)){
+              Javascript::InvokeSwal("Lỗi", "Vui lòng upload một hình ảnh!", "error");
+              $this->Index();
+              return;
+          }
+
+          if($file_size > 1024*1024){
+              Javascript::InvokeSwal("Lỗi", "Vui lòng upload một hình ảnh >= 1MB!", "error");
+              $this->Index();
+              return;
+          }
+
+
+          if (move_uploaded_file($files["tmp_name"], dirname(__FILE__)."/..".$target_file_upload)) {
+              return $target_file_upload;
+          } else {
+              return "";
+          }
+        }
     }
 
 
