@@ -1,8 +1,7 @@
 <?php
-    define("HOSTDB", "remotemysql.com");
-    define("USERDB", "PsSqwxzcvi");
-    define("PASSDB", "ztrptQbPDb");
-    define("NAMEDB", "PsSqwxzcvi");
+    define("HOSTDB", "127.0.0.1");
+    define("USERDB", "root");
+    define("PASSDB", "");
+    define("NAMEDB", "qlbanhang");
     define("PORTDB", 3306);
-
 ?>
